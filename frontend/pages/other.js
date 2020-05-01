@@ -6,7 +6,6 @@ import { connect }            from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const Counter = props => {
-
   useEffect(() => {
     const timer = props.startClock()
 
@@ -15,10 +14,9 @@ const Counter = props => {
     }
   }, [props])
 
-  return <Page title="Index Page" linkTo="/other"/>
+  return <Page title="Other Page" linkTo="/"/>
 }
 
-// Dispatch actions that need to happen as the page renders here
 Counter.getInitialProps = async ({ store, isServer }) => {
   store.dispatch(clockActions.serverRenderClock(isServer))
   store.dispatch(countActions.incrCount())

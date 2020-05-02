@@ -39,9 +39,6 @@ const NavBar = ({ theme, toggleTheme }) => (
   <StyledNavBar>
     <nav>
       <ActiveLink href="/">
-        <StyledLink>Home</StyledLink>
-      </ActiveLink>
-      <ActiveLink href="/chat">
         <StyledLink>Chat</StyledLink>
       </ActiveLink>
       <ActiveLink href="/help">

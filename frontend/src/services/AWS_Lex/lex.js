@@ -1,21 +1,17 @@
 import { Config as AWSconfig } from 'aws-sdk'
 import LexRuntime              from 'aws-sdk/clients/lexruntime'
-import getConfig               from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-const { AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_REGION } = publicRuntimeConfig
 
 const config = new AWSconfig({
-  accessKeyId    : AWS_ACCESS_KEY,
-  secretAccessKey: AWS_SECRET_KEY,
-  region         : AWS_REGION,
+  accessKeyId    : process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  region         : process.env.AWS_REGION,
   apiVersions    : {
     lexruntime: '2016-11-28'
   }
 })
 
 const lexInstance = new LexRuntime({
-  region     : AWS_REGION,
+  region     : process.env.AWS_REGION,
   credentials: config.credentials
 })
 

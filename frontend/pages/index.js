@@ -5,21 +5,18 @@ import React, { useEffect }   from 'react'
 import { connect }            from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-const Counter = props => {
-
+const Home = props => {
   useEffect(() => {
     const timer = props.startClock()
 
-    return () => {
-      clearInterval(timer)
-    }
+    return () => clearInterval(timer)
   }, [props])
 
   return <Page title="Index Page" linkTo="/other"/>
 }
 
 // Dispatch actions that need to happen as the page renders here
-Counter.getInitialProps = async ({ store, isServer }) => {
+Home.getInitialProps = async ({ store, isServer }) => {
   store.dispatch(clockActions.serverRenderClock(isServer))
   store.dispatch(countActions.incrCount())
   return { isServer }
@@ -33,4 +30,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Counter)
+export default connect(null, mapDispatchToProps)(Home)

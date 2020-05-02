@@ -1,3 +1,5 @@
-import * as utils from './utils'
+import { isAuthor } from './utils'
 
-export default utils
+export {
+  isAuthor
+}

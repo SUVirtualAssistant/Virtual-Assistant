@@ -1,6 +1,7 @@
 const withImages = require('next-images')
 const withFonts = require('next-fonts')
-const path = require('path')
+
+require('dotenv').config()
 
 module.exports = withFonts(
   withImages({
@@ -9,27 +10,28 @@ module.exports = withFonts(
       jsconfigPaths: true
     },
     env: {
-      // BOT_NAME: ,
-      // BOT_ALIAS: ,
+      BOT_NAME: process.env.BOT_NAME,
+      BOT_ALIAS: process.env.BOT_ALIAS,
     },
+    /*
     // Will only be available on the server side
     serverRuntimeConfig: {
     },
+     */
     // Will be available on both server and client
     publicRuntimeConfig: {
+      // These get set at runtime
+      MERCURY_DEV_POOL_ID: process.env.MERCURY_DEV_POOL_ID,
+      MERCURY_DEV_POOL_ARN: process.env.MERCURY_DEV_POOL_ARN,
+
+      COGNITO_DOMAIN: process.env.COGNITO_DOMAIN,
+
+      AWS_REGION: process.env.AWS_REGION,
+      AWS_IDENTITY_POOL: process.env.AWS_IDENTITY_POOL,
+
+      AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+      AWS_SECRET_KEY: process.env.AWS_SECRET_KEY
     },
-    // analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-    // analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-    // bundleAnalyzerConfig: {
-    //   server: {
-    //     analyzerMode: 'static',
-    //     reportFilename: './bundles/server.html'
-    //   },
-    //   browser: {
-    //     analyzerMode: 'static',
-    //     reportFilename: './bundles/client.html'
-    //   }
-    // }
     webpack(config, options) {
       return config
     }

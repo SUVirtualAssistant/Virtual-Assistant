@@ -1,6 +1,9 @@
+/**
+ * src: https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/
+ */
 import { useEffect, useState } from 'react'
 
-const useDarkMode = () => {
+export const useDarkMode = () => {
   const [theme, setTheme] = useState('light')
   const [componentMounted, setComponentMounted] = useState(false)
   const setMode = mode => {
@@ -28,5 +31,3 @@ const useDarkMode = () => {
 
   return [theme, toggleTheme, componentMounted]
 }
-
-export default useDarkMode

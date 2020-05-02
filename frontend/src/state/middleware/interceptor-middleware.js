@@ -2,23 +2,13 @@
  * src: https://everyday.codes/javascript/improve-your-redux-skills-by-writing-custom-middleware/
  */
 
+import * as lexTypes from '../modules/lex/types'
+
 const interceptors = [
   {
-    type   : 'INCREMENT',
+    type   : lexTypes.SESSION_START_REQUEST,
     handler: (props) => {
-      console.log('middleware: increment')
-      console.log('middleware: fired after dispatch')
-      console.log('action: ' + props.action + ' dispatch: ' + props.dispatch + ' state: ' + props.state)
-    }
-  },
-  {
-    type   : 'DECREMENT',
-    handler: () => {
-      console.log('middleware: fired before dispatch')
-      return (props) => {
-        console.log('middleware: fired after dispatch')
-        console.log('action: ' + props.action + ' dispatch: ' + props.dispatch)
-      }
+      console.log('starting lex session')
     }
   }
 ]

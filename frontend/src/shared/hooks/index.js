@@ -1,5 +1,9 @@
-import useDarkMode from './useDarkMode'
+import { useDarkMode }     from './useDarkMode'
+import { usePrevious }     from './usePrevious'
+import { useEventListener } from './useEventListener'
 
-export {
-  useDarkMode
+export default {
+  useDarkMode,
+  usePrevious,
+  useEventListener
 }

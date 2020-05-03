@@ -1,6 +1,6 @@
-import reducer from 'src/state/modules/lex/reducer'
+import reducer from './reducer'
 
-import * as lexActions from 'src/state/modules/lex/actions'
+import * as lexActions from './actions'
 
 export {
   lexActions

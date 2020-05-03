@@ -1,18 +1,25 @@
-import { Config as AWSconfig } from 'aws-sdk'
-import LexRuntime              from 'aws-sdk/clients/lexruntime'
+import AWS from 'aws-sdk'
+import LexRuntime                                          from 'aws-sdk/clients/lexruntime'
 
-const config = new AWSconfig({
-  accessKeyId    : process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  region         : process.env.AWS_REGION,
-  apiVersions    : {
-    lexruntime: '2016-11-28'
-  }
-})
+AWS.config.region = process.env.LEX_REGION
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+  IdentityPoolId: process.env.LEX_IDENTITY_POOL_ID
+});
+
+// const botConfig = new AWSconfig({
+//   region     : process.env.LEX_REGION,
+//   apiVersions: {
+//     lexruntime: process.env.LEX_RUNTIME
+//   },
+//   lexruntime: {
+//     region: process.env.LEX_REGION,
+//     credentials: botCredentials
+//   }
+// })
 
 const lexInstance = new LexRuntime({
-  region     : process.env.AWS_REGION,
-  credentials: config.credentials
+  apiVersion: process.env.LEX_RUNTIME,
+  region     : process.env.LEX_REGION,
 })
 
 const _startSession = params => (

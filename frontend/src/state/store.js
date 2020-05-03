@@ -1,4 +1,3 @@
-import { interceptorMiddleware }                         from '@state/middleware'
 import * as reducers                                     from '@state/modules'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware                                   from 'redux-thunk'
@@ -20,7 +19,7 @@ export const configureStore = initialState => {
     bindMiddleware(
       [
         thunkMiddleware,
-        interceptorMiddleware
+        // interceptorMiddleware
       ]
     )
   )

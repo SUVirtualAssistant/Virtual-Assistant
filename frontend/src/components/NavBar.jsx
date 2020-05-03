@@ -1,7 +1,7 @@
 import Link          from 'next/link'
 import { useRouter } from 'next/router'
 import React         from 'react'
-import ThemeToggle   from 'src/components/ThemeToggle'
+import ThemeToggle   from '@components/ThemeToggle'
 import styled        from 'styled-components'
 
 const StyledLink = styled.a`
@@ -34,7 +34,6 @@ const ActiveLink = ({ children, ...props }) => {
   )
 }
 
-// TODO: fix this
 const NavBar = ({ theme, toggleTheme }) => (
   <StyledNavBar>
     <nav>

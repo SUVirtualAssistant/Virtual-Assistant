@@ -1,123 +1,213 @@
-import convertMsgsToViewItems from '@shared/utils/view-items'
+import { classNames }                         from '@shared/utils/classNames'
+import { KEYS }                               from '@shared/constants'
+import { convertMsgsToViewItems }             from '@shared/utils/view-items'
+import { any, arrayOf, func, object, string } from 'prop-types'
+import * as React                             from 'react'
+import ActionGroup                            from './ActionGroup'
+import DateMarker                             from './DateMarker'
+import dispatchEvent                          from './event/dispatchEvent'
+import MessageGroup                           from './MessageGroup'
+import NewMessage                             from './NewMessage'
 
-import React      from 'react'
-import styled     from 'styled-components'
-// import { mockChatState } from 'src/components/chat/__mock_data__/chat'
-import DateMarker from './DateMarker'
-import NMessage   from '@components/chat/NewMessage'
+class Chat extends React.Component {
+  scrollToBottomOnLoadingData = true
 
-const ChatContainer = styled.div`
-  border-color: rgba(0, 0, 0.12);
-  color: rgba(0, 0, 0.87);
-  background-color: #fafafa;
+  constructor(props) {
+    super(props)
 
-  border-width: 1px;
-  border-style: solid;
-  box-sizing: border-box;
-  outline: 0;
-  font-size: 14px;
-  line-height: 2;
-  height: 100vh;
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`
+    this.state = {
+      selectedItemIndex: null,
+      isFirstRender    : true
+    }
 
-const MessageList = styled.div`
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-`
+    this.onFocus = this.onFocus.bind(this)
+    this.onBlur = this.onBlur.bind(this)
+    this.onSelectionRequested = this.onSelectionRequested.bind(this)
+  }
 
-const MessageListContent = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden;
-`
-// const startParams = {
-//   botAlias: '$LATEST',
-//   botName: 'Mercury',
-//   userId: 'CONNOR',
-//   accept: 'text/plain; charset=utf-8',
-//   dialogAction: {
-//     type: 'Delegate',
-//     intentName: 'Greeting'
-//   }
-// }
+  onFocus = () => {
+    clearTimeout(this.timeoutIdForChatLosingFocus)
+    this.selectLastViewItemWhenNoCurrentSelection()
+  }
 
-// const messageOneParams = {
-//   botAlias: '$LATEST',
-//   botName: 'Mercury',
-//   inputText: 'I want to look up a professor',
-//   userId: 'CONNOR'
-// }
-//
-// const messageTwoParams = {
-//   botAlias: '$LATEST',
-//   botName: 'Mercury',
-//   inputText: 'Hidy',
-//   userId: 'CONNOR'
-// }
-//
-// const messageThreeParams = {
-//   botAlias: '$LATEST',
-//   botName: 'Mercury',
-//   inputText: 'Kong',
-//   userId: 'CONNOR'
-// }
+  onBlur = () => {
+    this.timeoutIdForChatLosingFocus = setTimeout(
+      () =>
+        this.setState({ selectedItemIndex: null }),
+      0)
+  }
 
-const getViewItemsFromMsgs = msgs => msgs.length > 0 ? convertMsgsToViewItems(msgs) : []
+  onSelectionRequested(clickedItemIndex) {
+    this.setState({ selectedItemIndex: clickedItemIndex })
+  }
 
-const Chat = () => {
-  // const { messages } = mockChatState
-  // const dispatch = useDispatch()
-  // const messages = useSelector(state => state.chat.messages)
-  //
-  // // FIXME: useEffect is causing a new bot to be created each time someone
-  // //        navigates to the page
-  // useEffect(() => {
-  //   dispatch(lexActions.startSession(startParams))
-  // }, [dispatch])
+  onKeyDown = event => {
+    let newSelectedItemIndex = null
+    let currentSelectedItemIndex = this.state.selectedItemIndex !== null
+                                   ? this.state.selectedItemIndex
+                                   : this.messages.lastSelectionIndex
 
-  // const sendMessageOne = e => {
-  //   e.preventDefault()
-  //   dispatch(lexActions.sendMessage(messageOneParams))
-  // }
-  //
-  // const sendMessageTwo = e => {
-  //   e.preventDefault()
-  //   dispatch(lexActions.sendMessage(messageTwoParams))
-  // }
-  //
-  // const sendMessageThree = e => {
-  //   e.preventDefault()
-  //   dispatch(lexActions.sendMessage(messageThreeParams))
-  // }
+    if (event.keyCode === KEYS.up) {
+      if (currentSelectedItemIndex === null) {
+        newSelectedItemIndex = 0
+      } else if (currentSelectedItemIndex > 0) {
+        newSelectedItemIndex = currentSelectedItemIndex - 1
+      }
+    } else if (event.keyCode === KEYS.down) {
+      if (currentSelectedItemIndex === null) {
+        newSelectedItemIndex = 0
+      } else if (currentSelectedItemIndex < this.messages.lastSelectionIndex) {
+        newSelectedItemIndex = currentSelectedItemIndex + 1
+      }
+    }
 
-  return (
-    <ChatContainer>
-      <MessageList>
-        <DateMarker/>
-        <MessageListContent>
-          {/*<SendButton/>*/}
-        </MessageListContent>
-      </MessageList>
-      <NMessage/>
-      {/*<button onClick={sendMessageOne}>Message 1</button>*/}
-      {/*<button onClick={sendMessageTwo}>Message 2</button>*/}
-      {/*<button onClick={sendMessageThree}>Message 3</button>*/}
-    </ChatContainer>
-  )
+    if (newSelectedItemIndex !== null) {
+      this.setState({ selectedItemIndex: newSelectedItemIndex })
+      // Prevent the default behavior moving of the scrollbar
+      // because scrolling is achieved through item focusing.
+      event.preventDefault()
+    }
+  }
+
+  onMessageSend = (message, event) => {
+    dispatchEvent(this.props.onMessageSend, event, this, { message: message })
+  }
+
+  onActionExecute = (action, event) => {
+    dispatchEvent(this.props.onActionExecute, event, this, { action: action })
+    if (!event.isDefaultPrevented()) {
+      switch (action.type) {
+        case 'reply':
+          this.onMessageSend({
+            author   : this.props.user,
+            text     : action.value,
+            timestamp: new Date()
+          }, event)
+          break
+        case 'call':
+          window.open('tel: ' + action.value)
+          break
+        case 'openUrl':
+          window.open(action.value)
+          break
+        default:
+          break
+      }
+      this.newMsgComp.focusInput()
+    }
+  }
+
+  render() {
+    this.messages = this.getViewItemsFromMsgs(this.props.messages)
+
+    return (
+      <div className={this.getClassNames()}
+           onKeyPress={this.onKeyDown}>
+        <div className='k-message-list k-avatars'
+             role='log'
+             aria-live='polite'
+             onBlur={this.onBlur}
+             onFocus={this.onFocus}
+             onScroll={e => this.scrollToBottomOnLoadingData =
+               e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight}
+             ref={el => this.viewItemsWrapperEl = el}>
+          <div className='k-message-list-content'>
+            {this.renderMessageList()}
+          </div>
+        </div>
+        <NewMessage onMessageSend={this.onMessageSend}
+                    onToolbarActionButtonClick={this.props.onToolbarActionExecute}
+                    placeholder={this.props.placeholder}
+                    user={this.props.user}
+                    toolbar={this.props.toolbar}
+                    showToolbar={this.props.showToolbar}
+                    MessageBox={this.props.messageBox}
+                    ref={comp => this.newMsgComp = comp}/>
+      </div>
+    )
+  }
+
+  // todo: useEffect(() => { ... }, []) only runs on mount
+  componentDidMount() {
+    this.setState({ isFirstRender: false }, () => {
+      this.nextTickId = setTimeout(() => this.scrollViewItemsToBottom(), 250)
+    })
+  }
+
+  // todo: this is going to be a useEffect -> useEffect(() => { ... }, [messages]
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.messages.length !== this.props.messages.length && this.scrollToBottomOnLoadingData) {
+      this.scrollViewItemsToBottom()
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.nextTickId)
+  }
+
+  getClassNames() {
+    return classNames('k-widget', 'k-chat', this.props.className)
+  }
+
+  selectLastViewItemWhenNoCurrentSelection() {
+    if (this.state.selectedItemIndex === null) {
+      this.setState({ selectedItemIndex: this.messages.lastSelectionIndex })
+    }
+  }
+
+  renderMessageList() {
+    const lastViewItemIndex = this.messages.length - 1
+    return this.messages.map((viewItem, index) => {
+        switch (viewItem.type) {
+          case 'date-marker':
+            return <DateMarker item={viewItem}
+                               key={index}/>
+          case 'message-group':
+            return <MessageGroup group={viewItem}
+                                 user={this.props.user}
+                                 selectedItemIndex={this.state.selectedItemIndex}
+                                 onRequestSelection={this.onSelectionRequested}
+                                 isLastGroup={index === lastViewItemIndex}
+                                 key={index}/>
+          case 'action-group':
+            return <ActionGroup group={viewItem}
+                                onActionExecute={this.onActionExecute}
+                                onRequestSelection={this.onSelectionRequested}
+                                selected={viewItem.selectionIndex === this.state.selectedItemIndex}
+                                isLastGroup={index === lastViewItemIndex}
+                                key={index}/>
+          default:
+            break
+        }
+      }
+    )
+  }
+
+  scrollViewItemsToBottom() {
+    if (this.viewItemsWrapperEl) {
+      this.viewItemsWrapperEl.scrollTop = this.viewItemsWrapperEl.scrollHeight - this.viewItemsWrapperEl.clientHeight
+    }
+  }
+
+  getViewItemsFromMsgs(msgs) {
+    return msgs.length > 0 ? convertMsgsToViewItems(msgs) : []
+  }
+
 }
 
-export default Chat
+Chat.propTypes = {
+  messages              : arrayOf(object),
+  user                  : object,
+  messageTemplate       : any,
+  onMessageSend         : func,
+  onActionExecute       : func,
+  onToolbarActionExecute: func,
+  dir                   : string,
+  messageBox            : any
+}
+
+Chat.defaultProps = {
+  messages: []
+}
+
+export { Chat }

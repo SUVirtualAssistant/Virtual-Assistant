@@ -12,6 +12,8 @@
 /.next/
 /out/
 
+.env
+
 # production
 /build
 
@@ -28,3 +30,15 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+.idea/.gitignore
+.idea/.name
+.idea/aws.xml
+.idea/codeStyles/
+.idea/compiler.xml
+.idea/dictionaries/
+.idea/inspectionProfiles/
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml

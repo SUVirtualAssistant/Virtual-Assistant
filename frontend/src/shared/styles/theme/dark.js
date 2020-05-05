@@ -30,5 +30,14 @@ export const darkMode = {
     buttonText: '',
     buttonBackground: '#AA0000',
     buttonHover: '',
+
+    chat: {
+      background: '#232429',
+      input: '#1a1b1f',
+
+      userText: '#F7f7f8',
+      userMessage: '#FFF3E4',
+      botMessage: '#343333',
+    }
   }
 }

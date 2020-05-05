@@ -1,7 +1,6 @@
 /**
  * src: https://everyday.codes/javascript/improve-your-redux-skills-by-writing-custom-middleware/
  */
-
 import * as lexTypes from '../modules/lex/types'
 
 const interceptors = [

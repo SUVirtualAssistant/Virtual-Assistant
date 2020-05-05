@@ -20,6 +20,7 @@ const StyledNavBar = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  cursor: pointer;
   background: ${({ theme }) => theme.colors.navBarBackground};
   padding: 20px;
 `
@@ -42,6 +43,12 @@ const NavBar = ({ theme, toggleTheme }) => (
       </ActiveLink>
       <ActiveLink href="/help">
         <StyledLink>Help</StyledLink>
+      </ActiveLink>
+      <ActiveLink href="/newchat">
+        <StyledLink>New Chat</StyledLink>
+      </ActiveLink>
+      <ActiveLink href="/test">
+        <StyledLink>Test</StyledLink>
       </ActiveLink>
     </nav>
     <ThemeToggle theme={theme} toggleTheme={toggleTheme}/>

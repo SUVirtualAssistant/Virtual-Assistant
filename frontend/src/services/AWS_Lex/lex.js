@@ -6,17 +6,6 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
   IdentityPoolId: process.env.LEX_IDENTITY_POOL_ID
 });
 
-// const botConfig = new AWSconfig({
-//   region     : process.env.LEX_REGION,
-//   apiVersions: {
-//     lexruntime: process.env.LEX_RUNTIME
-//   },
-//   lexruntime: {
-//     region: process.env.LEX_REGION,
-//     credentials: botCredentials
-//   }
-// })
-
 const lexInstance = new LexRuntime({
   apiVersion: process.env.LEX_RUNTIME,
   region     : process.env.LEX_REGION,

@@ -1,4 +1,4 @@
-import { Chat }       from '@components/test_chat/Chat'
+import { Chat }       from '@components/chat'
 import { lexActions } from '@state/modules/lex'
 
 import React                  from 'react'
@@ -12,52 +12,30 @@ class ChatPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.startSession(startParams)
-  }
-
-  parseText = event => {
-    if (event.action !== undefined) {
-      return event.action.value
-    } else if (event.value) {
-      return event.value
-    } else {
-      return event.message.text
-    }
+    if (!this.props.active)
+      this.props.startSession(process.env.BOT_NAME, 'USER')
   }
 
   addNewMessage = event => {
-    let value = this.parseText(event)
-    this.props.sendMessage(value)
+    this.props.sendMessage(event.message)
   }
 
   render() {
     return (
       <div>
-        <Chat
-          user={{id : 1}}
-          messages={this.props.messages}
-          onMessageSend={this.addNewMessage}
-          placeholder={'Type a message...'}
-          width={400}
+        <Chat user={{ id: 1 }}
+              messages={this.props.messages}    // fixme: this is adding messages to the store
+              onMessageSend={this.addNewMessage}
+              placeholder={'Type a message...'}
         />
       </div>
     )
   }
 }
 
-const startParams = {
-  botAlias    : '$LATEST',
-  botName     : 'Mercury',
-  userId      : 'CONNOR',
-  accept      : 'text/plain; charset=utf-8',
-  dialogAction: {
-    type      : 'Delegate',
-    intentName: 'Greeting'
-  }
-}
-
 const mapStateToProps = state => ({
-  messages: state.lex.messages
+  messages: state.lex.messages,
+  active  : state.lex.active
 })
 
 const mapDispatchToProps = dispatch => ({

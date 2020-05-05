@@ -1,5 +1,5 @@
 import { classNames }          from '@shared/utils/classNames'
-import { KEYS }                from '@shared/utils/constants'
+import { KEYS }                from '@shared/constants'
 import React                   from 'react'
 import { FocusableUponSelect } from './base/FocusableUponSelect'
 

@@ -1,1 +1,1 @@
-export { default as interceptorMiddleware } from 'src/state/middleware/interceptor-middleware'
+export { default as interceptorMiddleware } from './interceptor'

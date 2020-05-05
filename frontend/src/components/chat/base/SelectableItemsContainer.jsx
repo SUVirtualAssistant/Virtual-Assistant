@@ -1,5 +1,5 @@
 import React    from 'react'
-import { KEYS } from '@shared/utils/constants'
+import { KEYS } from '@shared/constants'
 
 class SelectableItemsContainer extends React.Component {
   isKeyboardNavigationLeftRight = true

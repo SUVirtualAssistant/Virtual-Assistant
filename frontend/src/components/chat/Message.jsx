@@ -1,48 +1,64 @@
-import { classNames }                         from '@shared/utils/classNames'
-import { getMessageTime }                     from '@shared/utils/date-time'
-import React, { useEffect, useRef, useState } from 'react'
+import { classNames }          from '@shared/utils/classNames'
+import { getMessageTime }      from '@shared/utils/date-time'
+import React                   from 'react'
+import { FocusableUponSelect } from './base/FocusableUponSelect'
 
-const getTimestampView = props => {
-  let result = null
-  if (props.item.timestamp)
-    result = <time aria-hidden={!props.selected}>{getMessageTime()}</time>
-
-  return result
-}
-
-const getStatusView = props => {
-  let result = null
-  if (props.item.status)
-    result = <span>{props.item.status}</span>
-
-  return result
-}
-
-const Message = props => {
-  const [selected, setSelected] = useState(false)
-
-  const toggleSelected = () => {
-    setSelected(!selected)
+class Message extends FocusableUponSelect {
+  constructor(props) {
+    super(props)
   }
 
-  const messageRef = useRef(null)
+  render() {
+    return (
+      <div className={this.getClassNames()}
+           tabIndex={this.props.tabbable ? 0 : -1}
+           onClick={() => this.props.onRequestSelection(this.props.item.selectionIndex)}
+           onFocus={() => this.props.onRequestSelection(this.props.item.selectionIndex)}
+           ref={el => this.elementToFocus = el}>
+        {this.getTimestampView()}
+        {this.getMainView()}
+        {this.getStatusView()}
+      </div>
+    )
+  };
 
-  useEffect(() => {
-    if (selected) {
-      messageRef.current.focus()
+  getMainView() {
+    if (this.props.item.typing) {
+      return (
+        <div className="k-bubble">
+          <div className='k-typing-indicator'>
+            <span/>
+            <span/>
+            <span/>
+          </div>
+        </div>
+      )
+    } else if (this.props.item.text) {
+      return <div className="k-bubble">{this.props.item.text}</div>
+    } else {
+      return null
     }
-  }, [selected])
-
-  const getClassNames = ({ isFirstItemInGroup, isLastItemInGroup, selected, isOnlyItemInGroup }) => {
-    return classNames({ 'k-only': isOnlyItemInGroup}, { 'k-first': isFirstItemInGroup && !isOnlyItemInGroup}, { 'k-last': isLastItemInGroup && !isOnlyItemInGroup}, { 'k-state-focused': selected}, 'k-message')
   }
 
-  return (
-    <div
-      className={getClassNames(props)}
-      tabIndex={props.tabbable ? 0 : -1}
-      onClick={() => setSelected(true)}
-      onFocus={() => setSelected(true)}
-   />
-  )
+  getTimestampView() {
+    let result = null
+    if (this.props.item.timestamp)
+      result = <time className='k-message-time' aria-hidden={!this.props.selected}>{getMessageTime()}</time>
+
+    return result
+  }
+
+  getStatusView() {
+    let result = null
+    if (this.props.item.status)
+      result = <span className="k-message-status">{this.props.item.status}</span>
+
+    return result
+  }
+
+  getClassNames() {
+    return classNames({ 'k-only': this.props.isOnlyItemInGroup }, { 'k-first': this.props.isFirstItemInGroup && !this.props.isOnlyItemInGroup }, { 'k-last': this.props.isLastItemInGroup && !this.props.isOnlyItemInGroup }, { 'k-state-selected': this.props.selected }, { 'k-state-focused': this.props.selected }, 'k-message')
+  }
 }
+
+export default Message

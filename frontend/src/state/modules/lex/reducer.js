@@ -1,24 +1,4 @@
 import * as types from './types'
-/*
-messages: [
-  {
-    author          : this.bot,
-    suggestedActions: [
-      {
-        type : 'reply',
-        value: 'Oh, really?'
-      },
-      {
-        type : 'reply',
-        value: 'Thanks, but this is boring.'
-      }
-    ],
-    timestamp       : new Date(),
-    text            :
-      "Hello, this is a demo bot. I'm not lex."
-  }
-]
- */
 
 const initialState = {
   bot: null,
@@ -31,7 +11,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.ADD_MESSAGE:
+    case types.ADD_MESSAGE:       // todo: change this to save the messages as message-groups and take the call out of the Chat component
       return {
         ...state,
         messages: [
@@ -40,6 +20,7 @@ export default (state = initialState, action) => {
             author: action.author,
             timestamp: new Date(),
             text: action.message,
+            // selectionIndex: state.messages.length + 1
           }
         ]
       }
@@ -49,8 +30,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         bot: {
-          id: action.id,
-          name: action.bot
+          id: 0,    // bot always has id=0
+          name: action.name,
+          version: action.version
         }
       }
 

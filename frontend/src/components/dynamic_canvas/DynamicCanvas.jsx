@@ -19,4 +19,7 @@ const DynamicCanvas = styled.div`
   overflow: hidden;
 `
 
+// todo: use static variables to decide which component to render,
+//       this will have to be a class? ehh you can attach static
+//       variables outside of the main definition.
 export default DynamicCanvas

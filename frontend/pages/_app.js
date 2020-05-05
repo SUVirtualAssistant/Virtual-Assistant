@@ -1,5 +1,5 @@
 import NavBar             from '@components/NavBar'
-import { useDarkMode }    from '@shared/hooks/useDarkMode'
+import { useDarkMode }    from '@shared/hooks'
 import { GlobalStyle }    from '@shared/styles/GlobalStyles'
 import themes             from '@shared/styles/theme'
 import { configureStore } from '@state/store'
@@ -10,7 +10,7 @@ import React             from 'react'
 import { Provider }      from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
-import '../src/components/test_chat/all.css'
+import '../src/components/chat/all.css'
 
 const MyApp = props => {
   // Theme

@@ -1,64 +1,96 @@
-import { classNames }          from '@shared/utils/classNames'
-import { getMessageTime }      from '@shared/utils/date-time'
-import React                   from 'react'
-import { FocusableUponSelect } from './base/FocusableUponSelect'
+import { getMessageTime } from '@shared/utils/date-time'
+import PropTypes          from 'prop-types'
+import React              from 'react'
+import styled, { css }    from 'styled-components'
 
-class Message extends FocusableUponSelect {
-  constructor(props) {
-    super(props)
+const Msg = styled.div`
+  max-width: 100%;
+  margin: ${({ theme }) => theme.chat.bubble_spacing} 0 0;
+  position: relative;
+  transition: margin .2s ease-in-out;
+  outline: none;
+
+  ${props => props.selected && css`
+    margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
+    border: 0;
+    color: inherit;
+    background: none;
+
+      time {
+        opacity: 1;
+      }
+    `
+  }
+`
+
+const MsgText = styled.div`
+  // border radius
+  padding: ${({ theme }) => theme.chat.bubble_padding_y} ${({ theme }) => theme.chat.bubble_padding_x};
+  position: relative;
+
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  line-height: ${({ theme }) => theme.chat.bubble_line_height};
+  word-wrap: break-word;
+
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.colors.chat.bubble_hover_shadow};
   }
 
-  render() {
-    return (
-      <div className={this.getClassNames()}
-           tabIndex={this.props.tabbable ? 0 : -1}
-           onClick={() => this.props.onRequestSelection(this.props.item.selectionIndex)}
-           onFocus={() => this.props.onRequestSelection(this.props.item.selectionIndex)}
-           ref={el => this.elementToFocus = el}>
-        {this.getTimestampView()}
-        {this.getMainView()}
-        {this.getStatusView()}
-      </div>
-    )
-  };
+  ${props => props.user ? css`
+    color: ${({ theme }) => theme.colors.chat.alt_bubble_text};
+    background: ${({ theme }) => theme.colors.chat.alt_bubble_bg};
+    border: ${({ theme }) => theme.colors.chat.alt_bubble_border};
+  ` : css`
+  `}
+`
+const MsgTime = styled.time`
+  color: ${({ theme }) => theme.colors.chat.text};
+  font-size: smaller;
+  line-height: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity .2s ease-in-out;
+`
 
-  getMainView() {
-    if (this.props.item.typing) {
-      return (
-        <div className="k-bubble">
-          <div className='k-typing-indicator'>
-            <span/>
-            <span/>
-            <span/>
-          </div>
-        </div>
-      )
-    } else if (this.props.item.text) {
-      return <div className="k-bubble">{this.props.item.text}</div>
-    } else {
-      return null
-    }
-  }
+const Message = React.memo(({ item, user, selected, onRequestSelection, tabbable, isFirstItemInGroup, isLastItemInGroup, isOnlyItemInGroup }) => {
+  const only = isOnlyItemInGroup
+  const first = isFirstItemInGroup && !isOnlyItemInGroup
+  const last = isLastItemInGroup && !isOnlyItemInGroup
 
-  getTimestampView() {
-    let result = null
-    if (this.props.item.timestamp)
-      result = <time className='k-message-time' aria-hidden={!this.props.selected}>{getMessageTime()}</time>
+  const getTimestampView = (timestamp, selected) => (
+    timestamp
+    ? <MsgTime aria-hidden={!selected}>{getMessageTime()}</MsgTime>
+    : null
+  )
 
-    return result
-  }
+  const getMainView = (user, text) => text ? <MsgText user={user}>{text}</MsgText> : null
 
-  getStatusView() {
-    let result = null
-    if (this.props.item.status)
-      result = <span className="k-message-status">{this.props.item.status}</span>
+  return (
+    <Msg only={only} first={first} last={last}
+         tabIndex={tabbable ? 0 : -1} selected={selected}
+         onClick={() => onRequestSelection(item.selectionIndex)}
+         onFocus={() => onRequestSelection(item.selectionIndex)}>
+      {getTimestampView(item.timestamp, selected)}
+      {getMainView(user, item.text)}
+    </Msg>
+  )
+})
 
-    return result
-  }
-
-  getClassNames() {
-    return classNames({ 'k-only': this.props.isOnlyItemInGroup }, { 'k-first': this.props.isFirstItemInGroup && !this.props.isOnlyItemInGroup }, { 'k-last': this.props.isLastItemInGroup && !this.props.isOnlyItemInGroup }, { 'k-state-selected': this.props.selected }, { 'k-state-focused': this.props.selected }, 'k-message')
-  }
+Message.propTypes = {
+  isFirstItemInGroup: PropTypes.bool.isRequired,
+  isLastItemInGroup : PropTypes.bool.isRequired,
+  isOnlyItemInGroup : PropTypes.bool.isRequired,
+  item              : PropTypes.object.isRequired,
+  onRequestSelection: PropTypes.func.isRequired,
+  selected          : PropTypes.bool.isRequired,
+  tabbable          : PropTypes.bool.isRequired
 }
 
 export default Message

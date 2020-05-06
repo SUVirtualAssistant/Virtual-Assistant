@@ -1,12 +1,11 @@
 export const getDate = (locale = 'default') => {
   const dateOptions = {
-    year: 'numeric', month: 'long', day: 'numeric',
+    year   : 'numeric', month: 'long', day: 'numeric',
     weekday: 'long'
   }
 
   return new Intl.DateTimeFormat(locale, dateOptions).format(new Date())
 }
-
 
 export const getMessageTime = (locale = 'default') => {
   const messageDateOptions = {

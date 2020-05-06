@@ -1,16 +1,15 @@
-import NavBar             from '@components/NavBar'
+import SiteLayout         from '@components/layouts/SiteLayout'
 import { useDarkMode }    from '@shared/hooks'
 import { GlobalStyle }    from '@shared/styles/GlobalStyles'
 import themes             from '@shared/styles/theme'
 import { configureStore } from '@state/store'
 
 import withRedux         from 'next-redux-wrapper'
-import Head              from 'next/head'
 import React             from 'react'
 import { Provider }      from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
-import '../src/components/chat/all.css'
+import '../src/components/oldchat/all.css'
 
 const MyApp = props => {
   // Theme
@@ -22,17 +21,17 @@ const MyApp = props => {
 
   // props
   const { Component, pageProps, store } = props
-  const getLayout = Component.getLayout || (page => page)
 
-  return getLayout(
+  // allows for persistent layouts, each page needs to import getLayout from @components/layouts
+  const getLayout = Component.getLayout || (page => <SiteLayout theme={theme}
+                                                                toggleTheme={toggleTheme}
+                                                                children={page}/>)
+
+  return (
     <ThemeProvider theme={themeMode}>
       <Provider store={store}>
-        <Head>
-          <title>Virtual Assistant</title>
-        </Head>
         <GlobalStyle/>
-        <NavBar theme={theme} toggleTheme={toggleTheme}/>
-        <Component {...pageProps} />
+        {getLayout(theme, toggleTheme, <Component {...pageProps} />)}
       </Provider>
     </ThemeProvider>
   )

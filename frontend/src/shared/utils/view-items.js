@@ -5,7 +5,7 @@ const last = arr => arr[arr.length - 1]
 const dateChanged = (curr, prev) => {
   return (curr && prev) && (prev.getDate() !== curr.getDate() ||
     prev.getMonth() !== curr.getMonth() ||
-    prev.getFullYear() !== curr.getFullYear());
+    prev.getFullYear() !== curr.getFullYear())
 }
 
 const addDateMarker = (arr, msg) => {
@@ -72,19 +72,19 @@ function assignSelectionIndices(viewItems) {
   viewItems.forEach(viewItem => {
     if (viewItem.type === 'message-group') {
       viewItem.messages.forEach(msg => {
-        msg.selectionIndex = selectionCounter++;
-      });
+        msg.selectionIndex = selectionCounter++
+      })
     } else if (viewItem.type === 'action-group') {
-      viewItem.selectionIndex = selectionCounter++;
+      viewItem.selectionIndex = selectionCounter++
     }
-  });
+  })
 
-  viewItems.lastSelectionIndex = selectionCounter - 1;
+  viewItems.lastSelectionIndex = selectionCounter - 1
 }
 
 // TODO: Move this out of the Chat component and call it in a message action-creator
 export const convertMsgsToViewItems = (messages) => {
   let result = messages.reduce(groupItems(messages.length), [])
-  assignSelectionIndices(result);
-  return result;
-};
+  assignSelectionIndices(result)
+  return result
+}

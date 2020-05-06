@@ -1,58 +1,53 @@
-import Link          from 'next/link'
-import { useRouter } from 'next/router'
-import React         from 'react'
-import ThemeToggle   from '@components/ThemeToggle'
-import styled        from 'styled-components'
+import Link        from 'next/link'
+import React       from 'react'
+import styled      from 'styled-components'
 
-const StyledLink = styled.a`
-  font-family: ${({ theme }) => theme.font};
-  font-size: ${({ theme }) => theme.fontSize.subtitle}px;
-  padding: 10px 10px;
+const Nav = styled.nav`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
 
-  color: ${props => props.theme.colors.navBarText};
+  ul {
+    display: flex;
+    order: 1;
+    width: 100%;
+  }
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.navBarHover};
+  & ul li:not(:last-child) {
+    padding-right: 15px;
   }
 `
 
-const StyledNavBar = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  cursor: pointer;
-  background: ${({ theme }) => theme.colors.navBarBackground};
-  padding: 20px;
+const NavLink = styled.a`
+  font-family: ${({ theme }) => theme.font.family};
+  font-size: ${({ theme }) => theme.font.size.lg};
+  font-weight: 400;
+  color: ${props => props.theme.colors.navBarText};
+
+  padding: 10px 10px;
+
+  &:hover {
+    cursor: pointer;
+    background: black;
+  }
 `
 
-const ActiveLink = ({ children, ...props }) => {
-  const router = useRouter()
-  const child = React.Children.only(children)
-  return (
-    <Link {...props}>
-      {React.cloneElement(child, { active: router.pathname === props.href })}
-    </Link>
-  )
-}
-
-const NavBar = ({ theme, toggleTheme }) => (
-  <StyledNavBar>
-    <nav>
-      <ActiveLink href="/">
-        <StyledLink>Chat</StyledLink>
-      </ActiveLink>
-      <ActiveLink href="/help">
-        <StyledLink>Help</StyledLink>
-      </ActiveLink>
-      <ActiveLink href="/newchat">
-        <StyledLink>New Chat</StyledLink>
-      </ActiveLink>
-      <ActiveLink href="/test">
-        <StyledLink>Test</StyledLink>
-      </ActiveLink>
-    </nav>
-    <ThemeToggle theme={theme} toggleTheme={toggleTheme}/>
-  </StyledNavBar>
+const NavBar = () => (
+    <Nav>
+      <ul>
+        <Link href="/">
+          <NavLink>Chat</NavLink>
+        </Link>
+        <Link href="/oldchat">
+          <NavLink>Old Chat</NavLink>
+        </Link>
+        <Link href="/Admin">
+          <NavLink>Admin</NavLink>
+        </Link>
+      </ul>
+    </Nav>
 )
 
 export default NavBar

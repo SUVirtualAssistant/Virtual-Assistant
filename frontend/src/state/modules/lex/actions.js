@@ -29,13 +29,11 @@ export const startSession = (botName, userName) => {
 
     return lex._startSession(params)
               .then(message => {
-                  dispatch(success(message))
+                dispatch(success(message))
 
-                  const messages = msgUtils.parseMessage(message.message)
-                  messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
-                  // dispatch(addMessage({ id: 0, name: 'Mercury' }, message.message ))
-
-                }, error => dispatch(failure(error)))
+                const messages = msgUtils.parseMessage(message.message)
+                messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
+              }, error => dispatch(failure(error)))
   }
 }
 
@@ -44,23 +42,25 @@ export const sendMessage = message => {
   const success = response => ({ type: types.MESSAGE_SEND_SUCCESS, response })
   const failure = error => ({ type: types.MESSAGE_SEND_FAILURE, error })
 
-  return dispatch => {
-    const lexMessage = {
-      botAlias : process.env.BOT_VERSION,
-      botName  : process.env.BOT_NAME,
-      inputText: message.text,
-      userId   : 'user'  // fixme: create a better userID
-    }
+  const lexMessage = {
+    botAlias : process.env.BOT_VERSION,
+    botName  : process.env.BOT_NAME,
+    inputText: message.text,
+    userId   : 'user'  // fixme: create a better userID
+  }
 
+  return dispatch => {
     dispatch(request(true))
     dispatch(_addMessage(message.author, message.text, message.timestamp))        // add user message
 
     // send message to Lex
     return lex._postText(lexMessage)
               .then(message => {
-                  dispatch(success(message))
-                  dispatch(_addMessage({ id: 0 }, message.message, new Date()))
-                }, error => dispatch(failure(error)))
+                dispatch(success(message))
+
+                const messages = msgUtils.parseMessage(message.message)
+                messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
+              }, error => dispatch(failure(error)))
   }
 }
 

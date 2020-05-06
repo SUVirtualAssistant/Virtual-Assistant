@@ -1,12 +1,23 @@
 export const parseMessage = message => {
-  const msg = JSON.parse(message).messages
+  let results = []
+  try {
+    const msg = JSON.parse(message).messages
 
-  return Object.keys(msg).map((e) => msg[e].value)
+    let msgCount = msg.length
+    if (msgCount > 1)
+      for (let i = 0; i < msgCount; i++)
+        results.push(msg[i]['value'])
+    else
+      results = msg[0]['value']
+  } catch {
+    results = [message]
+  }
+  return results
 }
 
 export const wrapMessage = text => ({
-  botAlias: '$LATEST',
-  botName: process.env.BOT_NAME,
+  botAlias : '$LATEST',
+  botName  : process.env.BOT_NAME,
   inputText: text,
-  userId: 'user'
+  userId   : 'user'
 })

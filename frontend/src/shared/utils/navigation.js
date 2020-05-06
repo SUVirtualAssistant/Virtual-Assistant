@@ -1,4 +1,4 @@
-import { KEYS } from 'Src/shared/utils/constants'
+import { KEYS } from '@shared/constants'
 
 const navigate = (focusedIndex, keyCode, altKey, total) => {
   if (altKey)

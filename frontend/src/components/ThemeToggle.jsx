@@ -6,23 +6,22 @@ import React            from 'react'
 import styled           from 'styled-components'
 
 const ToggleContainer = styled.button`
-  background: ${({ theme }) => theme.toggleGradient};
-  border: 2px solid ${({ theme }) => theme.toggleBorder};
-  border-radius: 30px;
-  cursor: pointer;
+  background: ${({ theme }) => theme.colors.themeToggle.toggleGradient};
+  border: none;
+  border-radius: 5px;
+
   display: flex;
-  font-size: 0.5rem;
+
+  cursor: pointer;
   justify-content: space-between;
-  margin: 0 auto;
   overflow: hidden;
-  padding: 0.5rem;
-  position: relative;
-  width: 4rem;
-  height: 2rem;
+
+  margin: .5rem 3rem;
+  padding: 0.5rem 0.5rem;
 
   svg {
     height: auto;
-    width: 2.5rem;
+    width: 2rem;
     transition: all 0.3s linear;
 
     // sun icon
@@ -38,10 +37,10 @@ const ToggleContainer = styled.button`
 `
 
 const ThemeToggle = ({ theme, toggleTheme }) => {
-  const isLight = theme === 'light'
+  // const isLight = theme === 'light'
 
   return (
-    <ToggleContainer lightTheme={isLight} onClick={toggleTheme}>
+    <ToggleContainer lightTheme={theme === 'light'} onClick={toggleTheme}>
       <SunIcon/>
       <MoonIcon/>
     </ToggleContainer>

@@ -1,46 +1,27 @@
-import { Chat }       from '@components/chat'
-import { lexActions } from '@state/modules/lex'
+import { Chat }      from '@components/chat'
+import DynamicCanvas from '@components/dynamic_canvas'
+import { getLayout } from '@components/layouts'
+import React         from 'react'
+import styled        from 'styled-components'
 
-import React                  from 'react'
-import { connect }            from 'react-redux'
-import { bindActionCreators } from 'redux'
+const ChatLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+`
 
-class ChatPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.addNewMessage = this.addNewMessage.bind(this)
-  }
+const NewChatPage = () => {
+  return (
+    <ChatLayout>
+      <Chat botName={process.env.BOT_NAME}
+            user={{ id: 1, name: 'USER' }}
+            placeholder='Type a message...'/>
+      <DynamicCanvas/>
 
-  componentDidMount() {
-    if (!this.props.active)
-      this.props.startSession(process.env.BOT_NAME, 'USER')
-  }
-
-  addNewMessage = event => {
-    this.props.sendMessage(event.message)
-  }
-
-  render() {
-    return (
-      <div>
-        <Chat user={{ id: 1 }}
-              messages={this.props.messages}    // fixme: this is adding messages to the store
-              onMessageSend={this.addNewMessage}
-              placeholder={'Type a message...'}
-        />
-      </div>
-    )
-  }
+    </ChatLayout>
+  )
 }
 
-const mapStateToProps = state => ({
-  messages: state.lex.messages,
-  active  : state.lex.active
-})
+NewChatPage.getLayout = getLayout
 
-const mapDispatchToProps = dispatch => ({
-  startSession: bindActionCreators(lexActions.startSession, dispatch),
-  sendMessage : bindActionCreators(lexActions.sendMessage, dispatch)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatPage)
+export default NewChatPage

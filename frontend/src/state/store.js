@@ -22,7 +22,7 @@ export const configureStore = initialState => {
     bindMiddleware(
       [
         thunkMiddleware,
-        interceptorMiddleware
+        // interceptorMiddleware
       ]
     )
   )

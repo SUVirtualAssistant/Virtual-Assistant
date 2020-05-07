@@ -15,6 +15,13 @@ export const parseMessage = message => {
   return results
 }
 
+export const parseData = data => {
+  const parsedData = Object.values(data.sessionAttributes)
+  const arr = []
+  parsedData.forEach(el => arr.push(JSON.parse(el)))
+  return arr
+}
+
 export const wrapMessage = text => ({
   botAlias : '$LATEST',
   botName  : process.env.BOT_NAME,

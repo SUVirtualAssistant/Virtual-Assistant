@@ -64,11 +64,19 @@ export const sendMessage = message => {
               .then(message => {
                 dispatch(success(message))
 
-                // adds session attributes to store.lex.latestData
-                dispatch(_addData(message.sessionAttributes))
-
                 const messages = msgUtils.parseMessage(message.message)
                 messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
+
+                // adds session attributes to store.lex.latestData
+                if (message.sessionAttributes !== null) {
+                  const data = Object.values(message.sessionAttributes)
+                  const arr = []
+                  data.forEach(el => arr.push(JSON.parse(el)))
+                  dispatch(_addData(arr))
+                }
+                // dispatch(_addData(Object.values(message.sessionAttributes)))
+                // dispatch(_addData(message.sessionAttributes))
+
               }, error => dispatch(failure(error)))
   }
 }

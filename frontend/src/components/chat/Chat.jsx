@@ -93,11 +93,6 @@ const Chat = ({ botName, user, placeholder }) => {
     return () => clearTimeout(nextTickId)
   }, [])
 
-  // componentDidUpdate
-  useEffect(() => {
-    scrollViewItemsToBottom()
-  }, [messages])
-
   const onFocus = () => {
     clearTimeout(timeoutIdForChatLosingFocus.current)
     selectLastViewItemWhenNoCurrentSelection()

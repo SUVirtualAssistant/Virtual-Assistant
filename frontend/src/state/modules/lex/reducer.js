@@ -6,6 +6,7 @@ const initialState = {
   sendingMessage: false,
   currentIntent: '',
   dialogState: '',
+  latestData: null,
   messages: []
 }
 
@@ -23,6 +24,11 @@ export default (state = initialState, action) => {
             // selectionIndex: state.messages.length + 1
           }
         ]
+      }
+    case types.ADD_DATA:
+      return {
+        ...state,
+        latestData: action.data
       }
 
     /* --- Session ------------------------------------ */

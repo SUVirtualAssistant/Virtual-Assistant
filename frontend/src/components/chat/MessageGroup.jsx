@@ -1,11 +1,10 @@
 import { isAuthor as isUser } from '@shared/utils'
 import PropTypes              from 'prop-types'
-import React, { forwardRef }  from 'react'
+import React                  from 'react'
 import styled, { css }        from 'styled-components'
 import Message                from './Message'
 
 const MessageGroupContainer = styled.div`
-  max-width: 80%;
   background: none;
   box-sizing: border-box;
   display: flex;
@@ -41,7 +40,7 @@ const MessageGroupContainer = styled.div`
 }
 `
 
-const MessageGroup = forwardRef(({ group, user, selectedItemIndex, onRequestSelection, isLastGroup }, ref) => {
+const MessageGroup = ({ group, user, selectedItemIndex, onRequestSelection, isLastGroup }) => {
 
   const getGroupMessagesView = (group, selectedItemIndex, onRequestSelection, isLastGroup) => {
     const lastItemIndex = group.messages.length - 1
@@ -62,7 +61,7 @@ const MessageGroup = forwardRef(({ group, user, selectedItemIndex, onRequestSele
       {getGroupMessagesView(group, selectedItemIndex, onRequestSelection, isLastGroup)}
     </MessageGroupContainer>
   )
-})
+}
 
 MessageGroup.propTypes = {
   group             : PropTypes.object.isRequired,

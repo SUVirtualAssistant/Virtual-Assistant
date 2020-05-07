@@ -1,11 +1,17 @@
-import lex, { msgUtils } from '@services/AWS_Lex'
-import * as types        from './types'
+import lex, { msgUtils }          from '@services/AWS_Lex'
+import { convertMsgsToViewItems } from '@shared/utils/view-items'
+import * as types                 from './types'
 
-export const _addMessage = (author, message, timestamp) => ({
+const _addMessage = (author, message, timestamp) => ({
   type: 'ADD_MESSAGE',
   author,
   message,
   timestamp
+})
+
+const _addData = data => ({
+  type: types.ADD_DATA,
+  data
 })
 
 export const startSession = (botName, userName) => {
@@ -57,6 +63,9 @@ export const sendMessage = message => {
     return lex._postText(lexMessage)
               .then(message => {
                 dispatch(success(message))
+
+                // adds session attributes to store.lex.latestData
+                dispatch(_addData(message.sessionAttributes))
 
                 const messages = msgUtils.parseMessage(message.message)
                 messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))

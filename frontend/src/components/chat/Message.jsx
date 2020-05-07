@@ -1,7 +1,7 @@
 import { getMessageTime } from '@shared/utils/date-time'
-import PropTypes          from 'prop-types'
-import React              from 'react'
-import styled, { css }    from 'styled-components'
+import PropTypes         from 'prop-types'
+import React, { useRef } from 'react'
+import styled, { css }   from 'styled-components'
 
 const Msg = styled.div`
   max-width: 100%;
@@ -60,6 +60,8 @@ const MsgTime = styled.time`
 `
 
 const Message = React.memo(({ item, user, selected, onRequestSelection, tabbable, isFirstItemInGroup, isLastItemInGroup, isOnlyItemInGroup }) => {
+  const elementToFocus = useRef(null)
+
   const only = isOnlyItemInGroup
   const first = isFirstItemInGroup && !isOnlyItemInGroup
   const last = isLastItemInGroup && !isOnlyItemInGroup
@@ -76,7 +78,9 @@ const Message = React.memo(({ item, user, selected, onRequestSelection, tabbable
     <Msg only={only} first={first} last={last}
          tabIndex={tabbable ? 0 : -1} selected={selected}
          onClick={() => onRequestSelection(item.selectionIndex)}
-         onFocus={() => onRequestSelection(item.selectionIndex)}>
+         onFocus={() => onRequestSelection(item.selectionIndex)}
+         ref={elementToFocus}
+    >
       {getTimestampView(item.timestamp, selected)}
       {getMainView(user, item.text)}
     </Msg>

@@ -7,7 +7,7 @@ import styled        from 'styled-components'
 const ChatLayout = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  height: 100%;
 `
 
 const NewChatPage = () => {

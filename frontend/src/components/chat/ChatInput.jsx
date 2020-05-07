@@ -4,17 +4,20 @@ import React, { useState } from 'react'
 import styled              from 'styled-components'
 
 const MsgBox = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  flex-flow: row nowrap;
 
   color: rgba(0,0,0,0.87);
-  border-color: inherit;
   background-color: #fff;
 
-  padding: 10px 15px;
+  border-color: inherit;
   border-style: solid;
   border-width: 1px 0 0;
+
+  padding: 10px 15px;
+
 `
 
 const MsgInput = styled.input`
@@ -47,6 +50,7 @@ const MsgButton = styled.button`
   background: none !important;
   box-shadow: none !important;
   transition: color .2s ease-in-out;
+  overflow-y: auto;
 
   padding: 0;
   flex-shrink: 0;
@@ -66,8 +70,6 @@ const MsgButton = styled.button`
   justify-content: center;
   vertical-align: middle;
   user-select: none;
-  position: relative;
-  outline: none;
 
   &:hover {
     color: #3f51b5;
@@ -111,7 +113,7 @@ const ChatInput = React.forwardRef(({ onMessageSend, user, placeholder }, ref) =
 
   return (
     <MsgBox>
-      <MsgInput type='text'
+      <MsgInput type='text' focused={focused}
                 placeholder={placeholder}
                 onKeyDown={onInputKeyDown}
                 onFocus={() => setFocused(true)}

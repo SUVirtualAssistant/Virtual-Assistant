@@ -24,7 +24,7 @@ const NavLink = styled.a`
   font-family: ${({ theme }) => theme.font.family};
   font-size: ${({ theme }) => theme.font.size.lg};
   font-weight: 400;
-  color: ${props => props.theme.colors.navBarText};
+  color: ${({ theme }) => theme.colors.navBarText};
 
   padding: 10px 10px;
 

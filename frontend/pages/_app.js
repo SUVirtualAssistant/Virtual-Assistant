@@ -24,7 +24,6 @@ const MyApp = props => {
 
   // allows for persistent layouts, each page needs to import getLayout from @components/layouts
   const getLayout = Component.getLayout || (page => <SiteLayout theme={theme}
-                                                                toggleTheme={toggleTheme}
                                                                 children={page}/>)
 
   return (

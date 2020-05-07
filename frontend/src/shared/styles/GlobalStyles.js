@@ -10,26 +10,32 @@ export const GlobalStyle = createGlobalStyle`
   ${normalize()}
 
   *, *:before, *:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-  }
-
-  html {
     box-sizing: border-box;
   }
 
-  body {
-    position: fixed;
+  html {
+    position: fixed;          // prevents scroll bounce
+    height: 100%;
     overflow: hidden;
-    transition: all 0.25s linear;
-
-    background: ${({ theme }) => theme.colors.pageBackground};
   }
 
-  html, body {
-    height: 100%;
+  body {
+    margin: 0;
     width: 100vw;
+    height: 100vh;
+    overflow-y: auto;         // allows scrolling on the page itself
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    display: flex;
+    flex-flow: column nowrap;
+
+    box-sizing: border-box;
+
+    transition: all 0.25s linear;
+    background: ${({ theme }) => theme.colors.pageBackground};
   }
 
 

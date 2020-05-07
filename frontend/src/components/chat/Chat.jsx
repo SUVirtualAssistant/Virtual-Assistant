@@ -1,3 +1,4 @@
+import { KEYS }                               from '@shared/constants/keys'
 import { convertMsgsToViewItems }             from '@shared/utils/view-items'
 import { lexActions as Lex }                  from '@state/modules/lex'
 import React, { useEffect, useRef, useState } from 'react'
@@ -9,12 +10,15 @@ import MessageGroup                           from './MessageGroup'
 
 const ChatContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100vh;
   flex: 1 1 auto;
-  max-height: 100vh;
-  width: 50vw;
-  min-width: 50vw;
 
+  overflow: hidden;
+
+  outline: 0;
   border-style: solid;
   border-width: ${({ theme }) => theme.chat.border_width};
 
@@ -32,48 +36,48 @@ const ChatContainer = styled.div`
 
 const MessageList = styled.div`
   display: flex;
-  flex: auto;
+  flex: 1 1 98%;
   flex-direction: column;
-  max-height: 92.5vh;
 
+  align-items: flex-start;
   overflow-x: hidden;
   overflow-y: auto;
-  align-items: flex-start;
   scroll-behavior: smooth;
 `
 
 const MessageListContent = styled.div`
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  align-items: flex-start;
-  position: relative;
-  overflow: hidden;
   padding: ${({ theme }) => theme.chat.message_list_padding_y} ${({ theme }) => theme.chat.message_box_padding_x};
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
 
   >*+* {
     margin-top: ${({ theme }) => theme.chat.message_list_spacing};
   }
 `
 
-/**
- * NewChat
- * TODO
- *    * Autoscroll to bottom on new message
- *
- */
-
 const Chat = ({ botName, user, placeholder }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null)
+
+  const selectedItemIndexRef = useRef(selectedItemIndex)
+  const timeoutIdForChatLosingFocus = useRef(null)
   const scrollToBottomOnLoadingData = useRef(true)
+  const chatWrapperEl = useRef(null)
+  const viewItemsWrapperEl = useRef(null)
+
   const inputRef = useRef()
 
   /* ------ Store hooks ------ */
   const dispatch = useDispatch()
 
+  // noinspection JSUnresolvedVariable
   const messages = useSelector(state => state.lex.messages)
+  // noinspection JSUnresolvedVariable
   const active = useSelector(state => state.lex.active)
 
   /**
@@ -84,7 +88,71 @@ const Chat = ({ botName, user, placeholder }) => {
       dispatch(Lex.startSession(botName, user.name))
 
     inputRef.current.focus()
+
+    const nextTickId = setTimeout(() => scrollViewItemsToBottom(), 250)
+    return () => clearTimeout(nextTickId)
   }, [])
+
+  // componentDidUpdate
+  useEffect(() => {
+    scrollViewItemsToBottom()
+  }, [messages])
+
+  const onFocus = () => {
+    clearTimeout(timeoutIdForChatLosingFocus.current)
+    selectLastViewItemWhenNoCurrentSelection()
+    console.log('onFocus fired')
+  }
+
+  const onBlur = () => {
+    selectedItemIndexRef.current = selectedItemIndex
+    console.log('onBlur fired')
+  }
+
+  const onSelectionRequest = clickedItemIndex => {
+    console.log(clickedItemIndex)
+    setSelectedItemIndex(clickedItemIndex)
+  }
+
+  const onKeyDown = e => {
+    let newSelectedItemIndex = null
+    const currentSelectedItemIndex = selectedItemIndex !== null ? selectedItemIndex : messages.lastSelectionIndex
+
+    switch (e.keyCode) {
+      case KEYS.up:
+        if (currentSelectedItemIndex === null) {
+          newSelectedItemIndex = 0
+        } else if (currentSelectedItemIndex > 0) {
+          newSelectedItemIndex = currentSelectedItemIndex - 1
+        }
+        break
+      case KEYS.down:
+        if (currentSelectedItemIndex === null) {
+          newSelectedItemIndex = 0
+        } else if (currentSelectedItemIndex < messages.lastSelectionIndex) {
+          newSelectedItemIndex = currentSelectedItemIndex + 1
+        }
+        break
+      default:
+        break
+    }
+
+    if (newSelectedItemIndex !== null) {
+      setSelectedItemIndex(newSelectedItemIndex)
+      e.preventDefault()
+    }
+  }
+
+  const selectLastViewItemWhenNoCurrentSelection = () => {
+    if (selectedItemIndex === null)
+      setSelectedItemIndex(messages.lastSelectionIndex)
+  }
+
+  const scrollViewItemsToBottom = () => {
+    if (viewItemsWrapperEl) {
+      viewItemsWrapperEl.current.scrollTop = viewItemsWrapperEl.scrollHeight - viewItemsWrapperEl.clientHeight
+    }
+  }
 
   /**
    * Callback sent to `NewMessage`; gets called when a user hits enter or send
@@ -112,7 +180,7 @@ const Chat = ({ botName, user, placeholder }) => {
           return <MessageGroup group={viewItem}
                                user={user}
                                selectedItemIndex={selectedItemIndex}
-                               onRequestSelection={setSelectedItemIndex}
+                               onRequestSelection={onSelectionRequest}
                                isLastGroup={index === lastViewItemIndex}
                                key={index}/>
         default:
@@ -122,11 +190,16 @@ const Chat = ({ botName, user, placeholder }) => {
   }
 
   return (
-    <ChatContainer>
+    <ChatContainer onKeyDown={onKeyDown}
+                   ref={chatWrapperEl}>
       <MessageList role='log'
                    aria-live='polite'
+                   onBlur={onBlur}
+                   onFocus={onFocus}
                    onScroll={e => scrollToBottomOnLoadingData.current =
-                     e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight}>
+                     e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight}
+                   ref={viewItemsWrapperEl}
+      >
         <MessageListContent>
           {renderMessageList(messages)}
         </MessageListContent>

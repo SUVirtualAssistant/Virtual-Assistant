@@ -48,23 +48,22 @@ const groupMessages = (arr, msg, isLastMessage) => {
   }
 }
 
-const groupItems = total =>
-  (arr, msg, index) => {
-    const isLastMessage = index === total - 1
+const groupItems = total => (arr, msg, index) => {
+  const isLastMessage = index === total - 1
 
-    addDateMarker(arr, msg)
-    groupMessages(arr, msg, isLastMessage)
+  addDateMarker(arr, msg)
+  groupMessages(arr, msg, isLastMessage)
 
-    if (msg.suggestedActions && isLastMessage) {
-      arr.push({
-        type     : 'action-group',
-        actions  : msg.suggestedActions,
-        timestamp: msg.timestamp,
-        trackBy  : msg
-      })
-    }
-    return arr
+  if (msg.suggestedActions && isLastMessage) {
+    arr.push({
+      type     : 'action-group',
+      actions  : msg.suggestedActions,
+      timestamp: msg.timestamp,
+      trackBy  : msg
+    })
   }
+  return arr
+}
 
 function assignSelectionIndices(viewItems) {
   let selectionCounter = 0

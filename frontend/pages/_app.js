@@ -9,8 +9,6 @@ import React             from 'react'
 import { Provider }      from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
-import '../src/components/oldchat/all.css'
-
 const MyApp = props => {
   // Theme
   const [theme, toggleTheme, componentMounted] = useDarkMode()

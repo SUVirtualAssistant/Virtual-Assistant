@@ -54,14 +54,14 @@ const groupItems = total => (arr, msg, index) => {
   addDateMarker(arr, msg)
   groupMessages(arr, msg, isLastMessage)
 
-  if (msg.suggestedActions && isLastMessage) {
-    arr.push({
-      type     : 'action-group',
-      actions  : msg.suggestedActions,
-      timestamp: msg.timestamp,
-      trackBy  : msg
-    })
-  }
+  // if (msg.suggestedActions && isLastMessage) {
+  //   arr.push({
+  //     type     : 'action-group',
+  //     actions  : msg.suggestedActions,
+  //     timestamp: msg.timestamp,
+  //     trackBy  : msg
+  //   })
+  // }
   return arr
 }
 

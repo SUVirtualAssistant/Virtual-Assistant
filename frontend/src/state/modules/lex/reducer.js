@@ -5,33 +5,11 @@ const initialState = {
   active: false,
   sendingMessage: false,
   currentIntent: '',
-  dialogState: '',
-  latestData: null,
-  messages: []
+  dialogState: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.ADD_MESSAGE:       // todo: change this to save the messages as message-groups and take the call out of the Chat component
-      return {
-        ...state,
-        messages: [
-          ...state.messages,
-          {
-            author: action.author,
-            timestamp: new Date(),
-            text: action.message,
-            // selectionIndex: state.messages.length + 1
-          }
-        ]
-      }
-    case types.ADD_DATA:
-      return {
-        ...state,
-        latestData: action.data
-      }
-
-    /* --- Session ------------------------------------ */
     case types.SESSION_START_REQUEST:
       return {
         ...state,

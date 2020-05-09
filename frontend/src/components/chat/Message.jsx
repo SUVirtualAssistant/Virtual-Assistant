@@ -1,7 +1,20 @@
-import { getMessageTime } from '@shared/utils/date-time'
-import PropTypes         from 'prop-types'
-import React, { useRef } from 'react'
-import styled, { css }   from 'styled-components'
+import { getMessageTime }           from '@shared/utils/date-time'
+import PropTypes                    from 'prop-types'
+import React, { useEffect, useRef } from 'react'
+import styled, { css }              from 'styled-components'
+
+const MsgTime = styled.time`
+  color: ${({ theme }) => theme.colors.chat.text};
+  font-size: smaller;
+  line-height: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity .2s ease-in-out;
+`
 
 const Msg = styled.div`
   max-width: 100%;
@@ -10,17 +23,18 @@ const Msg = styled.div`
   transition: margin .2s ease-in-out;
   outline: none;
 
-  ${props => props.selected && css`
-    margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
-    border: 0;
-    color: inherit;
-    background: none;
+  ${props => props.selected
+      ? css`
+        margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
+        border: 0;
+        color: inherit;
+        background: none;
 
-      time {
-        opacity: 1;
-      }
-    `
-  }
+          ${MsgTime} {
+            opacity: 1;
+          }`
+      : css` ` }
+
 `
 
 const MsgText = styled.div`
@@ -43,34 +57,28 @@ const MsgText = styled.div`
     color: ${({ theme }) => theme.colors.chat.alt_bubble_text};
     background: ${({ theme }) => theme.colors.chat.alt_bubble_bg};
     border: ${({ theme }) => theme.colors.chat.alt_bubble_border};
-  ` : css`
-  `}
+  ` : ` `
+  }
 `
-const MsgTime = styled.time`
-  color: ${({ theme }) => theme.colors.chat.text};
-  font-size: smaller;
-  line-height: normal;
-  white-space: nowrap;
-  pointer-events: none;
-  position: absolute;
-  opacity: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: opacity .2s ease-in-out;
-`
-
-const Message = React.memo(({ item, user, selected, onRequestSelection, tabbable, isFirstItemInGroup, isLastItemInGroup, isOnlyItemInGroup }) => {
+const Message = ({ item, user, selected, onRequestSelection, tabbable, isFirstItemInGroup, isLastItemInGroup, isOnlyItemInGroup }) => {
   const elementToFocus = useRef(null)
+
+  useEffect(() => {
+    if (selected) {
+      elementToFocus.current.focus()
+      console.log(selected)
+    }
+
+  }, [selected])
 
   const only = isOnlyItemInGroup
   const first = isFirstItemInGroup && !isOnlyItemInGroup
   const last = isLastItemInGroup && !isOnlyItemInGroup
 
-  const getTimestampView = (timestamp, selected) => (
-    timestamp
-    ? <MsgTime aria-hidden={!selected}>{getMessageTime()}</MsgTime>
-    : null
-  )
+  const getTimestampView = (timestamp, selected) => timestamp
+                                                    ? <MsgTime
+                                                      aria-hidden={!selected}>{getMessageTime(timestamp)}</MsgTime>
+                                                    : null
 
   const getMainView = (user, text) => text ? <MsgText user={user}>{text}</MsgText> : null
 
@@ -79,13 +87,12 @@ const Message = React.memo(({ item, user, selected, onRequestSelection, tabbable
          tabIndex={tabbable ? 0 : -1} selected={selected}
          onClick={() => onRequestSelection(item.selectionIndex)}
          onFocus={() => onRequestSelection(item.selectionIndex)}
-         ref={elementToFocus}
-    >
+         ref={elementToFocus}>
       {getTimestampView(item.timestamp, selected)}
       {getMainView(user, item.text)}
     </Msg>
   )
-})
+}
 
 Message.propTypes = {
   isFirstItemInGroup: PropTypes.bool.isRequired,

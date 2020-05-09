@@ -10,18 +10,18 @@ const ChatLayout = styled.div`
   height: 100%;
 `
 
-const NewChatPage = () => {
+const ChatPage = () => {
   return (
     <ChatLayout>
       <Chat botName={process.env.BOT_NAME}
             user={{ id: 1, name: 'USER' }}
             placeholder='Type a message...'/>
-      <DynamicCanvas/>
+      {/*<DynamicCanvas/>*/}
 
     </ChatLayout>
   )
 }
 
-NewChatPage.getLayout = getLayout
+ChatPage.getLayout = getLayout
 
-export default NewChatPage
+export default ChatPage

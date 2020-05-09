@@ -3,7 +3,7 @@ const font = {
   size       : {
     default: '14px',
     xs     : '10px',
-    sm     : '12px',
+    sm     : '13px',
     lg     : '19px',
     xl     : '19px'
   },

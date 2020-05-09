@@ -9,39 +9,31 @@ import { normalize } from 'polished'
 export const GlobalStyle = createGlobalStyle`
   ${normalize()}
 
-  *, *:before, *:after {
-    box-sizing: border-box;
+  * {
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  html {
-    position: fixed;          // prevents scroll bounce
+  html, body {
     height: 100%;
+    position: fixed;          // prevents scroll bounce
     overflow: hidden;
+    margin: 0;
   }
 
   body {
-    margin: 0;
     width: 100vw;
     height: 100vh;
+
     overflow-y: auto;         // allows scrolling on the page itself
     overflow-x: hidden;
+
     -webkit-overflow-scrolling: touch;
   }
-
-  body {
-    display: flex;
-    flex-flow: column nowrap;
-
-    box-sizing: border-box;
-
-    transition: all 0.25s linear;
-    background: ${({ theme }) => theme.colors.pageBackground};
-  }
-
 
   h1 {
     font-family: ${props => props.theme.font.family};
     font-size: ${props => props.theme.font.size.lg};
   }
 `
-

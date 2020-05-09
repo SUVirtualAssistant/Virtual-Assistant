@@ -59,9 +59,9 @@ export const darkMode = {
     border     : '',
     card       : '',
 
-    navBarText      : '#fff',
-    navBarBackground: '#363537',
-    navBarHover     : '',
+    navBarText      : rgba(255, 255, 255, 0.6),
+    navBarBackground: '#12171c',
+    navBarHover     : '#fff',
 
     text          : '#FAFAFA',
     title         : '',

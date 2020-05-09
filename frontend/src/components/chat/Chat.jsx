@@ -1,19 +1,21 @@
-import { KEYS }                               from '@shared/constants/keys'
-import { convertMsgsToViewItems }             from '@shared/utils/view-items'
-import { lexActions as Lex }                  from '@state/modules/lex'
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector }           from 'react-redux'
-import styled                                 from 'styled-components'
-import ChatInput                              from './ChatInput'
-import DateMarker                             from './DateMarker'
-import MessageGroup                           from './MessageGroup'
+import { KEYS }                                            from '@shared/constants/keys'
+import { convertMsgsToViewItems }                          from '@shared/utils/view-items'
+import { lexActions as Lex }                               from '@state/modules/lex'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector }                        from 'react-redux'
+import styled                                              from 'styled-components'
+import ChatInput                                           from './ChatInput'
+import DateMarker                                          from './DateMarker'
+import MessageGroup                                        from './MessageGroup'
 
 const ChatContainer = styled.div`
+  position: absolute;
+
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   flex: 1 1 auto;
 
   overflow: hidden;
@@ -64,49 +66,26 @@ const MessageListContent = styled.div`
 const Chat = ({ botName, user, placeholder }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null)
 
-  const selectedItemIndexRef = useRef(selectedItemIndex)
-  const timeoutIdForChatLosingFocus = useRef(null)
-  const scrollToBottomOnLoadingData = useRef(true)
   const chatWrapperEl = useRef(null)
   const viewItemsWrapperEl = useRef(null)
-
   const inputRef = useRef()
 
   /* ------ Store hooks ------ */
   const dispatch = useDispatch()
-
-  // noinspection JSUnresolvedVariable
-  const messages = useSelector(state => state.lex.messages)
-  // noinspection JSUnresolvedVariable
+  const messages = useSelector(state => state.chat.messages)
   const active = useSelector(state => state.lex.active)
 
   /**
    * Starts lex session on mount
    */
   useEffect(() => {
-    if (!active)
-      dispatch(Lex.startSession(botName, user.name))
-
-    inputRef.current.focus()
-
-    const nextTickId = setTimeout(() => scrollViewItemsToBottom(), 250)
-    return () => clearTimeout(nextTickId)
+    if (!active) dispatch(Lex.startSession(botName, user.name))
   }, [])
 
-  const onFocus = () => {
-    clearTimeout(timeoutIdForChatLosingFocus.current)
-    selectLastViewItemWhenNoCurrentSelection()
-    console.log('onFocus fired')
-  }
-
-  const onBlur = () => {
-    selectedItemIndexRef.current = selectedItemIndex
-    console.log('onBlur fired')
-  }
-
   const onSelectionRequest = clickedItemIndex => {
-    console.log(clickedItemIndex)
+    console.log('--OLD selectedItemIndex: ' + selectedItemIndex)
     setSelectedItemIndex(clickedItemIndex)
+    console.log('NEW selectedItemIndex: ' + clickedItemIndex)
   }
 
   const onKeyDown = e => {
@@ -138,29 +117,17 @@ const Chat = ({ botName, user, placeholder }) => {
     }
   }
 
-  const selectLastViewItemWhenNoCurrentSelection = () => {
-    if (selectedItemIndex === null)
-      setSelectedItemIndex(messages.lastSelectionIndex)
-  }
-
-  const scrollViewItemsToBottom = () => {
-    if (viewItemsWrapperEl) {
-      viewItemsWrapperEl.current.scrollTop = viewItemsWrapperEl.scrollHeight - viewItemsWrapperEl.clientHeight
-    }
-  }
-
   /**
    * Callback sent to `NewMessage`; gets called when a user hits enter or send
    * @param message
    */
-  const addNewMessage = message => {
-    dispatch(Lex.sendMessage(message))
-  }
+  const addNewMessage = useCallback(message => dispatch(Lex.sendMessage(message)), [
+    dispatch
+  ])
 
   /**
    * Loops through msgs returning items to render
    * @returns {*}
-   * @param msgList
    */
   const renderMessageList = msgList => {
     const msgs = msgList.length > 0 ? convertMsgsToViewItems(msgList) : []
@@ -185,16 +152,10 @@ const Chat = ({ botName, user, placeholder }) => {
   }
 
   return (
-    <ChatContainer onKeyDown={onKeyDown}
-                   ref={chatWrapperEl}>
+    <ChatContainer ref={chatWrapperEl}>
       <MessageList role='log'
                    aria-live='polite'
-                   onBlur={onBlur}
-                   onFocus={onFocus}
-                   onScroll={e => scrollToBottomOnLoadingData.current =
-                     e.currentTarget.scrollTop === e.currentTarget.scrollHeight - e.currentTarget.clientHeight}
-                   ref={viewItemsWrapperEl}
-      >
+                   ref={viewItemsWrapperEl}>
         <MessageListContent>
           {renderMessageList(messages)}
         </MessageListContent>

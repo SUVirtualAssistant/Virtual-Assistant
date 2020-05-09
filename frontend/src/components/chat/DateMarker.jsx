@@ -11,6 +11,6 @@ const StyledDateMarker = styled.div`
   align-self: stretch;
 `
 
-const DateMarker = () => <StyledDateMarker>{getDate()}</StyledDateMarker>
+const DateMarker = ({ item }) => <StyledDateMarker>{getDate(item.timestamp)}</StyledDateMarker>
 
 export default DateMarker

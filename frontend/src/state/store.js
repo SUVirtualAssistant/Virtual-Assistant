@@ -1,4 +1,3 @@
-import { interceptorMiddleware } from '@state/middleware'
 import * as reducers from '@state/modules'
 
 
@@ -22,7 +21,6 @@ export const configureStore = initialState => {
     bindMiddleware(
       [
         thunkMiddleware,
-        // interceptorMiddleware
       ]
     )
   )

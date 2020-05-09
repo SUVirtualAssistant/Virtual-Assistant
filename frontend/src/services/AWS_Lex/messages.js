@@ -15,11 +15,20 @@ export const parseMessage = message => {
   return results
 }
 
+// TODO: make this more robust
 export const parseData = data => {
   const parsedData = Object.values(data.sessionAttributes)
-  const arr = []
-  parsedData.forEach(el => arr.push(JSON.parse(el)))
-  return arr
+
+  // console.log(test)
+  //
+  // const arr = []
+  // parsedData.forEach(el => arr.push(JSON.parse(el)))
+  // return arr
+
+  return parsedData.reduce((arr, elem) => {
+    arr.push(JSON.parse(elem))
+    return arr
+  }, [])
 }
 
 export const wrapMessage = text => ({

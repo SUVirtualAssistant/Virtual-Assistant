@@ -1,18 +1,6 @@
-import lex, { msgUtils }          from '@services/AWS_Lex'
-import { convertMsgsToViewItems } from '@shared/utils/view-items'
-import * as types                 from './types'
-
-const _addMessage = (author, message, timestamp) => ({
-  type: 'ADD_MESSAGE',
-  author,
-  message,
-  timestamp
-})
-
-const _addData = data => ({
-  type: types.ADD_DATA,
-  data
-})
+import lex, { msgUtils } from '@services/AWS_Lex'
+import { chatActions }   from '@state/modules/chat'
+import * as types        from './types'
 
 export const startSession = (botName, userName) => {
   const request = (name, version) => ({ type: types.SESSION_START_REQUEST, name, version })
@@ -38,7 +26,7 @@ export const startSession = (botName, userName) => {
                 dispatch(success(message))
 
                 const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
+                messages.forEach(msg => dispatch(chatActions.addMessage({ id: 0 }, msg, new Date())))
               }, error => dispatch(failure(error)))
   }
 }
@@ -57,7 +45,7 @@ export const sendMessage = message => {
 
   return dispatch => {
     dispatch(request(true))
-    dispatch(_addMessage(message.author, message.text, message.timestamp))        // add user message
+    dispatch(chatActions.addMessage(message.author, message.text, message.timestamp))        // add user message
 
     // send message to Lex
     return lex._postText(lexMessage)
@@ -65,24 +53,12 @@ export const sendMessage = message => {
                 dispatch(success(message))
 
                 const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(_addMessage({ id: 0 }, msg, new Date())))
+                messages.forEach(msg => dispatch(chatActions.addMessage({ id: 0 }, msg, new Date())))
 
                 // adds session attributes to store.lex.latestData
-                if (message.sessionAttributes !== null) {
-                  const data = Object.values(message.sessionAttributes)
-                  const arr = []
-                  data.forEach(el => arr.push(JSON.parse(el)))
-                  dispatch(_addData(arr))
-                }
-                // dispatch(_addData(Object.values(message.sessionAttributes)))
-                // dispatch(_addData(message.sessionAttributes))
+                // if (message.sessionAttributes !== null)
+                //   dispatch(_addData(msgUtils.parseData(message)))
 
               }, error => dispatch(failure(error)))
   }
 }
-
-// TODO: create an action-creator for altering conversation flow
-//       i.e. changing the current intent or ending the session
-//       You'll want to separate out the message reducers from
-//       the lex state to separate concerns. While they relate to
-//       Lex, they're really just formatting actions.

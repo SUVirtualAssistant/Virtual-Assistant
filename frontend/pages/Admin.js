@@ -3,6 +3,7 @@ import React         from 'react'
 import styled        from 'styled-components'
 
 const Content = styled.div`
+  position: absolute;
   background: #eee;
   height: 100vh;
   display: flex;

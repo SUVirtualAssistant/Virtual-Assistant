@@ -1,7 +1,6 @@
 import React           from 'react'
 import { useSelector } from 'react-redux'
 import styled          from 'styled-components'
-import { Landing }     from './modules/Landing'
 import { Table }       from './modules/Table'
 
 const DynamicCanvasContainer = styled.div`
@@ -24,26 +23,16 @@ const DynamicCanvasContainer = styled.div`
   font-size: 14px;
 `
 
-const modules = {
-  landing: <Landing/>,
-  table  : <Table/>
-}
-
 const DynamicCanvas = ({ children }) => {
   const dialogState = useSelector(state => state.lex.dialogState)
   const currentIntent = useSelector(state => state.lex.currentIntent)
-  const latestData = useSelector(state => state.lex.latestData)
-
-  /*
-    <Tabs pass through state here>
-
-   */
+  const latestData = useSelector(state => state.chat.latestData)
 
   return (
     <DynamicCanvasContainer>
       <h1>{currentIntent}</h1>
       <h2>{dialogState}</h2>
-      <Table data={latestData}/>
+      {latestData && <Table data={latestData}/>}
       {children}
     </DynamicCanvasContainer>
   )

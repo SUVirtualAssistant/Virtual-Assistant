@@ -1,11 +1,13 @@
 const font = {
   family     : 'IBM Plex Sans, sans-serif',
   size       : {
-    default: '14px',
-    xs     : '10px',
-    sm     : '13px',
-    lg     : '19px',
-    xl     : '19px'
+    default : '14px',
+    xs      : '10px',
+    sm      : '13px',
+    lg      : '19px',
+    xl      : '19px',
+    sm_title: '26px',
+    lg_title: '32px'
   },
   line_height: {
     default: 'calc(20 / 14)',

@@ -1,7 +1,8 @@
 const withImages = require('next-images')
+const withFonts = require('next-fonts')
 const Dotenv = require('dotenv-webpack')
 
-module.exports = withImages({
+module.exports = withImages(withFonts({
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(new Dotenv({ silent: true }))
     return config
@@ -33,4 +34,4 @@ module.exports = withImages({
     AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
     AWS_SECRET_KEY: process.env.AWS_SECRET_KEY
   }
-})
+}))

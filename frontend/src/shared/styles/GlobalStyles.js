@@ -9,6 +9,11 @@ import { normalize } from 'polished'
 export const GlobalStyle = createGlobalStyle`
   ${normalize()}
 
+  @font-face {
+    font-family: BrutGothic;
+    src: url('/static/fonts/BrutGothic-Regular.woff') format('woff');
+  }
+
   * {
     padding: 0;
     margin: 0;
@@ -29,11 +34,13 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: auto;         // allows scrolling on the page itself
     overflow-x: hidden;
 
+    background-color: ${({ theme }) => theme.colors.background};
+
     -webkit-overflow-scrolling: touch;
   }
 
   h1 {
-    font-family: ${props => props.theme.font.family};
+    font-family: BrutGothic, sans-serif;
     font-size: ${props => props.theme.font.size.lg};
   }
 `

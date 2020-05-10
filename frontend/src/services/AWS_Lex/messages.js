@@ -19,21 +19,8 @@ export const parseMessage = message => {
 export const parseData = data => {
   const parsedData = Object.values(data.sessionAttributes)
 
-  // console.log(test)
-  //
-  // const arr = []
-  // parsedData.forEach(el => arr.push(JSON.parse(el)))
-  // return arr
-
   return parsedData.reduce((arr, elem) => {
     arr.push(JSON.parse(elem))
     return arr
   }, [])
 }
-
-export const wrapMessage = text => ({
-  botAlias : '$LATEST',
-  botName  : process.env.BOT_NAME,
-  inputText: text,
-  userId   : 'user'
-})

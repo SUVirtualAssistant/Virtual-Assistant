@@ -6,26 +6,21 @@ const Nav = styled.nav`
   float: right;
   margin-right: 30px;
 
-
   @media (max-width: 1100px) {
-    margin-right: 5px;
+    margin-right: 10px;
   }
-
 `
 
 const NavLink = styled.a`
   font-family: ${({ theme }) => theme.font.family};
-  font-size: ${({ theme }) => theme.font.size.default};
-  color: ${({ theme }) => theme.colors.navBarText};
+  font-size: ${({ theme }) => theme.font.size.lg};
+  line-height: 50px;
+  color: ${({ theme }) => theme.colors.navBarLink};
 
-  text-align: center;
   padding-left: 20px;
   padding-right: 20px;
   height: 30px;
-  line-height: 50px;
   margin-top: 30px;
-
-  transition: all 0.15s ease;
 
   border: none;
   background-color: transparent;
@@ -34,6 +29,7 @@ const NavLink = styled.a`
   cursor: pointer;
 
   &:hover {
+    transition: all 0.15s ease;
     color: ${({ theme }) => theme.colors.navBarHover} !important;
   }
 
@@ -47,10 +43,10 @@ const NavLink = styled.a`
   }
 
   @media (max-width: 1100px) {
+    font-size: ${({ theme }) => theme.font.size.default};
     width: 45px;
     height: 40px;
     overflow: hidden;
-    box-sizing: border-box;
     padding: 0 0 0 45px;
     margin: 0 0 0 7px;
     border-radius: 45px;
@@ -59,14 +55,13 @@ const NavLink = styled.a`
   }
 `
 
-const NavBar = () => (
+const NavBar = ({ navLinks }) => (
     <Nav>
-      <Link href="/">
-        <NavLink>Chat</NavLink>
-      </Link>
-      <Link href="/Admin">
-        <NavLink>Admin</NavLink>
-      </Link>
+      { navLinks.map((link, index) => (
+        <Link href={link.to} key={index}>
+          <NavLink>{link.name}</NavLink>
+        </Link>
+      )) }
     </Nav>
 )
 

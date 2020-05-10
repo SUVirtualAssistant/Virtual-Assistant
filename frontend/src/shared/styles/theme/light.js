@@ -76,13 +76,13 @@ export const lightMode = {
     },
 
     chat: {
-      bg    : app.bg,
-      text  : app.text,
-      border: app.border,
+      bg    : '#424242',
+      text  : 'rgba(black, 0.87)',
+      border: 'rgba(white, 0.12)',
 
-      bubble_bg             : component.bg,
-      bubble_text           : component.text,
-      bubble_border         : component.bg,
+      bubble_bg             : '#424242',
+      bubble_text           : 'rgba(black, 0.87)',
+      bubble_border         : '#424242',
       bubble_shadow         : '0 1px 2px rgba(0, 0, 0, .08)',
       bubble_hover_shadow   : '0 1px 2px rgba( 0, 0, 0, .16)',
       bubble_selected_shadow: '0 3px 10px rgba( 0, 0, 0, .16)',

@@ -2,6 +2,7 @@ import { INTENTS } from '@shared/constants'
 import { types }   from './types'
 
 const initialState = {
+  data: null,
   activeTab    : null,
   tabs         : [
     {

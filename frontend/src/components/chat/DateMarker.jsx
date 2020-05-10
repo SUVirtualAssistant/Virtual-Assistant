@@ -9,6 +9,8 @@ const StyledDateMarker = styled.div`
   line-height: normal;
   text-align: center;
   align-self: stretch;
+  font-family: "IBM Plex Sans", serif;
+  color: ${({ theme }) => theme.colors.navBarLink};
 `
 
 const DateMarker = ({ item }) => <StyledDateMarker>{getDate(item.timestamp)}</StyledDateMarker>

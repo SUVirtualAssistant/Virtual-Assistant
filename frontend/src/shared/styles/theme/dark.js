@@ -1,4 +1,4 @@
-import { darken, getLuminance, lighten, rgba } from 'polished'
+import { getLuminance } from 'polished'
 
 const contrast_wcag = (color, dark = '#000000', light = '#ffffff') => {
   const luma = getLuminance(color)
@@ -8,18 +8,11 @@ const contrast_wcag = (color, dark = '#000000', light = '#ffffff') => {
 
 const primary = '#ff6358'
 
-const base = {
-  bg      : '#f6f6f6',
-  text    : '#656565',
-  border  : 'rbga(black, .08)',
-  gradient: '#f6f6f6, ' + darken(0.20, '#f6f6f6')
-}
-
-const app = {
-  bg    : lighten(0.01, '#f6f6f6'),
-  text  : base.text,
-  border: base.border
-}
+// const app = {
+//   bg    : lighten(0.01, '#f6f6f6'),
+//   text  : '#656565',
+//   border: 'rbga(black, .08)'
+// }
 
 const body = {
   bg  : '#ffffff',
@@ -32,25 +25,20 @@ const component = {
   border: 'rgba(black, .08)'
 }
 
-const button = {
-  border: ''
-}
-
 const input = {
   bg    : component.bg,
   text  : component.text,
-  border: button.border,
+  border: '',
   shadow: null
 }
 
 export const darkMode = {
   rgba_transparent: 'rgba(0, 0, 0, 0)',
 
-  buttonBackground: '#343239',
-
   colors: {
-    primary  : '',
-    secondary: '',
+    primary   : '',
+    secondary : '',
+    background: '#12171c',
 
     errors     : '',
     header     : '',
@@ -59,15 +47,16 @@ export const darkMode = {
     border     : '',
     card       : '',
 
-    navBarText      : rgba(255, 255, 255, 0.6),
-    navBarBackground: '#12171c',
+    navBarTitle     : '#fff',
+    navBarLink      : 'rgba(255, 255, 255, 0.6)',
+    navBarBackground: 'transparent',
     navBarHover     : '#fff',
 
     text          : '#FAFAFA',
     title         : '',
     pageBackground: '#363537',
 
-    modalTitle     : '',
+    modalTitle     : '#eee',
     modalBackground: '',
 
     buttonText      : '',
@@ -80,23 +69,23 @@ export const darkMode = {
     },
 
     chat: {
-      bg    : '#fafafa',
-      text  : rgba(0, 0, 0, 0.87),
-      border: app.border,
+      bg    : '#12171c',
+      text  : 'rgba(black, 0.87)',
+      border:  '#12171c',
 
-      bubble_bg             : '#fff',
-      bubble_text           : rgba(0,0,0,0.87),
-      bubble_border         : '#fff',
-      bubble_shadow         : '0 1px 2px ' + rgba(0, 0, 0, .08),
-      bubble_hover_shadow   : '0 1px 2px ' + rgba( 0, 0, 0, .16),
-      bubble_selected_shadow: '0 3px 10px ' + rgba( 0, 0, 0, .16),
+      bubble_bg             : '#232429',
+      bubble_text           : '#fff',
+      bubble_border         : '#232429',
+      bubble_shadow         : '0 1px 2px rgba(0, 0, 0, .08)',
+      bubble_hover_shadow   : '0 1px 2px rgba(0, 0, 0, .16)',
+      bubble_selected_shadow: '0 3px 10px rgba(0, 0, 0, .16)',
 
-      alt_bubble_bg             : '#3f51b5',
-      alt_bubble_text           : '#fff',
-      alt_bubble_border         : '#3f51b5',
-      alt_bubble_shadow         : '0 1px 2px ' + rgba('#ff6358', .2),
-      alt_bubble_hover_shadow   : '0 1px 2px ' + rgba('#ff6358', .2),
-      alt_bubble_selected_shadow: '0 3px 10px ' + rgba('#ff6358', .4 ),
+      user_bubble_bg             : '#aa0000',
+      user_bubble_text           : '#fff',
+      user_bubble_border         : '#aa0000',
+      user_bubble_shadow         : '0 1px 2px rgba(#ff6358, .2)',
+      user_bubble_hover_shadow   : '0 1px 2px rgba(#ff6358, .2)',
+      user_bubble_selected_shadow: '0 3px 10px rgba(#ff6358, .4)',
 
       quick_reply_bg    : 'transparent',
       quick_reply_text  : primary,
@@ -116,9 +105,8 @@ export const darkMode = {
       background: '#232429',
       input     : '#1a1b1f',
 
-      userText   : '#F7f7f8',
-      userMessage: '#FFF3E4',
-      botMessage : '#343333'
+      bot_text : '#F7f7f8',
+      user_text: '#232429'
     }
   }
 }

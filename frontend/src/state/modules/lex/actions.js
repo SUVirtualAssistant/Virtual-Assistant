@@ -56,8 +56,8 @@ export const sendMessage = message => {
                 messages.forEach(msg => dispatch(chatActions.addMessage({ id: 0 }, msg, new Date())))
 
                 // adds session attributes to store.lex.latestData
-                // if (message.sessionAttributes !== null)
-                //   dispatch(_addData(msgUtils.parseData(message)))
+                if (message.sessionAttributes !== null && (message.dialogState === 'Fulfilled'))
+                  dispatch(chatActions.addData(msgUtils.parseData(message)))
 
               }, error => dispatch(failure(error)))
   }

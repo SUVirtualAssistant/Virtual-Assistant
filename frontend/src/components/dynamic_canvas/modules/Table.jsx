@@ -6,12 +6,14 @@ const getKeys = data => {
 
 const getHeader = data => {
   const keys = getKeys(data)
-  return keys.map((key, index) => <th key={key}>{key.toUpperCase()}</th>)
+  delete keys[2]
+  return keys.map(key => <th key={key}>{key.toUpperCase()}</th>)
 }
 
 const RenderRow = props => {
-  return props.keys.map(key => {
-    return <td key={props.data[key]}>{props.data[key]}</td>
+  return props.keys.map((key, index) => {
+    delete props.data.TargetMatches
+    return <td key={index}>{props.data[key]}</td>
   })
 }
 
@@ -24,14 +26,14 @@ const getRowsData = data => {
 }
 
 export const Table = props => {
-  return props.data !== null
-         ? <table>
-             <thead>
-               <tr>{getHeader(props.data)}</tr>
-             </thead>
-           <tbody>
-             {getRowsData(props.data)}
-           </tbody>
-         </table>
-         : <h1>null</h1>
+  return (
+    <table>
+      <thead>
+      <tr>{getHeader(props.data)}</tr>
+      </thead>
+      <tbody>
+      {getRowsData(props.data)}
+      </tbody>
+    </table>
+  )
 }

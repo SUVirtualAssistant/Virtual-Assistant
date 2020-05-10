@@ -1,53 +1,53 @@
-import { KEYS }                                            from '@shared/constants/keys'
 import { convertMsgsToViewItems }                          from '@shared/utils/view-items'
 import { lexActions as Lex }                               from '@state/modules/lex'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector }                        from 'react-redux'
 import styled                                              from 'styled-components'
-import ChatInput                                           from './ChatInput'
-import DateMarker                                          from './DateMarker'
-import MessageGroup                                        from './MessageGroup'
+
+import DateMarker   from './DateMarker'
+import MessageGroup from './MessageGroup'
+import ChatInput    from './ChatInput'
 
 const ChatContainer = styled.div`
-  position: absolute;
+  box-sizing: border-box;
+  outline: 0;
 
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100%;
-  flex: 1 1 auto;
-
+  flex-direction: column;
   overflow: hidden;
-
-  outline: 0;
-  border-style: solid;
-  border-width: ${({ theme }) => theme.chat.border_width};
+  height: calc(100vh - 50px);
+  width: 100%;
+  margin: auto;
 
   font-family: ${({ theme }) => theme.chat.font_family};
-  font-size: ${({ theme }) => theme.chat.font_size};
+  font-size: ${({ theme }) => theme.chat.text};
   line-height: ${({ theme }) => theme.chat.line_height};
 
-  color: ${({ theme }) => theme.colors.chat.text};
   background: ${({ theme }) => theme.colors.chat.bg};
   border-color: ${({ theme }) => theme.colors.chat.border};
 
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: ${({ theme }) => theme.colors.rgba_transparent};
+  ::selection {
+    //background-color: ;
+    //color: '';
+  }
+
+  @media (max-width: 1100px) {
+    height: calc(100vh - 40px);
+  }
 `
 
-const MessageList = styled.div`
+const MessageList = styled(ChatContainer)`
   display: flex;
-  flex: 1 1 98%;
+  flex: 1;
   flex-direction: column;
-
   align-items: flex-start;
+
   overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
 `
 
-const MessageListContent = styled.div`
+const MessageListContent = styled(ChatContainer)`
   padding: ${({ theme }) => theme.chat.message_list_padding_y} ${({ theme }) => theme.chat.message_box_padding_x};
   width: 100%;
   box-sizing: border-box;
@@ -58,7 +58,7 @@ const MessageListContent = styled.div`
   align-items: flex-start;
   overflow: hidden;
 
-  >*+* {
+  > * + * {
     margin-top: ${({ theme }) => theme.chat.message_list_spacing};
   }
 `
@@ -88,34 +88,34 @@ const Chat = ({ botName, user, placeholder }) => {
     console.log('NEW selectedItemIndex: ' + clickedItemIndex)
   }
 
-  const onKeyDown = e => {
-    let newSelectedItemIndex = null
-    const currentSelectedItemIndex = selectedItemIndex !== null ? selectedItemIndex : messages.lastSelectionIndex
-
-    switch (e.keyCode) {
-      case KEYS.up:
-        if (currentSelectedItemIndex === null) {
-          newSelectedItemIndex = 0
-        } else if (currentSelectedItemIndex > 0) {
-          newSelectedItemIndex = currentSelectedItemIndex - 1
-        }
-        break
-      case KEYS.down:
-        if (currentSelectedItemIndex === null) {
-          newSelectedItemIndex = 0
-        } else if (currentSelectedItemIndex < messages.lastSelectionIndex) {
-          newSelectedItemIndex = currentSelectedItemIndex + 1
-        }
-        break
-      default:
-        break
-    }
-
-    if (newSelectedItemIndex !== null) {
-      setSelectedItemIndex(newSelectedItemIndex)
-      e.preventDefault()
-    }
-  }
+  // const onKeyDown = e => {
+  //   let newSelectedItemIndex = null
+  //   const currentSelectedItemIndex = selectedItemIndex !== null ? selectedItemIndex : messages.lastSelectionIndex
+  //
+  //   switch (e.keyCode) {
+  //     case KEYS.up:
+  //       if (currentSelectedItemIndex === null) {
+  //         newSelectedItemIndex = 0
+  //       } else if (currentSelectedItemIndex > 0) {
+  //         newSelectedItemIndex = currentSelectedItemIndex - 1
+  //       }
+  //       break
+  //     case KEYS.down:
+  //       if (currentSelectedItemIndex === null) {
+  //         newSelectedItemIndex = 0
+  //       } else if (currentSelectedItemIndex < messages.lastSelectionIndex) {
+  //         newSelectedItemIndex = currentSelectedItemIndex + 1
+  //       }
+  //       break
+  //     default:
+  //       break
+  //   }
+  //
+  //   if (newSelectedItemIndex !== null) {
+  //     setSelectedItemIndex(newSelectedItemIndex)
+  //     e.preventDefault()
+  //   }
+  // }
 
   /**
    * Callback sent to `NewMessage`; gets called when a user hits enter or send
@@ -153,10 +153,10 @@ const Chat = ({ botName, user, placeholder }) => {
 
   return (
     <ChatContainer ref={chatWrapperEl}>
-      <MessageList role='log'
-                   aria-live='polite'
-                   ref={viewItemsWrapperEl}>
-        <MessageListContent>
+      <MessageList>
+        <MessageListContent role='log'
+                            aria-live='polite'
+                            ref={viewItemsWrapperEl}>
           {renderMessageList(messages)}
         </MessageListContent>
       </MessageList>

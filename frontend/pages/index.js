@@ -22,7 +22,6 @@ const ChatPage = () => {
             user={{ id: 1, name: 'USER' }}
             placeholder='Type a message...'/>
       <DynamicCanvas/>
-
     </ChatLayout>
   )
 }

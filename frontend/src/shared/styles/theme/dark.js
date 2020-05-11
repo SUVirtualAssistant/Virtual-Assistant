@@ -50,7 +50,7 @@ export const darkMode = {
     navBarTitle     : '#fff',
     navBarLink      : 'rgba(255, 255, 255, 0.6)',
     navBarBackground: 'transparent',
-    navBarHover     : '#fff',
+    navBarHover     : 'rgba(204, 159, 38, 0.87)',
 
     text          : '#FAFAFA',
     title         : '',
@@ -59,9 +59,9 @@ export const darkMode = {
     modalTitle     : '#eee',
     modalBackground: '',
 
-    buttonText      : '',
+    buttonText      : 'rgba(255, 255, 255, 0.6)',
     buttonBackground: '#AA0000',
-    buttonHover     : '',
+    buttonHover     : 'rgba(204, 159, 38, 0.87)',
 
     themeToggle: {
       toggleBorder  : '#6B9096',

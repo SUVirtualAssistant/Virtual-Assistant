@@ -45,8 +45,8 @@ const chat = {
   bubble_border_radius   : '12px',
   bubble_border_radius_sm: '2px',
 
-  message_box_padding_x: '12px',
-  message_box_padding_y: '10px',
+  input_padding_x: '16px',
+  input_padding_y: '10px',
 
   quick_reply_padding_x  : '12px',
   quick_reply_padding_y  : '8px',

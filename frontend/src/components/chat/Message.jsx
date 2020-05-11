@@ -1,33 +1,7 @@
-import { getMessageTime }           from '@shared/utils/date-time'
-import PropTypes                    from 'prop-types'
-import React, { useEffect, useRef } from 'react'
-import styled, { css }              from 'styled-components'
-
-const MessageTime = styled.time`
-  opacity: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: opacity .2s ease-in-out;
-
-  font-size: smaller;
-  line-height: normal;
-  white-space: nowrap;
-  pointer-events: none;
-  position: absolute;
-
-  text-transform: uppercase;
-`
-
-const Bubble = styled.div`
-  border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
-  padding: ${({ theme }) => theme.chat.bubble_padding_y} ${({ theme }) => theme.chat.bubble_padding_x};
-  line-height: ${({ theme }) => theme.chat.bubble_line_height};
-  word-wrap: break-word;
-
-  color: ${props => props.user ? props.theme.colors.chat.user_bubble_text : props.theme.colors.chat.bubble_text};
-  background: ${props => props.user ? props.theme.colors.chat.user_bubble_bg : props.theme.colors.chat.bubble_bg};
-  border: ${props => props.user ? props.theme.colors.chat.user_bubble_border : props.theme.colors.chat.bubble_border} 1px solid;
-`
+import { getMessageTime }     from '@shared/utils/date-time'
+import PropTypes              from 'prop-types'
+import React, { useCallback } from 'react'
+import styled, { css }        from 'styled-components'
 
 const ChatMessage = styled.div`
   max-width: 100%;
@@ -36,55 +10,96 @@ const ChatMessage = styled.div`
   transition: margin .2s ease-in-out;
   outline: none;
 
+  &:hover {
+    box-shadow: 0 -2px 10px rbga(0,0,0,1);
+  }
+
   ${props => props.selected && css`
     margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
     border: 0;
     color: inherit;
     background: none;
 
-    ${MessageTime} { opacity: 1; }
+    ${Time} { opacity: 1; };
   `}
 `
 
-const Message = ({ item, user, selected, onRequestSelection, tabbable, isFirstItemInGroup, isLastItemInGroup, isOnlyItemInGroup }) => {
-  const elementToFocus = useRef(null)
+const Text = styled.div`
+  border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
+  padding: ${({ theme }) => theme.chat.bubble_padding_y} ${({ theme }) => theme.chat.bubble_padding_x};
+  line-height: ${({ theme }) => theme.chat.bubble_line_height};
+  word-wrap: break-word;
 
-  useEffect(() => {
-    if (selected) {
-      elementToFocus.current.focus()
-      console.log(selected)
-    }
+  color: ${props => props.user ? props.theme.colors.chat.user_bubble_text
+                               : props.theme.colors.chat.bubble_text};
+  background: ${props => props.user ? props.theme.colors.chat.user_bubble_bg
+                                    : props.theme.colors.chat.bubble_bg};
+  border: ${props => props.user ? props.theme.colors.chat.user_bubble_border
+                                : props.theme.colors.chat.bubble_border} 1px solid;
+`
 
-  }, [selected])
+const Time = styled.time`
+  top: 50%;
+  left: 100%;
 
-  const only = isOnlyItemInGroup
-  const first = isFirstItemInGroup && !isOnlyItemInGroup
-  const last = isLastItemInGroup && !isOnlyItemInGroup
+  margin-left: ${({ theme }) => theme.chat.item_spacing_x};
 
-  const getTimestampView = (timestamp, selected) => timestamp
-                                                    ? <MessageTime
-                                                      aria-hidden={!selected}>{getMessageTime(timestamp)}</MessageTime>
-                                                    : null
+  white-space: nowrap;
+  pointer-events: none;
+  position: absolute;
 
-  const getMainView = (user, text) => text ? <Bubble user={user}>{text}</Bubble> : null
+  font-size: smaller;
+  line-height: normal;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.navBarLink};
+  opacity: 0;
+
+  transform: translateY(-50%);
+  transition: opacity .2s ease-in-out;
+
+  ${props => props.user && css`
+    align-self: flex-end;
+    align-items: flex-end;
+    text-align: right;
+
+    margin-right: ${({ theme }) => theme.chat.item_spacing_x};
+    right: 100%;
+  `}
+`
+
+const getTimestampView = (timestamp, selected, user) => timestamp &&
+  <Time user={user} aria-hidden={!selected}>
+    {getMessageTime(timestamp)}
+  </Time>
+
+const getMessageText = (user, text) => text &&
+  <Text user={user}>{text}</Text>
+
+const Message = props => {
+  const {
+    item,
+    user,
+    selected,
+    onRequestSelection,
+    tabbable
+  } = props
+
+  const onClick = useCallback(() => {
+    onRequestSelection(item.selectionIndex)
+  }, [onRequestSelection])
 
   return (
-    <ChatMessage isOnly={only} isFirst={first} isLast={last}
-                 user={user} className={user ? 'mine' : ''}
-                 tabIndex={tabbable ? 0 : -1} selected={selected}
-                 onClick={() => onRequestSelection(item.selectionIndex)}
-                 onFocus={() => onRequestSelection(item.selectionIndex)}
-                 ref={elementToFocus}>
-      {getTimestampView(item.timestamp, selected)}
-      {getMainView(user, item.text)}
+    <ChatMessage tabIndex={tabbable ? 0 : -1}
+                 selected={selected}
+                 onClick={onClick}
+                 onFocus={onClick}>
+      {getMessageText(user, item.text)}
+      {getTimestampView(item.timestamp, selected, user)}
     </ChatMessage>
   )
 }
 
 Message.propTypes = {
-  isFirstItemInGroup: PropTypes.bool.isRequired,
-  isLastItemInGroup : PropTypes.bool.isRequired,
-  isOnlyItemInGroup : PropTypes.bool.isRequired,
   item              : PropTypes.object.isRequired,
   onRequestSelection: PropTypes.func.isRequired,
   selected          : PropTypes.bool.isRequired,

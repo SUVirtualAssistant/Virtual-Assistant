@@ -1,18 +1,16 @@
 import { INTENTS } from '@shared/constants'
-import { types }   from './types'
+import * as types  from './types'
 
 const initialState = {
-  data: null,
-  activeTab    : null,
-  tabs         : [
+  activeIndex: null,
+  tabs       : [
     {
       tabId : 0,
+      title : '',
       intent: INTENTS.GREETING,
       data  : {}
     }
-  ],
-  prevActiveTab: {},
-  tabsElements : null
+  ]
 }
 
 export default (state = initialState, action) => {

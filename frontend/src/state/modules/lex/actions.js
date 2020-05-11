@@ -45,7 +45,7 @@ export const sendMessage = message => {
 
   return dispatch => {
     dispatch(request(true))
-    dispatch(chatActions.addMessage(message.author, message.text, message.timestamp))        // add user message
+    dispatch(chatActions.addMessage(message.author, message.text, message.timestamp))
 
     // send message to Lex
     return lex._postText(lexMessage)

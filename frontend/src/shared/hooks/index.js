@@ -1,5 +1,2 @@
-import { useDarkMode }      from './useDarkMode'
-
-export {
-  useDarkMode,
-}
+export { useDarkMode } from './useDarkMode'
+export { useFocus }    from './useFocus'

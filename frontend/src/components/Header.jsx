@@ -11,6 +11,7 @@ const MainHeader = styled.header`
   top: 0;
   left: 0;
   z-index: 10;
+
   background: ${({ theme }) => theme.colors.navBarBackground};
 
   @media (max-width: 1100px) {
@@ -30,12 +31,12 @@ const HeaderTitle = styled.a`
   font-family: BrutGothic, sans-serif;
   font-size: ${({ theme }) => theme.font.size.lg_title};
   line-height: 50px;
-  color: ${({ theme }) => theme.colors.navBarTitle};
+  color: ${({ theme }) => theme.colors.buttonText};
   text-decoration: none;
 
   &:hover {
     transition: all 0.15s ease;
-    color: ${({ theme }) => theme.colors.navBarHover};
+    color: ${({ theme }) => theme.colors.buttonHover};
   }
 
   @media (max-width: 1100px) {

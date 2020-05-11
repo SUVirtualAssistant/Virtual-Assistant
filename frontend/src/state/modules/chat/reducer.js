@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.ADD_MESSAGE:       // todo: change this to save the messages as message-groups and take the call out of the Chat component
+    case types.ADD_MESSAGE:
       return {
         ...state,
         messages: [
@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
             author   : action.author,
             timestamp: action.timestamp,
             text     : action.message
-            // selectionIndex: state.messages.length + 1
           }
         ]
       }

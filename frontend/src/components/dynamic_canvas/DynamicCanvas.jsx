@@ -1,7 +1,11 @@
 import React           from 'react'
 import { useSelector } from 'react-redux'
 import styled          from 'styled-components'
-import { Table }       from './modules/Table'
+
+import * as Components from './modules'
+
+// import { Table }       from './modules/Table'
+// import { Landing }     from './modules/Landing'
 
 const DynamicCanvasContainer = styled.div`
   flex: 1 1 auto;
@@ -12,7 +16,7 @@ const DynamicCanvasContainer = styled.div`
 
   color: rgba(0, 0, 0.87);
   border-color: rgba(0, 0, 0.12);
-  background-color: #fafafa;
+  background-color: rgba(128, 112, 100, .87);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -23,17 +27,31 @@ const DynamicCanvasContainer = styled.div`
   font-size: 14px;
 `
 
-const DynamicCanvas = ({ children }) => {
+const testComponentConfig = [
+  { type: 'Table' },
+  { type: 'Landing' }
+]
+
+const DynamicCanvas = props => {
   const dialogState = useSelector(state => state.lex.dialogState)
   const currentIntent = useSelector(state => state.lex.currentIntent)
   const latestData = useSelector(state => state.chat.latestData)
+
+  const mapPropsToComponent = ( component, props ) =>
+    ({...(component.props || props), type: component.type })
+
 
   return (
     <DynamicCanvasContainer>
       <h1>{currentIntent}</h1>
       <h2>{dialogState}</h2>
-      {latestData && <Table data={latestData}/>}
-      {children}
+      {/*{latestData && <Table data={latestData}/>}*/}
+      <Components.ModuleCollection
+        components={ Components }
+        collection={ testComponentConfig }
+        mapPropsToComponent={ mapPropsToComponent } />
+
+      {props.children}
     </DynamicCanvasContainer>
   )
 }

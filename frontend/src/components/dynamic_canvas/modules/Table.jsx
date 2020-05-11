@@ -26,14 +26,14 @@ const getRowsData = data => {
 }
 
 export const Table = props => {
-  return (
-    <table>
-      <thead>
-      <tr>{getHeader(props.data)}</tr>
-      </thead>
-      <tbody>
-      {getRowsData(props.data)}
-      </tbody>
-    </table>
-  )
+  return ( <h1>table</h1> )
+    // <table>
+    //   <thead>
+    //   <tr>{getHeader(props.data)}</tr>
+    //   </thead>
+    //   <tbody>
+    //   {getRowsData(props.data)}
+    //   </tbody>
+    // </table>
+
 }

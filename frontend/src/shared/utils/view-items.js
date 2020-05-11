@@ -1,12 +1,14 @@
+import _            from 'lodash'
 import { isAuthor } from './utils'
 
 const last = arr => arr[arr.length - 1]
 
-const dateChanged = (curr, prev) => {
-  return (curr && prev) && (prev.getDate() !== curr.getDate() ||
-    prev.getMonth() !== curr.getMonth() ||
-    prev.getFullYear() !== curr.getFullYear())
-}
+const dateChanged = (curr, prev) => (
+  (curr && prev) &&
+  (prev.getDate() !== curr.getDate()
+    || prev.getMonth() !== curr.getMonth()
+    || prev.getFullYear() !== curr.getFullYear())
+)
 
 const addDateMarker = (arr, msg) => {
   const timestamp = msg.timestamp
@@ -25,12 +27,9 @@ const addDateMarker = (arr, msg) => {
   }
 }
 
-const groupMessages = (arr, msg, isLastMessage) => {
+const groupMessages = (arr, msg) => {
   const lastItem = last(arr)
   let messages = undefined
-
-  if (msg.typing && !isLastMessage)
-    return
 
   if (lastItem && lastItem.type === 'message-group')
     messages = lastItem.messages
@@ -54,14 +53,6 @@ const groupItems = total => (arr, msg, index) => {
   addDateMarker(arr, msg)
   groupMessages(arr, msg, isLastMessage)
 
-  // if (msg.suggestedActions && isLastMessage) {
-  //   arr.push({
-  //     type     : 'action-group',
-  //     actions  : msg.suggestedActions,
-  //     timestamp: msg.timestamp,
-  //     trackBy  : msg
-  //   })
-  // }
   return arr
 }
 
@@ -81,9 +72,10 @@ function assignSelectionIndices(viewItems) {
   viewItems.lastSelectionIndex = selectionCounter - 1
 }
 
-// TODO: Move this out of the Chat component and call it in a message action-creator
-export const convertMsgsToViewItems = (messages) => {
-  let result = messages.reduce(groupItems(messages.length), [])
+export const convertMsgsToViewItems = messages => {
+  const msgs = _.cloneDeep(messages)    // Need to make a deep copy to avoid altering the store.
+
+  let result = msgs.reduce(groupItems(msgs.length), [])
   assignSelectionIndices(result)
   return result
 }

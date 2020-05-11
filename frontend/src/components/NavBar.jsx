@@ -12,10 +12,10 @@ const Nav = styled.nav`
 `
 
 const NavLink = styled.a`
+  color: ${({ theme }) => theme.colors.navBarLink};
   font-family: ${({ theme }) => theme.font.family};
   font-size: ${({ theme }) => theme.font.size.lg};
   line-height: 50px;
-  color: ${({ theme }) => theme.colors.navBarLink};
 
   padding-left: 20px;
   padding-right: 20px;

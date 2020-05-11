@@ -1,12 +1,11 @@
-import { convertMsgsToViewItems }                          from '@shared/utils/view-items'
-import { lexActions as Lex }                               from '@state/modules/lex'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector }                        from 'react-redux'
-import styled                                              from 'styled-components'
-
-import DateMarker   from './DateMarker'
-import MessageGroup from './MessageGroup'
-import ChatInput    from './ChatInput'
+import { convertMsgsToViewItems }                from '@shared/utils/view-items'
+import { lexActions as Lex }                     from '@state/modules/lex'
+import React, { useCallback, useEffect, useRef } from 'react'
+import { useDispatch, useSelector }              from 'react-redux'
+import styled                                    from 'styled-components'
+import ChatInput                                 from './ChatInput'
+import DateMarker                                from './DateMarker'
+import MessageGroup                              from './MessageGroup'
 
 const ChatContainer = styled.div`
   box-sizing: border-box;
@@ -36,7 +35,7 @@ const ChatContainer = styled.div`
   }
 `
 
-const MessageList = styled(ChatContainer)`
+const MessageList = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -47,8 +46,8 @@ const MessageList = styled(ChatContainer)`
   scroll-behavior: smooth;
 `
 
-const MessageListContent = styled(ChatContainer)`
-  padding: ${({ theme }) => theme.chat.message_list_padding_y} ${({ theme }) => theme.chat.message_box_padding_x};
+const MessageListContent = styled.div`
+  padding: ${({ theme }) => theme.chat.message_list_padding_y} ${({ theme }) => theme.chat.message_list_padding_x};
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -63,101 +62,68 @@ const MessageListContent = styled(ChatContainer)`
   }
 `
 
+function renderMessageList(props) {
+  const {
+    messages,
+    user,
+    selectedItemIndex,
+    onSelectionRequest
+  } = props
+
+  const msgs = messages.length > 0 ? convertMsgsToViewItems(messages)
+                                   : []
+
+  const lastViewItemIndex = msgs.length - 1
+
+  return msgs.map((viewItem, index) => {
+    switch (viewItem.type) {
+      case 'date-marker':
+        return <DateMarker item={viewItem}
+                           key={index}/>
+      case 'message-group':
+        return <MessageGroup group={viewItem}
+                             user={user}
+                             selectedItemIndex={selectedItemIndex}
+                             onRequestSelection={onSelectionRequest}
+                             isLastGroup={index === lastViewItemIndex}
+                             key={index}/>
+      default:
+        break
+    }
+  })
+}
+
 const Chat = ({ botName, user, placeholder }) => {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null)
-
-  const chatWrapperEl = useRef(null)
-  const viewItemsWrapperEl = useRef(null)
-  const inputRef = useRef()
-
-  /* ------ Store hooks ------ */
   const dispatch = useDispatch()
+
   const messages = useSelector(state => state.chat.messages)
   const active = useSelector(state => state.lex.active)
 
-  /**
-   * Starts lex session on mount
-   */
+  const chatWrapperEl = useRef()
+  const viewItemsWrapperEl = useRef()
+  const inputRef = useRef()
+  const selectedItemIndex = useRef(null)
+
   useEffect(() => {
-    if (!active) dispatch(Lex.startSession(botName, user.name))
+    if (!active)
+      dispatch(Lex.startSession(botName, user.name))
   }, [])
 
-  const onSelectionRequest = clickedItemIndex => {
-    console.log('--OLD selectedItemIndex: ' + selectedItemIndex)
-    setSelectedItemIndex(clickedItemIndex)
-    console.log('NEW selectedItemIndex: ' + clickedItemIndex)
-  }
+  const addNewMessage = useCallback(message =>
+    dispatch(Lex.sendMessage(message)), [dispatch])
 
-  // const onKeyDown = e => {
-  //   let newSelectedItemIndex = null
-  //   const currentSelectedItemIndex = selectedItemIndex !== null ? selectedItemIndex : messages.lastSelectionIndex
-  //
-  //   switch (e.keyCode) {
-  //     case KEYS.up:
-  //       if (currentSelectedItemIndex === null) {
-  //         newSelectedItemIndex = 0
-  //       } else if (currentSelectedItemIndex > 0) {
-  //         newSelectedItemIndex = currentSelectedItemIndex - 1
-  //       }
-  //       break
-  //     case KEYS.down:
-  //       if (currentSelectedItemIndex === null) {
-  //         newSelectedItemIndex = 0
-  //       } else if (currentSelectedItemIndex < messages.lastSelectionIndex) {
-  //         newSelectedItemIndex = currentSelectedItemIndex + 1
-  //       }
-  //       break
-  //     default:
-  //       break
-  //   }
-  //
-  //   if (newSelectedItemIndex !== null) {
-  //     setSelectedItemIndex(newSelectedItemIndex)
-  //     e.preventDefault()
-  //   }
-  // }
-
-  /**
-   * Callback sent to `NewMessage`; gets called when a user hits enter or send
-   * @param message
-   */
-  const addNewMessage = useCallback(message => dispatch(Lex.sendMessage(message)), [
-    dispatch
-  ])
-
-  /**
-   * Loops through msgs returning items to render
-   * @returns {*}
-   */
-  const renderMessageList = msgList => {
-    const msgs = msgList.length > 0 ? convertMsgsToViewItems(msgList) : []
-    const lastViewItemIndex = msgs.length - 1
-
-    return msgs.map((viewItem, index) => {
-      switch (viewItem.type) {
-        case 'date-marker':
-          return <DateMarker item={viewItem}
-                             key={index}/>
-        case 'message-group':
-          return <MessageGroup group={viewItem}
-                               user={user}
-                               selectedItemIndex={selectedItemIndex}
-                               onRequestSelection={onSelectionRequest}
-                               isLastGroup={index === lastViewItemIndex}
-                               key={index}/>
-        default:
-          break
-      }
-    })
-  }
+  const onSelectionRequest = useCallback(clickedItemIndex => {
+    selectedItemIndex.current = clickedItemIndex
+    console.log(selectedItemIndex.current)
+  }, [])
 
   return (
     <ChatContainer ref={chatWrapperEl}>
-      <MessageList>
-        <MessageListContent role='log'
-                            aria-live='polite'
-                            ref={viewItemsWrapperEl}>
-          {renderMessageList(messages)}
+      <MessageList role='log'
+                   aria-live='polite'
+                   ref={viewItemsWrapperEl}>
+        <MessageListContent>
+          {renderMessageList({ messages, user, selectedItemIndex, onSelectionRequest})}
         </MessageListContent>
       </MessageList>
       <ChatInput onMessageSend={addNewMessage}

@@ -17,7 +17,7 @@ export const parseMessage = message => {
 
 // TODO: make this more robust
 export const parseData = data => {
-  const parsedData = Object.values(data.sessionAttributes)
+  const parsedData = Object.values(data)
 
   return parsedData.reduce((arr, elem) => {
     arr.push(JSON.parse(elem))

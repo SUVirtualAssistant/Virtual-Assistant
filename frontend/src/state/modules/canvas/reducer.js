@@ -1,39 +1,17 @@
-import { INTENTS } from '@shared/constants'
 import * as types  from './types'
 
-const initialState = {
-  activeIndex: null,
-  tabs       : [
-    {
-      tabId : 0,
-      title : '',
-      intent: INTENTS.GREETING,
-      data  : {}
-    }
-  ]
-}
-
-export default (state = initialState, action) => {
+export default (state = [], action) => {
   switch (action.type) {
-    case types.ADD_TAB:
-      return {
+    case types.ADD_DATA:
+      return [
         ...state,
-        tabs: [
-          ...state.tabs,
-          action.tab
-        ]
-      }
-
-    case types.CHANGE_TAB:
-      return {
-        ...state,
-        activeTab: action.tab
-      }
-
-    case types.REMOVE_TAB:
-      return {
-        ...state
-      }
+        {
+          index: action.index,
+          intent: action.intentName,
+          data: action.data
+        }
+        // [action.name]: action.data
+      ]
     default:
       return state
   }

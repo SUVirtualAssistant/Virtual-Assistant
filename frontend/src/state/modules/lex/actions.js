@@ -1,5 +1,6 @@
 import lex, { msgUtils } from '@services/AWS_Lex'
-import { chatActions }   from '@state/modules/chat'
+import { messageActions }   from '@state/modules/messages'
+import { canvasActions } from '@state/modules/canvas'
 import * as types        from './types'
 
 export const startSession = (botName, userName) => {
@@ -26,7 +27,7 @@ export const startSession = (botName, userName) => {
                 dispatch(success(message))
 
                 const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(chatActions.addMessage({ id: 0 }, msg, new Date())))
+                messages.forEach(msg => dispatch(messageActions.addMessage({ id: 0 }, msg, new Date())))
               }, error => dispatch(failure(error)))
   }
 }
@@ -45,7 +46,7 @@ export const sendMessage = message => {
 
   return dispatch => {
     dispatch(request(true))
-    dispatch(chatActions.addMessage(message.author, message.text, message.timestamp))
+    dispatch(messageActions.addMessage(message.author, message.text, message.timestamp))
 
     // send message to Lex
     return lex._postText(lexMessage)
@@ -53,11 +54,11 @@ export const sendMessage = message => {
                 dispatch(success(message))
 
                 const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(chatActions.addMessage({ id: 0 }, msg, new Date())))
+                messages.forEach(msg => dispatch(messageActions.addMessage({ id: 0 }, msg, new Date())))
 
                 // adds session attributes to store.lex.latestData
                 if (message.sessionAttributes !== null && (message.dialogState === 'Fulfilled'))
-                  dispatch(chatActions.addData(msgUtils.parseData(message)))
+                  dispatch(canvasActions.addData(message))
 
               }, error => dispatch(failure(error)))
   }

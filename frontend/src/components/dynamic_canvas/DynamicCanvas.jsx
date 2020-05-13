@@ -31,7 +31,7 @@ const testComponentConfig = [
 export const DynamicCanvas = props => {
   const dialogState = useSelector(state => state.lex.dialogState)
   const currentIntent = useSelector(state => state.lex.currentIntent)
-  const latestData = useSelector(state => state.chat.latestData)
+  const latestData = useSelector(state => state.canvas)
 
   const mapPropsToComponent = (component, props) =>
     ({ ...(component.props || props), type: component.type })
@@ -40,6 +40,7 @@ export const DynamicCanvas = props => {
     <DynamicCanvasContainer>
       <h1>{currentIntent}</h1>
       <h2>{dialogState}</h2>
+      {latestData[latestData.length - 1] && <h1>{latestData[latestData.length - 1]["data"][0]["Title"]}</h1>}
       {/*{latestData && <Table data={latestData}/>}*/}
       <Components.ModuleCollection
         components={Components}

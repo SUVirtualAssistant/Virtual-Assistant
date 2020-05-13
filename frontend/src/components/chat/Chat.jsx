@@ -100,7 +100,7 @@ const Chat = ({
   const messageListEl = useRef()
   const inputEl = useRef()
 
-  const messages = useSelector(state => state.chat.messages)
+  const messages = useSelector(state => state.messages)
   const active = useSelector(state => state.lex.active)
   const dispatch = useDispatch()
 

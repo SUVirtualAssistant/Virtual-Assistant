@@ -68,31 +68,29 @@ const Time = styled.time`
 `
 
 const getTimestampView = (timestamp, selected, user) => timestamp &&
-  <Time user={user} aria-hidden={!selected}>
+  <Time user={user}
+        aria-hidden={!selected}>
     {getMessageTime(timestamp)}
   </Time>
 
 const getMessageText = (user, text) => text &&
   <Text user={user}>{text}</Text>
 
-const Message = props => {
-  const {
-    item,
-    user,
-    selected,
-    onRequestSelection,
-    tabbable
-  } = props
+
+const Message = ({
+  item,
+  user,
+  selected,
+  onRequestSelection
+}) => {
 
   const onClick = useCallback(() => {
     onRequestSelection(item.selectionIndex)
   }, [onRequestSelection])
 
   return (
-    <ChatMessage tabIndex={tabbable ? 0 : -1}
-                 selected={selected}
-                 onClick={onClick}
-                 onFocus={onClick}>
+    <ChatMessage selected={selected}
+                 onClick={onClick}>
       {getMessageText(user, item.text)}
       {getTimestampView(item.timestamp, selected, user)}
     </ChatMessage>
@@ -102,8 +100,7 @@ const Message = props => {
 Message.propTypes = {
   item              : PropTypes.object.isRequired,
   onRequestSelection: PropTypes.func.isRequired,
-  selected          : PropTypes.bool.isRequired,
-  tabbable          : PropTypes.bool.isRequired
+  selected          : PropTypes.bool.isRequired
 }
 
 export default Message

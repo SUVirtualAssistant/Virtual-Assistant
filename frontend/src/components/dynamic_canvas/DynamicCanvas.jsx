@@ -1,11 +1,7 @@
 import React           from 'react'
 import { useSelector } from 'react-redux'
 import styled          from 'styled-components'
-
 import * as Components from './modules'
-
-// import { Table }       from './modules/Table'
-// import { Landing }     from './modules/Landing'
 
 const DynamicCanvasContainer = styled.div`
   flex: 1 1 auto;
@@ -32,14 +28,13 @@ const testComponentConfig = [
   { type: 'Landing' }
 ]
 
-const DynamicCanvas = props => {
+export const DynamicCanvas = props => {
   const dialogState = useSelector(state => state.lex.dialogState)
   const currentIntent = useSelector(state => state.lex.currentIntent)
   const latestData = useSelector(state => state.chat.latestData)
 
-  const mapPropsToComponent = ( component, props ) =>
-    ({...(component.props || props), type: component.type })
-
+  const mapPropsToComponent = (component, props) =>
+    ({ ...(component.props || props), type: component.type })
 
   return (
     <DynamicCanvasContainer>
@@ -47,13 +42,11 @@ const DynamicCanvas = props => {
       <h2>{dialogState}</h2>
       {/*{latestData && <Table data={latestData}/>}*/}
       <Components.ModuleCollection
-        components={ Components }
-        collection={ testComponentConfig }
-        mapPropsToComponent={ mapPropsToComponent } />
+        components={Components}
+        collection={testComponentConfig}
+        mapPropsToComponent={mapPropsToComponent}/>
 
       {props.children}
     </DynamicCanvasContainer>
   )
 }
-
-export default DynamicCanvas

@@ -1,11 +1,14 @@
-import { convertMsgsToViewItems }                from '@shared/utils/view-items'
-import { lexActions as Lex }                     from '@state/modules/lex'
-import React, { useCallback, useEffect, useRef } from 'react'
-import { useDispatch, useSelector }              from 'react-redux'
-import styled                                    from 'styled-components'
-import ChatInput                                 from './ChatInput'
-import DateMarker                                from './DateMarker'
-import MessageGroup                              from './MessageGroup'
+import { useOnClickOutside }      from '@shared/hooks'
+import { convertMsgsToViewItems } from '@shared/utils/view-items'
+import { lexActions as Lex }      from '@state/modules/lex'
+
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector }                        from 'react-redux'
+import styled                                              from 'styled-components'
+
+import ChatInput    from './ChatInput'
+import DateMarker   from './DateMarker'
+import MessageGroup from './MessageGroup'
 
 const ChatContainer = styled.div`
   box-sizing: border-box;
@@ -16,6 +19,7 @@ const ChatContainer = styled.div`
   overflow: hidden;
   height: calc(100vh - 50px);
   width: 100%;
+  min-width: 400px;
   margin: auto;
 
   font-family: ${({ theme }) => theme.chat.font_family};
@@ -24,11 +28,6 @@ const ChatContainer = styled.div`
 
   background: ${({ theme }) => theme.colors.chat.bg};
   border-color: ${({ theme }) => theme.colors.chat.border};
-
-  ::selection {
-    //background-color: ;
-    //color: '';
-  }
 
   @media (max-width: 1100px) {
     height: calc(100vh - 40px);
@@ -55,24 +54,22 @@ const MessageListContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   overflow: hidden;
+  scroll-behavior: smooth;
 
   > * + * {
     margin-top: ${({ theme }) => theme.chat.message_list_spacing};
   }
 `
 
-function renderMessageList(props) {
-  const {
-    messages,
-    user,
-    selectedItemIndex,
-    onSelectionRequest
-  } = props
-
-  const msgs = messages.length > 0 ? convertMsgsToViewItems(messages)
-                                   : []
-
+const renderMessageList = ({
+  messages,
+  user,
+  selectedItemIndex,
+  onSelectionRequest
+}) => {
+  const msgs = messages.length > 0 ? convertMsgsToViewItems(messages) : []
   const lastViewItemIndex = msgs.length - 1
 
   return msgs.map((viewItem, index) => {
@@ -93,43 +90,79 @@ function renderMessageList(props) {
   })
 }
 
-const Chat = ({ botName, user, placeholder }) => {
-  const dispatch = useDispatch()
+const Chat = ({
+  botName,
+  user,
+  placeholder
+}) => {
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null)
+
+  const messageListEl = useRef()
+  const inputEl = useRef()
 
   const messages = useSelector(state => state.chat.messages)
   const active = useSelector(state => state.lex.active)
+  const dispatch = useDispatch()
 
-  const chatWrapperEl = useRef()
-  const viewItemsWrapperEl = useRef()
-  const inputRef = useRef()
-  const selectedItemIndex = useRef(null)
-
+  /**
+   * Runs when page loads.
+   */
   useEffect(() => {
+    const { current } = inputEl
+    current.focus()
+
     if (!active)
       dispatch(Lex.startSession(botName, user.name))
   }, [])
 
+  /**
+   * Runs whenever the messages array changes.
+   */
+  useEffect(() => {
+    const { current } = messageListEl
+    current.scrollIntoView({ block: 'end', behavior: 'smooth' })
+
+    document.title = 'New Message !'
+
+  }, [messages])
+
+  /**
+   * Call hook passing in the ref and a function to call on outside click
+   */
+  useOnClickOutside(messageListEl, useCallback(() => {
+    console.log('clicked outside')
+    setSelectedItemIndex(null)
+  }, [selectedItemIndex]))
+
+  /**
+   * dispatches a new message to lex
+   * @type {function(*=): *}
+   */
   const addNewMessage = useCallback(message =>
     dispatch(Lex.sendMessage(message)), [dispatch])
 
   const onSelectionRequest = useCallback(clickedItemIndex => {
-    selectedItemIndex.current = clickedItemIndex
-    console.log(selectedItemIndex.current)
-  }, [])
+    setSelectedItemIndex(clickedItemIndex)
+    console.log('clickedItemIndex: ' + clickedItemIndex)
+  }, [selectedItemIndex])
 
   return (
-    <ChatContainer ref={chatWrapperEl}>
+    <ChatContainer>
       <MessageList role='log'
-                   aria-live='polite'
-                   ref={viewItemsWrapperEl}>
-        <MessageListContent>
-          {renderMessageList({ messages, user, selectedItemIndex, onSelectionRequest})}
+                   aria-live='polite'>
+        <MessageListContent ref={messageListEl}>
+          {renderMessageList({
+            messages,
+            user,
+            selectedItemIndex,
+            onSelectionRequest
+          })}
         </MessageListContent>
       </MessageList>
       <ChatInput onMessageSend={addNewMessage}
                  user={user}
                  placeholder={placeholder}
-                 ref={inputRef}/>
+                 ref={inputEl}/>
     </ChatContainer>
   )
 }

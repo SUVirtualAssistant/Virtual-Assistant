@@ -1,4 +1,1 @@
-import DynamicCanvas from './DynamicCanvas'
-
-export default DynamicCanvas
-
+export { DynamicCanvas } from  './DynamicCanvas'

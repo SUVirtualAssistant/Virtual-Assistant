@@ -46,7 +46,12 @@ const HeaderTitle = styled.a`
   }
 `
 
-const Header = ({ theme, toggleTheme, title, navLinks }) => (
+const Header = ({
+  title,
+  navLinks,
+  theme,
+  toggleTheme
+}) =>
   <MainHeader>
     <Link href={title.to}>
       <HeaderTitle>{title.name}</HeaderTitle>
@@ -54,7 +59,6 @@ const Header = ({ theme, toggleTheme, title, navLinks }) => (
     <NavBar navLinks={navLinks}/>
     {/*<ThemeToggle theme={theme} toggleTheme={toggleTheme} />*/}
   </MainHeader>
-)
 
 Header.propTypes = {
   theme      : PropTypes.string,

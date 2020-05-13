@@ -1,8 +1,10 @@
 import { isAuthor as isUser } from '@shared/utils'
-import PropTypes              from 'prop-types'
-import React                  from 'react'
-import styled, { css }        from 'styled-components'
-import Message                from './Message'
+
+import PropTypes       from 'prop-types'
+import React           from 'react'
+import styled, { css } from 'styled-components'
+
+import Message from './Message'
 
 const StyledMessageGroup = styled.div`
   max-width: 80%;
@@ -23,16 +25,13 @@ const StyledMessageGroup = styled.div`
   `}
 `
 
-const MessageGroup = props => {
-  const {
-    group,
-    user,
-    isLastGroup,
-    selectedItemIndex,
-    ...other
-  } = props
-
-  const lastItemIndex = group.messages.length - 1
+const MessageGroup = ({
+  group,
+  user,
+  isLastGroup,
+  selectedItemIndex,
+  ...other
+}) => {
   const is_user = isUser(user, group.messages[0])
 
   return (
@@ -40,8 +39,7 @@ const MessageGroup = props => {
       {group.messages.map((msg, index) =>
         [<Message item={msg}
                   user={is_user}
-                  selected={msg.selectionIndex === selectedItemIndex.current}
-                  tabbable={index === lastItemIndex && isLastGroup}
+                  selected={msg.selectionIndex === selectedItemIndex}
                   key={index}
                   {...other}/>]
       )}
@@ -53,8 +51,7 @@ MessageGroup.propTypes = {
   group             : PropTypes.object.isRequired,
   user              : PropTypes.object.isRequired,
   isLastGroup       : PropTypes.bool.isRequired,
-  onRequestSelection: PropTypes.func.isRequired,
-  selectedItemIndex : PropTypes.object.isRequired
+  selectedItemIndex : PropTypes.number
 }
 
 export default React.memo(MessageGroup)

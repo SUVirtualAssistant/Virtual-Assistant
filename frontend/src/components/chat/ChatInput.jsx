@@ -1,7 +1,7 @@
-import { KEYS }          from '@shared/constants'
-import PropTypes         from 'prop-types'
-import React, { useRef } from 'react'
-import styled            from 'styled-components'
+import { KEYS }              from '@shared/constants'
+import PropTypes             from 'prop-types'
+import React, { forwardRef } from 'react'
+import styled                from 'styled-components'
 
 const WrappedChatInput = styled.div`
   padding: ${({ theme }) => theme.chat.input_padding_y} ${({ theme }) => theme.chat.input_padding_x};
@@ -11,6 +11,10 @@ const WrappedChatInput = styled.div`
   flex: 0 0 auto;
   display: flex;
   flex-flow: row nowrap;
+
+  @media (max-width: 1100px) {
+    max-height: 47px;
+  }
 
   input {
     display: inline-block;
@@ -40,8 +44,8 @@ const WrappedChatInput = styled.div`
     flex-shrink: 0;
     text-align: center;
 
-    height: 36px;
-    width: 36px;
+    height: 30px;
+    width: 30px;
     justify-content: center;
 
     border-color: transparent !important;
@@ -71,14 +75,11 @@ const WrappedChatInput = styled.div`
   }
 `
 
-const ChatInput = React.forwardRef((props, ref) => {
-  const {
-    onMessageSend,
-    user,
-    placeholder
-  } = props
-
-  const focused = useRef(false)
+const ChatInput = forwardRef(({
+  onMessageSend,
+  user,
+  placeholder
+}, ref) => {
 
   const onInputKeyDown = event => {
     if (event.keyCode === KEYS.enter)
@@ -99,7 +100,9 @@ const ChatInput = React.forwardRef((props, ref) => {
       }
     }
 
-    if (ref) ref.current.value = null
+    if (ref !== null) { // noinspection JSUnresolvedVariable
+      ref.current.value = null
+    }
   }
 
   return (
@@ -107,8 +110,6 @@ const ChatInput = React.forwardRef((props, ref) => {
       <input type='text'
              placeholder={placeholder}
              onKeyDown={onInputKeyDown}
-             onFocus={() => focused.current = true}
-             onBlur={() => focused.current = false}
              ref={ref}/>
       <button onClick={sendMessage}
               aria-label={placeholder}>

@@ -14,6 +14,6 @@ const StyledDateMarker = styled.div`
   color: ${({ theme }) => theme.colors.navBarLink};
 `
 
-const DateMarker = ({ item }) => <StyledDateMarker>{getDate(item.timestamp)}</StyledDateMarker>
+const DateMarker = React.memo(({ item }) => <StyledDateMarker>{getDate(item.timestamp)}</StyledDateMarker>)
 
 export default DateMarker

@@ -1,8 +1,6 @@
-import * as reducers from '@state/modules'
-
-
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware                                   from 'redux-thunk'
+import * as reducers                                     from './modules'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
@@ -20,8 +18,9 @@ export const configureStore = initialState => {
     initialState,
     bindMiddleware(
       [
-        thunkMiddleware,
+        thunkMiddleware
       ]
     )
   )
 }
+

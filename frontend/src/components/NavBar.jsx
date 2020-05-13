@@ -1,6 +1,6 @@
-import Link        from 'next/link'
-import React       from 'react'
-import styled      from 'styled-components'
+import Link   from 'next/link'
+import React  from 'react'
+import styled from 'styled-components'
 
 const Nav = styled.nav`
   float: right;
@@ -55,14 +55,13 @@ const NavLink = styled.a`
   }
 `
 
-const NavBar = ({ navLinks }) => (
-    <Nav>
-      { navLinks.map((link, index) => (
-        <Link href={link.to} key={index}>
-          <NavLink>{link.name}</NavLink>
-        </Link>
-      )) }
-    </Nav>
-)
+const NavBar = ({ navLinks }) =>
+  <Nav>
+    {navLinks.map((link, index) => (
+      <Link href={link.to} key={index}>
+        <NavLink>{link.name}</NavLink>
+      </Link>
+    ))}
+  </Nav>
 
 export default NavBar

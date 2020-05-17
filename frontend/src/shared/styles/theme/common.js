@@ -1,5 +1,6 @@
 const font = {
-  family     : 'IBM Plex Sans, sans-serif',
+  regular    : 'IBM Plex Sans, sans-serif',
+  display    : 'BrutGothic, serif',
   size       : {
     default : '14px',
     xs      : '10px',
@@ -26,7 +27,7 @@ const chat = {
   paddingX    : '16px',
   paddingY    : '16px',
   border_width: '1px',
-  font_family : font.family,
+  font_family : font.regular,
   font_size   : font.size.default,
   line_height : font.line_height.default,
 

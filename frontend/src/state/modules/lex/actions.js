@@ -1,33 +1,38 @@
-import lex, { msgUtils } from '@services/AWS_Lex'
-import { messageActions }   from '@state/modules/messages'
-import { canvasActions } from '@state/modules/canvas'
-import * as types        from './types'
+import lex, { msgUtils }  from '@services/AWS_Lex'
+import { canvasActions }  from '@state/modules/canvas'
+import { messageActions } from '@state/modules/messages'
+import * as types         from './types'
 
-export const startSession = (botName, userName) => {
+const bot = {
+  id: 0,
+  name: process.env.BOT_NAME
+}
+
+export const startSession = userName => {
   const request = (name, version) => ({ type: types.SESSION_START_REQUEST, name, version })
   const success = response => ({ type: types.SESSION_START_SUCCESS, response })
   const failure = error => ({ type: types.SESSION_START_FAILURE, error })
 
   const params = {
-    botAlias    : process.env.BOT_VERSION,
-    botName     : botName,
+    botAlias    : '$' + process.env.BOT_VERSION,
+    botName     : process.env.BOT_NAME,
     userId      : userName,
     accept      : 'text/plain; charset=utf-8',
     dialogAction: {
       type      : 'Delegate',
-      intentName: 'Greeting'
+      intentName: process.env.BOT_START_INTENT
     }
   }
 
   return dispatch => {
-    dispatch(request(botName, process.env.BOT_VERSION))
+    dispatch(request(params.botName, params.botAlias))
 
     return lex._startSession(params)
-              .then(message => {
-                dispatch(success(message))
+              .then(lexResponse => {
+                dispatch(success(lexResponse))
 
-                const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(messageActions.addMessage({ id: 0 }, msg, new Date())))
+                const messages = msgUtils.parseMessage(lexResponse)
+                messages.forEach(msg => dispatch(messageActions.addMessage(bot, msg, new Date())))
               }, error => dispatch(failure(error)))
   }
 }
@@ -50,16 +55,19 @@ export const sendMessage = message => {
 
     // send message to Lex
     return lex._postText(lexMessage)
-              .then(message => {
-                dispatch(success(message))
+              .then(lexResponse => {
+                dispatch(success(lexResponse))
 
-                const messages = msgUtils.parseMessage(message.message)
-                messages.forEach(msg => dispatch(messageActions.addMessage({ id: 0 }, msg, new Date())))
+                const messages = msgUtils.parseMessage(lexResponse)
+                messages.forEach(msg => dispatch(messageActions.addMessage(bot, msg, new Date())))
+
+                console.log(lexResponse)
 
                 // adds session attributes to store.lex.latestData
-                if (message.sessionAttributes !== null && (message.dialogState === 'Fulfilled'))
-                  dispatch(canvasActions.addData(message))
-
+                if (lexResponse.sessionAttributes !== undefined) {
+                  console.log('firing')
+                  dispatch(canvasActions.addData(lexResponse))
+                }
               }, error => dispatch(failure(error)))
   }
 }

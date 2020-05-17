@@ -1,26 +1,29 @@
-export const parseMessage = message => {
-  let results = []
+const hasJsonStructure = str => {
+  if (typeof str !== 'string') return false
+
   try {
-    const msg = JSON.parse(message).messages
+    const result = JSON.parse(str)
+    const type = Object.prototype.toString.call(result)
 
-    let msgCount = msg.length
-    if (msgCount > 1)
-      for (let i = 0; i < msgCount; i++)
-        results.push(msg[i]['value'])
-    else
-      results = msg[0]['value']
-  } catch {
-    results = [message]
+    return type === '[object Object]'
+        || type === '[object Array]'
+  } catch (err) {
+    return false
   }
-  return results
 }
 
-// TODO: make this more robust
-export const parseData = data => {
-  const parsedData = Object.values(data)
+export const parseMessage = response => {
+  const message = response.message
 
-  return parsedData.reduce((arr, elem) => {
-    arr.push(JSON.parse(elem))
-    return arr
-  }, [])
+  if (hasJsonStructure(message)) {
+    const testMsg = JSON.parse(message).messages
+
+    return testMsg.reduce((arr, msg) => {
+      arr.push(msg['value'])
+      return arr
+    }, [])
+  } else {
+    return [message]
+  }
 }
+

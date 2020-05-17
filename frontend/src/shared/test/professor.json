@@ -1,0 +1,25 @@
+{
+  "intentName": "DIR_GetEmailByName",
+  "slots": {
+    "Fname": null,
+    "LName": null
+  },
+  "sessionAttributes": {
+    "Address": "N/A",
+    "Department": "N/A",
+    "Email": "hkong@seattleu.edu",
+    "Fname": "hidy",
+    "JTitle": "assistant professor, computer science",
+    "LName": "kong",
+    "Phone": "(206) 296-5562"
+  },
+  "message": "What's their first name?",
+  "sentimentResponse": {
+    "sentimentLabel": "NEUTRAL",
+    "sentimentScore": "{Positive: 0.07214602,Negative: 0.056038138,Neutral: 0.8717942,Mixed: 2.1597318E-5}"
+  },
+  "messageFormat": "PlainText",
+  "dialogState": "ElicitSlot",
+  "slotToElicit": "Fname",
+  "sessionId": "2020-05-17T08:36:56.704Z-hOAodYMn"
+}

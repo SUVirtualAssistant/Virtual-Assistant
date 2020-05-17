@@ -1,18 +1,20 @@
-import { msgUtils } from '@services/AWS_Lex'
+import { dataUtils } from '@services/AWS_Lex'
 import * as types   from './types'
 
-export const addData = message => {
-  const currIntent = message.intentName.split('_')[0]
+let dataIndex = 0
 
-  const data = msgUtils.parseData(message.sessionAttributes)
+export const addData = lexResponse => {
+  // TODO: rename this
+  // TODO: map state
+  const intent = lexResponse.intentName.split('_')[0] + "-" + dataIndex++
+
+  const data = dataUtils.parseData(lexResponse.sessionAttributes)
 
   return ({
     type: types.ADD_DATA,
-    index: 0,
-    intentName: message.intentName,
+    name: intent,
+    intentName: lexResponse.intentName,
     data
-    // name: currIntent + ' ' + new Date(),
-    // data: dataObj
   })
 }
 

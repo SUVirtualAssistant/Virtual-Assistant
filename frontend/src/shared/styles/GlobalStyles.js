@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: BrutGothic;
     src: url('/static/fonts/BrutGothic-Regular.woff') format('woff');
+    font-display:auto;
   }
 
   * {
@@ -35,6 +36,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
 
     background-color: ${({ theme }) => theme.colors.background};
+    transition: all 0.3s linear;
 
     -webkit-overflow-scrolling: touch;
   }

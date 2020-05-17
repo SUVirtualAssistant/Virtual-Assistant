@@ -40,18 +40,18 @@ const MessageGroup = ({
         [<Message item={msg}
                   user={is_user}
                   selected={msg.selectionIndex === selectedItemIndex}
-                  key={index}
-                  {...other}/>]
+                  {...other}
+                  key={index}/>]
       )}
     </StyledMessageGroup>
   )
 }
 
 MessageGroup.propTypes = {
-  group             : PropTypes.object.isRequired,
-  user              : PropTypes.object.isRequired,
-  isLastGroup       : PropTypes.bool.isRequired,
-  selectedItemIndex : PropTypes.number
+  group            : PropTypes.object.isRequired,
+  user             : PropTypes.object.isRequired,
+  isLastGroup      : PropTypes.bool.isRequired,
+  selectedItemIndex: PropTypes.number
 }
 
 export default React.memo(MessageGroup)

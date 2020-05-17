@@ -1,4 +1,3 @@
-import SiteLayout         from '@components/layouts/SiteLayout'
 import { useDarkMode }    from '@shared/hooks'
 import { GlobalStyle }    from '@shared/styles/GlobalStyles'
 import themes             from '@shared/styles/theme'
@@ -23,15 +22,19 @@ const VirtualAssistant = ({
   if (!componentMounted) return <div/>
 
   // allows for persistent layouts, each page needs to import getLayout from @components/layouts
-  const getLayout = Component.getLayout || (page => <SiteLayout toggleTheme={toggleTheme}
-                                                                children={page}/>)
+  // const getLayout = Component.getLayout || (page => <SiteLayout toggleTheme={toggleTheme}
+  //                                                               children={page}/>)
+  const Layout = Component.Layout ?
+                 Component.Layout : React.Fragment
 
   return (
     <ThemeProvider theme={themeMode}>
       <Provider store={store}>
-        <GlobalStyle/>
         <DefaultSeo {...SEO} />
-        {getLayout(theme, toggleTheme, <Component {...pageProps} />)}
+        <GlobalStyle/>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </ThemeProvider>
   )

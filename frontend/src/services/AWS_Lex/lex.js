@@ -1,4 +1,3 @@
-import { lex }    from '@state/modules'
 import AWS        from 'aws-sdk'
 import LexRuntime from 'aws-sdk/clients/lexruntime'
 
@@ -22,16 +21,6 @@ const _startSession = params => (
   })
 )
 
-const _endSession = params => (
-  new Promise((res, rej) => {
-    lexInstance.deleteSession(params, (err, data) => {
-      if (err)
-        return rej(err)
-      res(data)
-    })
-  })
-)
-
 const _postText = params => (
   new Promise((res, rej) => {
     lexInstance.postText(params, (err, data) => {
@@ -44,6 +33,5 @@ const _postText = params => (
 
 export default {
   _startSession,
-  _endSession,
   _postText
 }

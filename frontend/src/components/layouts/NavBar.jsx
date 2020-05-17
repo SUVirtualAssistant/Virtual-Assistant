@@ -13,7 +13,7 @@ const Nav = styled.nav`
 
 const NavLink = styled.a`
   color: ${({ theme }) => theme.colors.navBarLink};
-  font-family: ${({ theme }) => theme.font.family};
+  font-family: ${({ theme }) => theme.font.regular};
   font-size: ${({ theme }) => theme.font.size.lg};
   line-height: 50px;
 
@@ -55,9 +55,14 @@ const NavLink = styled.a`
   }
 `
 
-const NavBar = ({ navLinks }) =>
+const links = [
+  { name: 'Admin', to: '/admin' },
+  { name: 'Canvas', to: '/test' }
+]
+
+const NavBar = () =>
   <Nav>
-    {navLinks.map((link, index) => (
+    {links.map((link, index) => (
       <Link href={link.to} key={index}>
         <NavLink>{link.name}</NavLink>
       </Link>

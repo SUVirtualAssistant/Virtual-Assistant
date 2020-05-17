@@ -40,7 +40,7 @@ const Text = styled.div`
 
 const Time = styled.time`
   top: 50%;
-  left: 100%;
+  left: ${props => !props.user && '100%'};
 
   margin-left: ${({ theme }) => theme.chat.item_spacing_x};
 
@@ -58,12 +58,10 @@ const Time = styled.time`
   transition: opacity .2s ease-in-out;
 
   ${props => props.user && css`
-    align-self: flex-end;
-    align-items: flex-end;
+    right: 100%;
     text-align: right;
 
     margin-right: ${({ theme }) => theme.chat.item_spacing_x};
-    right: 100%;
   `}
 `
 
@@ -76,21 +74,20 @@ const getTimestampView = (timestamp, selected, user) => timestamp &&
 const getMessageText = (user, text) => text &&
   <Text user={user}>{text}</Text>
 
-
 const Message = ({
   item,
   user,
   selected,
-  onRequestSelection
+  onMessageSelected
 }) => {
 
-  const onClick = useCallback(() => {
-    onRequestSelection(item.selectionIndex)
-  }, [onRequestSelection])
+  const handleSelection = useCallback(() => {
+    onMessageSelected(item.selectionIndex)
+  }, [selected])
 
   return (
     <ChatMessage selected={selected}
-                 onClick={onClick}>
+                 onClick={handleSelection}>
       {getMessageText(user, item.text)}
       {getTimestampView(item.timestamp, selected, user)}
     </ChatMessage>
@@ -98,9 +95,9 @@ const Message = ({
 }
 
 Message.propTypes = {
-  item              : PropTypes.object.isRequired,
-  onRequestSelection: PropTypes.func.isRequired,
-  selected          : PropTypes.bool.isRequired
+  item             : PropTypes.object.isRequired,
+  selected         : PropTypes.bool.isRequired,
+  onMessageSelected: PropTypes.func.isRequired
 }
 
 export default Message

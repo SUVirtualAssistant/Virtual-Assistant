@@ -1,6 +1,6 @@
-import { getLayout } from '@components/layouts'
-import React         from 'react'
-import styled        from 'styled-components'
+import Layout from '@components/layouts'
+import React  from 'react'
+import styled from 'styled-components'
 
 const Content = styled.div`
   position: absolute;
@@ -38,6 +38,6 @@ const Admin = () => {
   )
 }
 
-Admin.getLayout = getLayout
+Admin.Layout = Layout
 
 export default Admin

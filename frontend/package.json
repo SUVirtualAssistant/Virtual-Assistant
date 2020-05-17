@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "aws-sdk": "2.673.0",
-    "dotenv-webpack": "^1.7.0",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
-    "next": "9.3.6",
+    "next": "9.4.0",
+    "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.1.0",
     "next-images": "^1.4.0",
     "next-redux-wrapper": "6.0.0-rc.7",

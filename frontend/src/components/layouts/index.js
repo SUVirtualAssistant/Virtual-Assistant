@@ -1,5 +1,3 @@
-import SiteLayout from './SiteLayout'
+import Layout from './SiteLayout'
 
-export * from './SiteLayout'
-
-export default SiteLayout
+export default Layout

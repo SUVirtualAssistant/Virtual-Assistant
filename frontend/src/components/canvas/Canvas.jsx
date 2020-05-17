@@ -1,7 +1,8 @@
+import data            from '@shared/test/printing.json'
 import React           from 'react'
-import { useSelector } from 'react-redux'
+import CanvasView      from 'src/components/canvas/CanvasView'
 import styled          from 'styled-components'
-import * as Components from './modules'
+import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
   flex: 1 1 auto;
@@ -23,31 +24,29 @@ const DynamicCanvasContainer = styled.div`
   font-size: 14px;
 `
 
-const testComponentConfig = [
-  { type: 'Table' },
-  { type: 'Landing' }
+const componentCollection = [
+  {
+    type : 'Links',
+    props: { sessionAttributes: data.sessionAttributes }
+  }
 ]
 
-export const DynamicCanvas = props => {
-  const dialogState = useSelector(state => state.lex.dialogState)
-  const currentIntent = useSelector(state => state.lex.currentIntent)
-  const latestData = useSelector(state => state.canvas)
+const Canvas = ({
+  children
+}) => {
 
   const mapPropsToComponent = (component, props) =>
     ({ ...(component.props || props), type: component.type })
 
   return (
     <DynamicCanvasContainer>
-      <h1>{currentIntent}</h1>
-      <h2>{dialogState}</h2>
-      {latestData[latestData.length - 1] && <h1>{latestData[latestData.length - 1]["data"][0]["Title"]}</h1>}
-      {/*{latestData && <Table data={latestData}/>}*/}
-      <Components.ModuleCollection
+      <CanvasView
         components={Components}
-        collection={testComponentConfig}
+        collection={componentCollection}
         mapPropsToComponent={mapPropsToComponent}/>
-
-      {props.children}
+      {children}
     </DynamicCanvasContainer>
   )
 }
+
+export default Canvas

@@ -1,37 +1,28 @@
+require('dotenv').config()
+
 const withImages = require('next-images')
 const withFonts = require('next-fonts')
-const Dotenv = require('dotenv-webpack')
+const withPlugins = require('next-compose-plugins')
 
-module.exports = withImages(withFonts({
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.plugins.push(new Dotenv({ silent: true }))
+const nextConfig = {
+  env    : {
+    // BOT_NAME: 'Hermes',
+    // BOT_START_INTENT: 'BOT_BeginConversation',
+    BOT_NAME        : 'Mercury',
+    BOT_START_INTENT: 'Greeting',
+    BOT_VERSION     : process.env.BOT_VERSION,
+
+    LEX_RUNTIME: process.env.LEX_RUNTIME,
+    LEX_REGION : process.env.LEX_REGION,
+
+    LEX_IDENTITY_POOL_ID: process.env.LEX_IDENTITY_POOL_ID
+  },
+  webpack: (config) => {
     return config
-  },
-  ignoreTypes: ["svg"],
-  experimental: {
-    jsconfigPaths: true
-  },
-  env: {
-    BOT_NAME: process.env.BOT_NAME,
-    BOT_ALIAS: process.env.BOT_ALIAS,
-  },
-  /*
-  // Will only be available on the server side
-  serverRuntimeConfig: {
-  },
-   */
-  // Will be available on both server and client
-  publicRuntimeConfig: {
-    // These get set at runtime
-    MERCURY_DEV_POOL_ID: process.env.MERCURY_DEV_POOL_ID,
-    MERCURY_DEV_POOL_ARN: process.env.MERCURY_DEV_POOL_ARN,
-
-    COGNITO_DOMAIN: process.env.COGNITO_DOMAIN,
-
-    AWS_REGION: process.env.AWS_REGION,
-    AWS_IDENTITY_POOL: process.env.AWS_IDENTITY_POOL,
-
-    AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
-    AWS_SECRET_KEY: process.env.AWS_SECRET_KEY
   }
-}))
+}
+
+module.exports = withPlugins(
+  [[withImages], [withFonts]],
+  nextConfig
+)

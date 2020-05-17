@@ -10,6 +10,8 @@ import ChatInput    from './ChatInput'
 import DateMarker   from './DateMarker'
 import MessageGroup from './MessageGroup'
 
+// TODO: Bot bubble background needs more contrast
+
 const ChatContainer = styled.div`
   box-sizing: border-box;
   outline: 0;
@@ -65,9 +67,7 @@ const MessageListContent = styled.div`
 
 const renderMessageList = ({
   messages,
-  user,
-  selectedItemIndex,
-  onSelectionRequest
+  ...other
 }) => {
   const msgs = messages.length > 0 ? convertMsgsToViewItems(messages) : []
   const lastViewItemIndex = msgs.length - 1
@@ -75,15 +75,13 @@ const renderMessageList = ({
   return msgs.map((viewItem, index) => {
     switch (viewItem.type) {
       case 'date-marker':
-        return <DateMarker item={viewItem}
+        return <DateMarker timestamp={viewItem.timestamp}
                            key={index}/>
       case 'message-group':
-        return <MessageGroup group={viewItem}
-                             user={user}
-                             selectedItemIndex={selectedItemIndex}
-                             onRequestSelection={onSelectionRequest}
+        return <MessageGroup key={index}
+                             group={viewItem}
                              isLastGroup={index === lastViewItemIndex}
-                             key={index}/>
+                             {...other}/>
       default:
         break
     }
@@ -91,7 +89,6 @@ const renderMessageList = ({
 }
 
 const Chat = ({
-  botName,
   user,
   placeholder
 }) => {
@@ -108,11 +105,7 @@ const Chat = ({
    * Runs when page loads.
    */
   useEffect(() => {
-    const { current } = inputEl
-    current.focus()
-
-    if (!active)
-      dispatch(Lex.startSession(botName, user.name))
+    if (!active) dispatch(Lex.startSession(user.name))
   }, [])
 
   /**
@@ -121,27 +114,24 @@ const Chat = ({
   useEffect(() => {
     const { current } = messageListEl
     current.scrollIntoView({ block: 'end', behavior: 'smooth' })
-
-    document.title = 'New Message !'
-
   }, [messages])
 
   /**
    * Call hook passing in the ref and a function to call on outside click
    */
   useOnClickOutside(messageListEl, useCallback(() => {
-    console.log('clicked outside')
     setSelectedItemIndex(null)
-  }, [selectedItemIndex]))
+  }, []))
 
   /**
    * dispatches a new message to lex
    * @type {function(*=): *}
    */
   const addNewMessage = useCallback(message =>
-    dispatch(Lex.sendMessage(message)), [dispatch])
+    dispatch(Lex.sendMessage(message)), [dispatch]
+  )
 
-  const onSelectionRequest = useCallback(clickedItemIndex => {
+  const onMessageSelected = useCallback(clickedItemIndex => {
     setSelectedItemIndex(clickedItemIndex)
     console.log('clickedItemIndex: ' + clickedItemIndex)
   }, [selectedItemIndex])
@@ -151,12 +141,14 @@ const Chat = ({
       <MessageList role='log'
                    aria-live='polite'>
         <MessageListContent ref={messageListEl}>
-          {renderMessageList({
-            messages,
-            user,
-            selectedItemIndex,
-            onSelectionRequest
-          })}
+          {
+            renderMessageList({
+              messages,
+              user,
+              selectedItemIndex,
+              onMessageSelected
+            })
+          }
         </MessageListContent>
       </MessageList>
       <ChatInput onMessageSend={addNewMessage}

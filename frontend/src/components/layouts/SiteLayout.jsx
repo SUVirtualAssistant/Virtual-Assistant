@@ -1,12 +1,6 @@
-import Header    from '@components/Header'
-import PropTypes from 'prop-types'
-import React     from 'react'
-import styled    from 'styled-components'
-
-const App = styled.div`
-  background: ${({ theme }) => theme.colors.pageBackground};
-  transition: all 0.3s linear;
-`
+import Header from './Header'
+import React  from 'react'
+import styled from 'styled-components'
 
 const Content = styled.main`
   position: fixed;
@@ -21,47 +15,23 @@ const Content = styled.main`
   }
 `
 
-const navTitle = { name: 'SU Virtual Assistant', to: '/' }
-const navLinks = [
-  { name: 'Admin', to: '/admin' },
-  { name: 'Test', to: '/test' }
-]
+const Layout = ({
+  toggleTheme,
+  children
+}) =>
+  <>
+    <Header toggleTheme={toggleTheme}/>
+    <Content>
+      {children}
+    </Content>
+  </>
 
-const SiteLayout = React.memo(({
-    title,
-    links,
-    theme,
-    toggleTheme,
-    children
-  }) =>
-    <App>
-      <Header title={title}
-              navLinks={links}
-              theme={theme}
-              toggleTheme={toggleTheme}/>
-      <Content>
-        {children}
-      </Content>
-    </App>
-)
+// export const getLayout = (
+//   toggleTheme,
+//   page
+// ) =>
+//   <SiteLayout toggleTheme={toggleTheme}>
+//     {page}
+//   </SiteLayout>
 
-SiteLayout.propTypes = {
-  title      : PropTypes.object,
-  links      : PropTypes.arrayOf(PropTypes.object),
-  theme      : PropTypes.string,
-  toggleTheme: PropTypes.func,
-  children   : PropTypes.any
-}
-
-SiteLayout.defaultProps = {
-  title: navTitle,
-  links: navLinks
-}
-
-export const getLayout = (theme, toggleTheme, page) =>
-  <SiteLayout theme={theme}
-              toggleTheme={toggleTheme}>
-    {page}
-  </SiteLayout>
-
-export default SiteLayout
+export default Layout

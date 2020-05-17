@@ -1,6 +1,5 @@
-import NavBar    from '@components/NavBar'
+import NavBar    from './NavBar'
 import Link      from 'next/link'
-import PropTypes from 'prop-types'
 import React     from 'react'
 import styled    from 'styled-components'
 
@@ -46,25 +45,19 @@ const HeaderTitle = styled.a`
   }
 `
 
+const title = {
+  name: 'SU Virtual Assistant',
+  to: '/' }
+
 const Header = ({
-  title,
-  navLinks,
-  theme,
   toggleTheme
 }) =>
   <MainHeader>
     <Link href={title.to}>
       <HeaderTitle>{title.name}</HeaderTitle>
     </Link>
-    <NavBar navLinks={navLinks}/>
+    <NavBar />
     {/*<ThemeToggle theme={theme} toggleTheme={toggleTheme} />*/}
   </MainHeader>
-
-Header.propTypes = {
-  theme      : PropTypes.string,
-  toggleTheme: PropTypes.func.isRequired,
-  title      : PropTypes.object,
-  navLinks   : PropTypes.array
-}
 
 export default Header

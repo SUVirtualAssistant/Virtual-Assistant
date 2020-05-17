@@ -1,8 +1,9 @@
-import { Chat }          from '@components/chat'
-import { DynamicCanvas } from '@components/dynamic_canvas'
-import { getLayout }     from '@components/layouts'
-import React             from 'react'
-import styled            from 'styled-components'
+import Canvas          from '@components/canvas'
+import { Chat }        from '@components/chat'
+import Layout          from '@components/layouts'
+import React           from 'react'
+import { useSelector } from 'react-redux'
+import styled          from 'styled-components'
 
 const ChatLayout = styled.div`
   display: flex;
@@ -15,15 +16,18 @@ const ChatLayout = styled.div`
   }
 `
 
-const ChatPage = React.memo(() =>
-  <ChatLayout>
-    <Chat botName={process.env.BOT_NAME}
-          user={{ id: 1, name: 'USER' }}
-          placeholder='Type a message...'/>
-    <DynamicCanvas/>
-  </ChatLayout>
-)
+const ChatPage = () => {
+  const canvas_data = useSelector(state => state.canvas)
 
-ChatPage.getLayout = getLayout
+  return (
+    <ChatLayout>
+      <Chat user={{ id: 1, name: 'USER' }}
+            placeholder='Type a message...'/>
+      <Canvas data={canvas_data}/>
+    </ChatLayout>
+  )
+}
+
+ChatPage.Layout = Layout
 
 export default ChatPage

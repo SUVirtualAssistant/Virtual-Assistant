@@ -1,0 +1,8 @@
+virtual-assistant:
+  component: "serverless-next.js"
+  inputs:
+    domain: "su-assistant.chat"
+    memory: 1024
+    timeout: 20
+    name:
+      defaultLambda: virtual-assistant-deployment

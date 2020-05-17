@@ -110,6 +110,5 @@ modules.xml
 
 # End of https://www.gitignore.io/api/intellij
 .nyc_output/
-frontend/.idea/jsLinters/
-frontend/tests/
-public/manifest.json
+.serverless/
+.serverless_nextjs/

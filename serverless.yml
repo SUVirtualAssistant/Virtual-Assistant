@@ -1,6 +1,8 @@
 virtual-assistant:
   component: "serverless-next.js"
+  name: Virtual Assistant
   inputs:
+    hook: yarn run next build
     domain: "su-assistant.chat"
     memory: 1024
     timeout: 20

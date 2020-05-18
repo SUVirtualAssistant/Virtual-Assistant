@@ -1,12 +1,19 @@
-virtual-assistant:
-  component: serverless-next.js
-  name: Virtual Assistant
+name: virtual-assistant
+org: virtualassistant
+
+website:
+  component: serverless-next.js@1.11.5
   inputs:
-    name:
-      defaultLambda: virtual-assistant-deployment
-    timeout: 20
-    memory: 1024
-    hook: yarn run next build
     domain:
       - ${env.subdomain}
       - ${env.domain}
+    name:
+      defaultLambda: virtual-assistant-deployment
+    nextStaticDir: ./public/static/
+    publicDirectoryCache:
+      value: public, max-age=604800
+      test: /\.(gif|jpe?g|jp2|tiff|woff|png|ico|svg|txt|xml)$/i
+    bucketName: virtual-assistant-serverless
+    timeout: 20
+    memory: 1024
+    hook: yarn run next build

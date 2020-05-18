@@ -3,15 +3,15 @@
  * styled-reset to reset the userAgentStyleSheets that browsers inject
  * by default.
  */
+import { normalize }         from 'polished'
 import { createGlobalStyle } from 'styled-components'
-import { normalize } from 'polished'
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize()}
 
   @font-face {
     font-family: BrutGothic;
-    src: url('/static/fonts/BrutGothic-Regular.woff') format('woff');
+    src: url('/fonts/BrutGothic-Regular.woff') format('woff');
     font-display:auto;
   }
 

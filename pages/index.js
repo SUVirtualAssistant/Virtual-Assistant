@@ -18,7 +18,7 @@ const ChatLayout = styled.div`
 
 const ChatPage = () => {
   const canvas_data = useSelector(state => state.canvas)
-
+  
   return (
     <ChatLayout>
       <Chat user={{ id: 1, name: 'USER' }}

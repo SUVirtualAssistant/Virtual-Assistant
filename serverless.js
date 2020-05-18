@@ -8,7 +8,7 @@ class Deploy extends Component {
     const { stage } = inputs
     if (stage === "staging" || stage === "prod") {
       // Will load env-${stage} as environment variables
-      require("dotenv").config({ path: `${__dirname}/config/env-${stage}` })
+      require("dotenv").config({ path: `${__dirname}/env-${stage}` })
       
       const template = await this.load("@serverless/template", stage)
       return await template({ template: "serverless.yml" })

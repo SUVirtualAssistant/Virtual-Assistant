@@ -1,4 +1,4 @@
-import data            from '@shared/test/printing.json'
+import data            from './__mocks__/WS_SearchSU.json'
 import React           from 'react'
 import CanvasView      from 'src/components/canvas/CanvasView'
 import styled          from 'styled-components'
@@ -23,6 +23,14 @@ const DynamicCanvasContainer = styled.div`
   outline: 0;
   font-size: 14px;
 `
+
+/**
+ * CAL_UpcomingEvents
+ * DIR_GetEmailByName
+ * WS_Academics
+ * WS_SearchSU
+ *
+ */
 
 const componentCollection = [
   {

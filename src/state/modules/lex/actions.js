@@ -2,21 +2,27 @@ import lex, { msgUtils }  from '@services/AWS_Lex'
 import { canvasActions }  from '@state/modules/canvas'
 import { messageActions } from '@state/modules/messages'
 import * as types         from './types'
+import { uuid }           from 'uuidv4'
 
 const bot = {
   id: 0,
   name: process.env.BOT_NAME
 }
 
-export const startSession = userName => {
-  const request = (name, version) => ({ type: types.SESSION_START_REQUEST, name, version })
+const user = {
+  id: 1,
+  session_id: uuid()
+}
+
+export const startSession = () => {
+  const request = (name, alias) => ({ type: types.SESSION_START_REQUEST, name, alias })
   const success = response => ({ type: types.SESSION_START_SUCCESS, response })
   const failure = error => ({ type: types.SESSION_START_FAILURE, error })
 
   const params = {
-    botAlias    : '$' + process.env.BOT_VERSION,
+    botAlias    : process.env.BOT_ALIAS,
     botName     : process.env.BOT_NAME,
-    userId      : userName,
+    userId      : user.session_id,
     accept      : 'text/plain; charset=utf-8',
     dialogAction: {
       type      : 'Delegate',
@@ -46,7 +52,7 @@ export const sendMessage = message => {
     botAlias : process.env.BOT_VERSION,
     botName  : process.env.BOT_NAME,
     inputText: message.text,
-    userId   : 'user'  // fixme: create a better userID
+    userId   : user.session_id
   }
 
   return dispatch => {

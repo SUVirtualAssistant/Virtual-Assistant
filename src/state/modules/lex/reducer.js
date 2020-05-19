@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         bot: {
           id: 0,    // bot always has id=0
           name: action.name,
-          version: action.version
+          alias: action.alias
         }
       }
 

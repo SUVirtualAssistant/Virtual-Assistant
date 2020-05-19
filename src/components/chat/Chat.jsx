@@ -105,7 +105,7 @@ const Chat = ({
    * Runs when page loads.
    */
   useEffect(() => {
-    if (!active) dispatch(Lex.startSession(user.name))
+    if (!active) dispatch(Lex.startSession())
   }, [])
 
   /**

@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: BrutGothic;
-    src: url('/static/fonts/BrutGothic-Regular.woff') format('woff');
+    src: url('/static/BrutGothic-Regular.woff') format('woff');
     font-display:auto;
   }
 

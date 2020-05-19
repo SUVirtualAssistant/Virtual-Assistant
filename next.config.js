@@ -7,11 +7,9 @@ const withPlugins = require('next-compose-plugins')
 const nextConfig = {
   target : 'serverless',
   env    : {
-    // BOT_NAME: 'Hermes',
-    // BOT_START_INTENT: 'BOT_BeginConversation',
-    BOT_NAME        : 'Mercury',
-    BOT_START_INTENT: 'Greeting',
-    BOT_VERSION     : process.env.BOT_VERSION,
+    BOT_NAME        : process.env.BOT_NAME,
+    BOT_START_INTENT: 'BOT_BeginConversation',
+    BOT_ALIAS       : process.env.BOT_ALIAS,
     
     LEX_RUNTIME: process.env.LEX_RUNTIME,
     LEX_REGION : process.env.LEX_REGION,

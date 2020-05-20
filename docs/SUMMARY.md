@@ -24,5 +24,5 @@
   * [Redux](frontend/ui/redux.md)
 * [NextJS](frontend/nextjs.md)
 * [Deployment](frontend/deployment.md)
-* [Help](frontend/support.md)
+* [Support](frontend/support.md)
 

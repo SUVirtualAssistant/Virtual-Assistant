@@ -1,4 +1,4 @@
-# ToggleTheme
+# Hooks
 
 ## Usage
 

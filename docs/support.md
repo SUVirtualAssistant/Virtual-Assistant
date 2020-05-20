@@ -1,2 +1,6 @@
-# Help
+# Support
+
+## Resources
+
+## Contact Info
 

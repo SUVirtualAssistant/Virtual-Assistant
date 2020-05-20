@@ -11,11 +11,11 @@
   * [Lex](aws/lex/)
     * [Editing Lex](aws/lex/introduction.md)
     * [Intents](aws/lex/intents.md)
-    * [Lambdas](aws/dynamodb/03-lambdas.md)
+    * [Lambdas](aws/lambdas.md)
     * [Versioning](aws/lex/versioning.md)
-  * [IAM](aws/dynamodb/01-iam.md)
+  * [IAM](aws/iam.md)
   * [APIGateway](aws/dynamodb/api.md)
-  * [Lambda](aws/dynamodb/lambda.md)
+  * [Lambda](aws/lex/lambda.md)
 
 ## Frontend
 

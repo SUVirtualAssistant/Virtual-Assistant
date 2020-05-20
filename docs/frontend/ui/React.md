@@ -2,9 +2,9 @@
 
 ## Overview
 
-## Component Lifecycle
-
 ### Functional Components
+
+### Lifecycle
 
 ## CSS-In-JS
 

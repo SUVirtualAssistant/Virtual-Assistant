@@ -6,22 +6,20 @@
 * [Dev Tools](DevTools.md)
 
 ## AWS
-
-* [Getting Started](aws/)
-  * [Lex](aws/Lex.md)
-  * [Lambda](aws/Lambda.md)
-  * [DynamoDB](aws/DynamoDB.md)
-  * [IAM](aws/AccessControl.md)
-  * [APIGateway](aws/API.md)
+* [Overview](aws/README.md)
+* [Lex](aws/Lex.md)
+* [Lambda](aws/Lambda.md)
+* [DynamoDB](aws/DynamoDB.md)
+* [IAM](aws/AccessControl.md)
+* [APIGateway](aws/API.md)
 
 ## Frontend
-* [Overview](frontend/)
-  * [UI](frontend/ui/)
-    * [React](frontend/ui/React.md)
-    * [Redux](frontend/ui/Redux.md)
-  * [NextJS](frontend/NextJS.md)
-  * [Deployment](frontend/Deployment.md)
-
+* [Overview](frontend/README.md)
+* [UI](frontend/ui/)
+  * [React](frontend/ui/React.md)
+  * [Redux](frontend/ui/Redux.md)
+* [NextJS](frontend/NextJS.md)
+* [Deployment](frontend/Deployment.md)
 
 * [Help](support.md)
 

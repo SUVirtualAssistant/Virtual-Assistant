@@ -2,7 +2,7 @@
 
 * [Initial page](README.md)
 * [Summary](summary.md)
-* [README](aws/README.md)
+* [AWS](aws/README.md)
   * [Lex](aws/lex/README.md)
     * [02-Intents](aws/lex/02-intents.md)
     * [04-Versioning](aws/lex/04-versioning.md)

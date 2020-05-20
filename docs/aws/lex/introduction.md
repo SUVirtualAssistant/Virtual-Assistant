@@ -1,4 +1,4 @@
-# EditingLex
+# Introduction
 
 ## **Overview**
 

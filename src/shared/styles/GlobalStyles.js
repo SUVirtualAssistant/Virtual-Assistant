@@ -10,11 +10,15 @@ export const GlobalStyle = createGlobalStyle`
   ${normalize()}
 
   @font-face {
-    font-family: BrutGothic;
-    src: url('/static/BrutGothic-Regular.woff') format('woff');
+    font-family: 'Bungee', cursive;
     font-display:auto;
   }
-
+  
+  @font-face {
+    font-family: 'Open Sans', sans-serif;
+    font-display:auto;
+  }
+  
   * {
     padding: 0;
     margin: 0;
@@ -42,7 +46,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-family: BrutGothic, sans-serif;
+    font-family: Bungee, serif;
     font-size: ${props => props.theme.font.size.lg};
   }
 `

@@ -1,27 +1,4 @@
-require('dotenv').config()
-
-const withImages = require('next-images')
-const withFonts = require('next-fonts')
-const withPlugins = require('next-compose-plugins')
-
-const nextConfig = {
+module.exports = ({
   target : 'serverless',
-  env    : {
-    BOT_NAME        : process.env.BOT_NAME,
-    BOT_START_INTENT: 'BOT_BeginConversation',
-    BOT_ALIAS       : process.env.BOT_ALIAS,
-    
-    LEX_RUNTIME: process.env.LEX_RUNTIME,
-    LEX_REGION : process.env.LEX_REGION,
-    
-    LEX_IDENTITY_POOL_ID: process.env.LEX_IDENTITY_POOL_ID
-  },
-  webpack: (config) => {
-    return config
-  }
-}
-
-module.exports = withPlugins(
-  [[withImages], [withFonts]],
-  nextConfig
-)
+  webpack: (config) => config
+})

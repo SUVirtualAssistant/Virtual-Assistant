@@ -1,6 +1,6 @@
 const font = {
-  regular    : 'IBM Plex Sans, sans-serif',
-  display    : 'BrutGothic, serif',
+  regular    : 'Open Sans, sans-serif',
+  display    : 'Bungee',
   size       : {
     default : '14px',
     xs      : '10px',

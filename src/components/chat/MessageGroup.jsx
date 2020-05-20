@@ -33,7 +33,7 @@ const MessageGroup = ({
   ...other
 }) => {
   const is_user = isUser(user, group.messages[0])
-
+  
   return (
     <StyledMessageGroup user={is_user}>
       {group.messages.map((msg, index) =>

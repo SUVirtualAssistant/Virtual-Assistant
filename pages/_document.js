@@ -11,8 +11,9 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#000"/>
           <meta name="Description" content="SU Virtual Assistant"/>
           
-          {/* --- CDN Font --- */}
-          <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
+          {/* --- Fonts --- */}
+          <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
           
           {/* --- PAGE ICON --- */}
           <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>

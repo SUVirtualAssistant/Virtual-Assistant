@@ -1,7 +1,9 @@
-import Layout from '@components/layouts'
-import React         from 'react'
-import styled        from 'styled-components'
-import MetricsView from "@components/metrics";
+import Layout            from '@components/layouts'
+import MetricsView       from '@components/metrics'
+import metrics           from '@components/metrics/metrics.json'
+import CloudWatchService from '@services/AWS_Cloudwatch/CloudWatchService'
+import React             from 'react'
+import styled            from 'styled-components'
 
 const ChartContainer = styled.div`
   display: flex;
@@ -15,52 +17,25 @@ const ChartContainer = styled.div`
   }
 `
 
-const Content = styled.div`
-  display: table;
-  position: absolute;
-  background: #eee;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-
-  h1 {
-    width: 18ch;
-    font-size: 4.5rem;
-    font-weight: 400;
-
-    white-space: nowrap;
-    overflow: hidden;
-    animation: text 1s steps(18);
-  }
-
-  @keyframes text {
-    0% { width: 0; }
-    100% { width: 18ch; }
-  }
+const Admin = ({
+  apiCredentials
+}) => {
+  const metricData = new CloudWatchService(metrics)
+  metricData.setEndpoint(apiCredentials.key, apiCredentials.endpoint)
   
-   .rv-xy-plot {
-    font-family: sans-serif;
-    background-color:black;
-  }
-  .rv-xy-plot__axis__tick__text {
-    fill: white;
-    font-size: 7px;
-  }
-  
-`
-
-const Admin = () => {
-    return (
-        <Content>
-            <h1>Metrics</h1>
-            <ChartContainer>
-                {MetricsView()}
-            </ChartContainer>
-        </Content>
-    )
+  return <ChartContainer>
+    <MetricsView data={metricData}/>
+  </ChartContainer>
 }
+
+export const getStaticProps = async () => ({
+  props: {
+    apiCredentials: {
+      key     : process.env.API_KEY,
+      endpoint: process.env.API_ENDPOINT
+    }
+  }
+})
 
 Admin.Layout = Layout
 

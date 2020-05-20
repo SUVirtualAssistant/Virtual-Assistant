@@ -1,7 +1,8 @@
-import data            from './__mocks__/WS_SearchSU.json'
 import React           from 'react'
-import CanvasView      from 'src/components/canvas/CanvasView'
+import { useSelector } from 'react-redux'
 import styled          from 'styled-components'
+
+import DIRdata         from './__mocks__/DIR_GetEmailByName.json'
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
@@ -11,48 +12,30 @@ const DynamicCanvasContainer = styled.div`
   flex-direction: column;
   width: 100%;
 
-  color: rgba(0, 0, 0.87);
-  border-color: rgba(0, 0, 0.12);
-  background-color: rgba(128, 112, 100, .87);
   overflow-x: hidden;
   overflow-y: auto;
 
-  border-width: 1px;
-  border-style: solid;
   box-sizing: border-box;
   outline: 0;
-  font-size: 14px;
 `
 
-/**
- * CAL_UpcomingEvents
- * DIR_GetEmailByName
- * WS_Academics
- * WS_SearchSU
- *
- */
+const view = {
+  BOT  : Components.Default,
+  Error: Components.Error,
+  CAL  : Components.CAL,
+  Hal  : Components.Hal9000,
+  DIR  : Components.DIR,
+  WS   : Components.WS
+}
 
-const componentCollection = [
-  {
-    type : 'Links',
-    props: { sessionAttributes: data.sessionAttributes }
-  }
-]
-
-const Canvas = ({
-  children
-}) => {
-
-  const mapPropsToComponent = (component, props) =>
-    ({ ...(component.props || props), type: component.type })
-
+const Canvas = () => {
+  const canvasData = useSelector(state => state.canvas)
+  
+  const CanvasComponent = view['Hal']
+  
   return (
     <DynamicCanvasContainer>
-      <CanvasView
-        components={Components}
-        collection={componentCollection}
-        mapPropsToComponent={mapPropsToComponent}/>
-      {children}
+      <CanvasComponent data={DIRdata}/>
     </DynamicCanvasContainer>
   )
 }

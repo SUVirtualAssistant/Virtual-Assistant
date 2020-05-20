@@ -10,8 +10,6 @@ import ChatInput    from './ChatInput'
 import DateMarker   from './DateMarker'
 import MessageGroup from './MessageGroup'
 
-// TODO: Bot bubble background needs more contrast
-
 const ChatContainer = styled.div`
   box-sizing: border-box;
   outline: 0;
@@ -94,11 +92,13 @@ const Chat = ({
 }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null)
 
-  const messageListEl = useRef()
-  const inputEl = useRef()
+  const messageListEl = useRef(null)
+  const inputEl = useRef(null)
 
   const messages = useSelector(state => state.messages)
+  const typing = useSelector(state => state.lex.sendingMessage)
   const active = useSelector(state => state.lex.active)
+  
   const dispatch = useDispatch()
 
   /**
@@ -113,7 +113,10 @@ const Chat = ({
    */
   useEffect(() => {
     const { current } = messageListEl
-    current.scrollIntoView({ block: 'end', behavior: 'smooth' })
+    current.scrollIntoView({
+      block: 'end',
+      behavior: 'smooth'
+    })
   }, [messages])
 
   /**
@@ -133,7 +136,6 @@ const Chat = ({
 
   const onMessageSelected = useCallback(clickedItemIndex => {
     setSelectedItemIndex(clickedItemIndex)
-    console.log('clickedItemIndex: ' + clickedItemIndex)
   }, [selectedItemIndex])
 
   return (
@@ -145,6 +147,7 @@ const Chat = ({
             renderMessageList({
               messages,
               user,
+              typing: typing,
               selectedItemIndex,
               onMessageSelected
             })

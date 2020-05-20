@@ -1,9 +1,7 @@
 import lex from './lex'
-import * as msgUtils from './messages'
-import * as dataUtils from './data'
+import * as lexUtils from './lexUtils'
 
 export {
-  msgUtils,
-  dataUtils,
+  lexUtils,
   lex as default
 }

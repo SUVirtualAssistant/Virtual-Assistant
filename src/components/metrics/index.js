@@ -1,3 +1,2 @@
-import MetricsView from './MetricsView'
-export default MetricsView
+export { MetricsView as default } from './MetricsView'
 

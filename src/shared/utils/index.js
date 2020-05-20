@@ -1,5 +1,2 @@
-import { isAuthor } from './utils'
-
-export {
-  isAuthor
-}
+export * from './utils'
+export * from './json'

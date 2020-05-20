@@ -1,23 +1,27 @@
+import React, { useEffect, useState } from 'react'
+import BarGraph                       from './charts/Bar'
 
-import React, { Component } from 'react';
-import BarGraph from "@components/metrics/BarGraph";
-import styled from "styled-components";
-
-const GraphContainer = styled.div`
-  display: table;
-  background-color: white;
-`
-
-const MetricsView = () => {
-  return (
-    <GraphContainer>
-
-      <BarGraph>
-
-      </BarGraph>
-
-    </GraphContainer>
-  )
+export const MetricsView = ({
+  data
+}) => {
+  console.log(data)
+  
+  const [loaded, setLoaded] = useState(false)
+  const [oldData, setOldData] = useState([])
+  
+  useEffect(() => {
+    if (!loaded) {
+      const url = 'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'
+      
+      setLoaded(true)
+      
+      fetch(url)
+      .then(res => res.json())
+      .then(result => setOldData(Object.entries(result['body'])
+                                       .map(([x, y]) => ({ name: x, users: y }))),
+        error => console.error(error))
+    }
+  }, [])
+  
+  return loaded && <BarGraph data={oldData}/>
 }
-
-export default MetricsView

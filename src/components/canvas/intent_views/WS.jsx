@@ -25,16 +25,15 @@ const L = styled.a`
 
 `
 
-
-export const Links = ({
-  sessionAttributes
+export const WS = ({
+  data
 }) => {
+  const { sessionAttributes } = data
   const entries = Object.values(sessionAttributes)
                         .map(e => JSON.parse(e))
 
   return entries.map((e, index) =>
     <LinkCard key={index}>
-      <L href={'https://'+ e.Link} target="_blank">{e.Title}</L>
+      <L href={'https://' + e.Link} target="_blank">{e.Title}</L>
     </LinkCard>)
-
 }

@@ -27,7 +27,7 @@ const HeaderTitle = styled.a`
 
   cursor: pointer;
 
-  font-family: BrutGothic, sans-serif;
+  font-family: ${({ theme }) => theme.font.display};
   font-size: ${({ theme }) => theme.font.size.lg_title};
   line-height: 50px;
   color: ${({ theme }) => theme.colors.buttonText};

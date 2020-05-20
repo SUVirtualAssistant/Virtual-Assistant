@@ -5,7 +5,7 @@
 * [Technology Stack](03-TechnologyStack.md)
 * [Dev Tools](04-DevTools.md)
 
-## AWS
+### AWS
 * [Getting Started](AWS/README.md)
     * [Lex](AWS/Lex/README.md)
         * [Editing Lex](AWS/Lex/01-EditingLex.md)
@@ -17,7 +17,7 @@
     * [APIGateway](AWS/API/README.md)
     * [Lambda](AWS/Lambda/README.md)
         
-## Frontend
+### Frontend
 * [Deployment](Frontend/Deployment/README.md)
     * [Serverless](Frontend/Deployment/Serverless.md)
     

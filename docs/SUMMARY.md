@@ -1,8 +1,6 @@
 # Summary
 
 * [Quick Start](QuickStart.md)
-* [Dev Environment](DevEnvironment.md)
-* [About](README.md)
 
 ## AWS
 

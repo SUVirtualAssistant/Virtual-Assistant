@@ -1,5 +1,4 @@
 # Introduction
-## **Overview**
 
 Amazon Lex is a service for building conversational interfaces into any application using voice and text. Our Lex bot is called Mercury.
 

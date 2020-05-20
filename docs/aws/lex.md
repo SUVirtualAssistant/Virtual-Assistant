@@ -1,4 +1,4 @@
-# Introduction
+# Lex
 
 Amazon Lex is a service for building conversational interfaces into any application using voice and text. Our Lex bot is called Mercury.
 
@@ -22,7 +22,7 @@ Intents are a set of actions that we want Mercury to fulfill. Mercury has multip
 * [**Affirmations**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to affirmative message from a user, such as "Yes"
 * [**Negations**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a negation message from a user, such as "No"
 * [**Help**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a generic user request for help, such as "Help me"
-* [**Thanks**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to an expression of gratitude form a user, such as "Thank you" 
+* [**Thanks**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to an expression of gratitude form a user, such as "Thank you"
 
   **Off-Topic and small talk**
 

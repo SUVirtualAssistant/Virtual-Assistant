@@ -1,4 +1,4 @@
-# Getting Started
+# Introduction
 
 ## **Welcome**
 
@@ -28,7 +28,7 @@ Our project arouse out of Information Technology Services desire for a student f
 
 * Lambda
 
-    \* 
+  \*
 
 * DynamoDB
 * Lex

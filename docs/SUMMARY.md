@@ -1,25 +1,27 @@
-# Summary
+# Table of contents
 
-* [Getting up and running](GettingStarted.md)
-* [History](History.md)
-* [Technology Stack](Stack.md)
-* [Dev Tools](DevTools.md)
+* [Introduction](README.md)
+* [Getting up and running](getting-up-and-running.md)
+* [History](history.md)
+* [Technology Stack](stack.md)
+* [Dev Tools](devtools.md)
 
 ## AWS
-* [Overview](aws/README.md)
-* [Lex](aws/Lex.md)
-* [Lambda](aws/Lambda.md)
-* [DynamoDB](aws/DynamoDB.md)
-* [IAM](aws/AccessControl.md)
-* [APIGateway](aws/API.md)
+
+* [Overview](aws/aws.md)
+* [Lex](aws/lex.md)
+* [Lambda](aws/lambda.md)
+* [DynamoDB](aws/dynamodb.md)
+* [IAM](aws/accesscontrol.md)
+* [APIGateway](aws/api.md)
 
 ## Frontend
-* [Overview](frontend/README.md)
-* [UI](frontend/ui/)
-  * [React](frontend/ui/React.md)
-  * [Redux](frontend/ui/Redux.md)
-* [NextJS](frontend/NextJS.md)
-* [Deployment](frontend/Deployment.md)
 
-* [Help](support.md)
+* [Overview](frontend/frontend.md)
+* [UI](frontend/ui/README.md)
+  * [React](frontend/ui/react.md)
+  * [Redux](frontend/ui/redux.md)
+* [NextJS](frontend/nextjs.md)
+* [Deployment](frontend/deployment.md)
+* [Help](frontend/support.md)
 

@@ -1,4 +1,4 @@
-# Next JS
+# NextJS
 
 ## Overview
 

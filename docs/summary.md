@@ -8,27 +8,19 @@
 ## AWS
 
 * [Getting Started](aws/)
-  * [Lex](aws/lex/)
-    * [Editing Lex](aws/lex/01-editinglex.md)
-    * [Intents]()
-    * [Lambdas]()
-    * [Versioning]()
+  * [Lex]()
+  * [Lambda]()
+  * [DynamoDB]()
   * [IAM]()
   * [APIGateway]()
-  * [Lambda]()
 
 ## Frontend
 
 * [Deployment]()
-  * [Serverless]()
 * [NextJS]()
-  * [SSR]()
-  * [Environment Variables]()
-  * [Redux Integration]()
 * [UI]()
   * [React]()
-    * [Hooks]()
-    * [Styled Components]()
   * [Redux]()
+
 * [Help]()
 

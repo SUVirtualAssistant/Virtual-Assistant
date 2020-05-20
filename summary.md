@@ -14,7 +14,7 @@
     * [Lambdas](aws/lambdas.md)
     * [Versioning](aws/lex/versioning.md)
   * [IAM](aws/iam.md)
-  * [APIGateway](aws/dynamodb/api.md)
+  * [APIGateway](aws/api.md)
   * [Lambda](aws/lex/lambda.md)
 
 ## Frontend

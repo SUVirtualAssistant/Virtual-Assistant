@@ -1,2 +1,0 @@
-# Getting up and running
-

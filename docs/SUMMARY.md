@@ -8,7 +8,6 @@
 
 ## AWS
 
-* [Overview](aws/aws.md)
 * [Lex](aws/lex.md)
 * [Lambda](aws/lambda.md)
 * [DynamoDB](aws/dynamodb.md)
@@ -18,7 +17,6 @@
 
 ## Frontend
 
-* [Overview](frontend/frontend.md)
 * [UI](frontend/ui/README.md)
   * [React](frontend/ui/react.md)
   * [Redux](frontend/ui/redux.md)

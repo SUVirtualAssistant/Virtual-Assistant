@@ -18,21 +18,20 @@
     * [Lambda](AWS/Lambda/README.md)
         
 ## Frontend
-* [Getting Started]()
-    * [Deployment](Frontend/Deployment/README.md)
-        * [Serverless](Frontend/Deployment/Serverless.md)
+* [Deployment](Frontend/Deployment/README.md)
+    * [Serverless](Frontend/Deployment/Serverless.md)
+    
+* [NextJS](Frontend/NextJS/README.md)
+    * [SSR](Frontend/NextJS/01-SSR.md)
+    * [Environment Variables](Frontend/NextJS/02-Environment.md)
+    * [Redux Integration](Frontend/NextJS/03-ReduxIntegration.md)
+    
+* [UI](Frontend/UI/README.md)
+    * [React](Frontend/UI/React/README.md)
+        * [Hooks](Frontend/UI/React/02-Hooks.md)
+        * [Styled Components](Frontend/UI/React/03-StyledComponents.md)
         
-    * [NextJS](Frontend/NextJS/README.md)
-        * [SSR](Frontend/NextJS/01-SSR.md)
-        * [Environment Variables](Frontend/NextJS/02-Environment.md)
-        * [Redux Integration](Frontend/NextJS/03-ReduxIntegration.md)
-        
-    * [UI](Frontend/UI/README.md)
-        * [React](Frontend/UI/React/README.md)
-            * [Hooks](Frontend/UI/React/02-Hooks.md)
-            * [Styled Components](Frontend/UI/React/03-StyledComponents.md)
-            
-        * [Redux](Frontend/UI/Redux/README.md)
+    * [Redux](Frontend/UI/Redux/README.md)
 
 * [Help](support.md)
 

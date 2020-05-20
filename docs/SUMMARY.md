@@ -1,7 +1,7 @@
-# Table of contents
+# Summary
 
 * [Introduction](README.md)
-* [Getting up and running](getting-up-and-running.md)
+* [Quick Start](QuickStart.md)
 * [History](history.md)
 * [Technology Stack](stack.md)
 * [Dev Tools](devtools.md)

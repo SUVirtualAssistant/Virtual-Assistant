@@ -12,8 +12,9 @@
 * [Lex](aws/lex.md)
 * [Lambda](aws/lambda.md)
 * [DynamoDB](aws/dynamodb.md)
-* [IAM](aws/accesscontrol.md)
 * [APIGateway](aws/api.md)
+* [Access Management](aws/accesscontrol.md)
+
 
 ## Frontend
 

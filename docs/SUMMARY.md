@@ -1,10 +1,8 @@
 # Summary
 
-* [Introduction](README.md)
+* [About](README.md)
 * [Quick Start](QuickStart.md)
-* [History](history.md)
-* [Technology Stack](stack.md)
-* [Dev Tools](devtools.md)
+* [Dev Environment](devenvironment.md)
 
 ## AWS
 
@@ -22,5 +20,7 @@
   * [Redux](frontend/ui/redux.md)
 * [NextJS](frontend/nextjs.md)
 * [Deployment](frontend/deployment.md)
+
+
 * [Support](frontend/support.md)
 

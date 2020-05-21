@@ -1,8 +1,9 @@
-import Canvas   from '@components/canvas'
-import { Chat } from '@components/chat'
-import Layout   from '@components/layouts'
-import React    from 'react'
-import styled   from 'styled-components'
+import Canvas          from '@components/canvas'
+import { Chat }        from '@components/chat'
+import Layout          from '@components/layouts'
+import React           from 'react'
+import { useSelector } from 'react-redux'
+import styled          from 'styled-components'
 
 const ChatLayout = styled.div`
   display: flex;
@@ -16,11 +17,14 @@ const ChatLayout = styled.div`
 `
 
 const ChatPage = () => {
+  const currentDataIndex = useSelector(state => state.canvas.currentDataIndex)
+  const currentData = useSelector(state => state.canvas)
+  const currentView = useSelector(state => state.canvas.currentView)
+  
   return (
     <ChatLayout>
-      <Chat user={{ id: 1, name: 'USER' }}
-            placeholder='Type a message...'/>
-      <Canvas/>
+      <Chat placeholder='Type a message...'/>
+      <Canvas type={currentView} data={currentData[currentDataIndex] && currentData[currentDataIndex].data} />
     </ChatLayout>
   )
 }

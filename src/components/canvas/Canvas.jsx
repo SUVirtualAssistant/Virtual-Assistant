@@ -1,8 +1,6 @@
-import React           from 'react'
-import { useSelector } from 'react-redux'
-import styled          from 'styled-components'
+import React  from 'react'
+import styled from 'styled-components'
 
-import DIRdata         from './__mocks__/DIR_GetEmailByName.json'
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
@@ -28,14 +26,15 @@ const view = {
   WS   : Components.WS
 }
 
-const Canvas = () => {
-  const canvasData = useSelector(state => state.canvas)
-  
-  const CanvasComponent = view['Hal']
+const Canvas = ({
+  type,
+  data
+}) => {
+  const CanvasComponent = view[type]
   
   return (
     <DynamicCanvasContainer>
-      <CanvasComponent data={DIRdata}/>
+      <CanvasComponent data={data}/>
     </DynamicCanvasContainer>
   )
 }

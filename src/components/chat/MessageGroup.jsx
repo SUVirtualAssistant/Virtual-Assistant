@@ -18,27 +18,34 @@ const StyledMessageGroup = styled.div`
   align-items: flex-start;
   text-align: left;
 
-  ${props => props.user && css`
+  ${props => !!props.user && css`
     align-self: flex-end;
     align-items: flex-end;
     text-align: right;
   `}
 `
 
+/**
+ *
+ * @param group
+ * @param user
+ * @param selectedItemIndex
+ * @param other
+ * @returns {*}
+ * @constructor
+ */
 const MessageGroup = ({
   group,
-  user,
-  isLastGroup,
   selectedItemIndex,
   ...other
 }) => {
-  const is_user = isUser(user, group.messages[0])
+  const is_user = group.messages[0].author.id === 1
   
   return (
     <StyledMessageGroup user={is_user}>
       {group.messages.map((msg, index) =>
         [<Message item={msg}
-                  user={is_user}
+                  isUser={is_user}
                   selected={msg.selectionIndex === selectedItemIndex}
                   {...other}
                   key={index}/>]
@@ -49,8 +56,6 @@ const MessageGroup = ({
 
 MessageGroup.propTypes = {
   group            : PropTypes.object.isRequired,
-  user             : PropTypes.object.isRequired,
-  isLastGroup      : PropTypes.bool.isRequired,
   selectedItemIndex: PropTypes.number
 }
 

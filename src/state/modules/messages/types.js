@@ -1,2 +1,0 @@
-export const ADD_MESSAGE = 'ADD_MESSAGE'
-export const ADD_DATA = 'ADD_DATA'

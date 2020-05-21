@@ -57,7 +57,6 @@ const NavLink = styled.a`
 
 const links = [
   { name: 'Admin', to: '/admin' },
-  { name: 'Canvas', to: '/test' }
 ]
 
 const NavBar = () =>
@@ -67,6 +66,7 @@ const NavBar = () =>
         <NavLink>{link.name}</NavLink>
       </Link>
     ))}
+    <NavLink href={'https://docs.su-assistant.chat'}>Docs</NavLink>
   </Nav>
 
 export default NavBar

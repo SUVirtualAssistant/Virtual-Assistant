@@ -1,14 +1,14 @@
 # Summary
 
-* [Overview](README.md)
+* [Overview](docs/README.md)
 
 ## Backend
 
-* [Lex](docs/Backend/lex.md)
-* [Lambda](docs/Backend/lambda.md)
-* [DynamoDB](docs/Backend/dynamodb.md)
-* [APIGateway](docs/Backend/api.md)
-* [Access Management](docs/Backend/accesscontrol.md)
+* [Lex](Backend/lex.md)
+* [Lambda](Backend/lambda.md)
+* [DynamoDB](Backend/dynamodb.md)
+* [APIGateway](Backend/api.md)
+* [Access Management](Backend/accesscontrol.md)
 
 
 ## Frontend

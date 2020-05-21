@@ -12,7 +12,7 @@ const bindMiddleware = middleware => {
 
 export const configureStore = initialState => {
   const rootReducer = combineReducers(reducers)
-
+  
   return createStore(
     rootReducer,
     initialState,

@@ -2,13 +2,13 @@ import React  from 'react'
 import styled from 'styled-components'
 
 const LinkCard = styled.div`
-  margin: 10px;
-  background: white;
+  flex: 1 1 auto;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100px;
+  flex-flow: row wrap;
+  margin: 1px;
+  
+  background: white;
+  
   align-items: center;
   padding: 10px;
 
@@ -27,13 +27,7 @@ const L = styled.a`
 
 export const WS = ({
   data
-}) => {
-  const { sessionAttributes } = data
-  const entries = Object.values(sessionAttributes)
-                        .map(e => JSON.parse(e))
-
-  return entries.map((e, index) =>
-    <LinkCard key={index}>
-      <L href={'https://' + e.Link} target="_blank">{e.Title}</L>
-    </LinkCard>)
-}
+}) => data.map((e, index) =>
+  <LinkCard key={index}>
+    <L href={'https://' + e.Link} target="_blank">{e.Title}</L>
+  </LinkCard>)

@@ -1,9 +1,10 @@
 import { hasJsonStructure } from '@shared/utils'
 
 export const parseData = data => {
-  return data &&
-    Object.values(data)
-          .map(elem => JSON.parse(elem))
+  return hasJsonStructure(data[0])
+         ? Object.values(data)
+                 .map(elem => JSON.parse(elem))
+         : data
 }
 
 export const parseMessage = response => {

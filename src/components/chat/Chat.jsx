@@ -6,9 +6,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector }                        from 'react-redux'
 import styled                                              from 'styled-components'
 
-import ChatInput    from './ChatInput'
-import DateMarker   from './DateMarker'
-import MessageGroup from './MessageGroup'
+import ChatInputField from './ChatInputField'
+import DateMarker     from './DateMarker'
+import MessageGroup   from './MessageGroup'
 
 const ChatContainer = styled.div`
   box-sizing: border-box;
@@ -23,10 +23,10 @@ const ChatContainer = styled.div`
   margin: auto;
 
   font-family: ${({ theme }) => theme.chat.font_family};
-  font-size: ${({ theme }) => theme.chat.text};
+  font-size:   ${({ theme }) => theme.chat.text};
   line-height: ${({ theme }) => theme.chat.line_height};
 
-  background: ${({ theme }) => theme.colors.chat.bg};
+  background:   ${({ theme }) => theme.colors.chat.bg};
   border-color: ${({ theme }) => theme.colors.chat.border};
 
   @media (max-width: 1100px) {
@@ -68,64 +68,49 @@ const renderMessageList = ({
   ...other
 }) => {
   const msgs = messages.length > 0 ? convertMsgsToViewItems(messages) : []
-  const lastViewItemIndex = msgs.length - 1
-
-  return msgs.map((viewItem, index) => {
-    switch (viewItem.type) {
-      case 'date-marker':
-        return <DateMarker timestamp={viewItem.timestamp}
-                           key={index}/>
-      case 'message-group':
-        return <MessageGroup key={index}
-                             group={viewItem}
-                             isLastGroup={index === lastViewItemIndex}
-                             {...other}/>
-      default:
-        break
-    }
-  })
+  
+  return msgs.map((viewItem, index) => <MessageGroup key={index}
+                                                     group={viewItem}
+                                                     {...other}/>)
 }
 
-const Chat = ({
-  user,
-  placeholder
-}) => {
+const Chat = ({ placeholder }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null)
-
-  const messageListEl = useRef(null)
-  const inputEl = useRef(null)
-
-  const messages = useSelector(state => state.messages)
-  const typing = useSelector(state => state.lex.sendingMessage)
+  
+  const messageListRef = useRef(null)
+  const inputRef = useRef(null)
+  
+  const messages = useSelector(state => state.chat)
   const active = useSelector(state => state.lex.active)
   
   const dispatch = useDispatch()
-
+  
   /**
-   * Runs when page loads.
+   * Runs on page load.
    */
   useEffect(() => {
-    if (!active) dispatch(Lex.startSession())
+    if (!active)
+      dispatch(Lex.startSession())
   }, [])
-
+  
   /**
    * Runs whenever the messages array changes.
    */
   useEffect(() => {
-    const { current } = messageListEl
+    const { current } = messageListRef
     current.scrollIntoView({
-      block: 'end',
+      block   : 'end',
       behavior: 'smooth'
     })
   }, [messages])
-
+  
   /**
    * Call hook passing in the ref and a function to call on outside click
    */
-  useOnClickOutside(messageListEl, useCallback(() => {
+  useOnClickOutside(messageListRef, useCallback(() => {
     setSelectedItemIndex(null)
   }, []))
-
+  
   /**
    * dispatches a new message to lex
    * @type {function(*=): *}
@@ -133,31 +118,29 @@ const Chat = ({
   const addNewMessage = useCallback(message =>
     dispatch(Lex.sendMessage(message)), [dispatch]
   )
-
+  
   const onMessageSelected = useCallback(clickedItemIndex => {
     setSelectedItemIndex(clickedItemIndex)
   }, [selectedItemIndex])
-
+  
   return (
     <ChatContainer>
       <MessageList role='log'
                    aria-live='polite'>
-        <MessageListContent ref={messageListEl}>
+        <MessageListContent ref={messageListRef}>
+          <DateMarker timestamp={new Date()}/>
           {
             renderMessageList({
               messages,
-              user,
-              typing: typing,
               selectedItemIndex,
               onMessageSelected
             })
           }
         </MessageListContent>
       </MessageList>
-      <ChatInput onMessageSend={addNewMessage}
-                 user={user}
-                 placeholder={placeholder}
-                 ref={inputEl}/>
+      <ChatInputField onMessageSend={addNewMessage}
+                      placeholder={placeholder}
+                      ref={inputRef}/>
     </ChatContainer>
   )
 }

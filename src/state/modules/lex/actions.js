@@ -1,8 +1,8 @@
-import lex, { lexUtils }  from '@services/AWS_Lex'
-import { canvasActions }  from '@state/modules/canvas'
-import { messageActions } from '@state/modules/messages'
-import { uuid }           from 'uuidv4'
-import * as types         from './types'
+import lex, { lexUtils } from '@services/AWS_Lex'
+import { canvasActions } from '@state/modules/canvas'
+import { chatActions }   from '@state/modules/chat'
+import { uuid }          from 'uuidv4'
+import * as types        from './types'
 
 const bot = {
   id   : 0,
@@ -39,7 +39,7 @@ export const startSession = () => {
                 dispatch(success(lexResponse))
       
                 const messages = lexUtils.parseMessage(lexResponse)
-                messages.forEach(msg => dispatch(messageActions.addMessage(bot, msg, new Date())))
+                messages.forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
               }, error => dispatch(failure(error)))
   }
 }
@@ -58,7 +58,7 @@ export const sendMessage = message => {
   
   return dispatch => {
     dispatch(request(true))
-    dispatch(messageActions.addMessage(message.author, message.text, message.timestamp))
+    dispatch(chatActions.addMessage(message.timestamp, message.text, user))
     
     // send message to Lex
     return lex._postText(lexMessage)
@@ -66,11 +66,13 @@ export const sendMessage = message => {
                 dispatch(success(lexResponse))
       
                 const messages = lexUtils.parseMessage(lexResponse)
-                messages.forEach(msg => dispatch(messageActions.addMessage(bot, msg, new Date())))
+                messages.forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
       
                 // adds session attributes to store.lex.latestData
                 if (lexResponse.sessionAttributes !== undefined && lexResponse.dialogState === 'Fulfilled')
-                  dispatch(canvasActions.addData(lexResponse))
+                  try {
+                    dispatch(canvasActions.addData(lexResponse))
+                  } catch (err) { console.error(err) }
               }, error => dispatch(failure(error)))
   }
 }

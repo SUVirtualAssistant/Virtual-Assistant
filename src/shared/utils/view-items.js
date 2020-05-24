@@ -9,24 +9,6 @@ const dateChanged = (curr, prev) =>
     || prev.getMonth() !== curr.getMonth()
     || prev.getFullYear() !== curr.getFullYear())
 
-const addDateMarker = (arr, msg) => {
-  const timestamp = msg.timestamp
-  const lastItem = last(arr)
-
-  if (!timestamp)
-    return
-
-  if (!lastItem || dateChanged(timestamp, lastItem.timestamp)) {
-    const dateMarker = {
-      type     : 'date-marker',
-      timestamp: timestamp,
-      trackBy  : timestamp.getTime()
-    }
-
-    arr.push(dateMarker)
-  }
-}
-
 const groupMessages = (arr, msg) => {
   const lastItem = last(arr)
   let messages = undefined
@@ -34,11 +16,9 @@ const groupMessages = (arr, msg) => {
   if (lastItem && lastItem.type === 'message-group')
     messages = lastItem.messages
   
-  // TODO This is where they combine messages
   if (messages && isAuthor(msg.author, last(messages))) {
     messages.push(msg)
   } else {
-    // TODO otherwise add to group message array
     arr.push({
       type     : 'message-group',
       messages : [msg],
@@ -51,10 +31,7 @@ const groupMessages = (arr, msg) => {
 
 const groupItems = total => (arr, msg, index) => {
   const isLastMessage = index === total - 1
-  
-  // addDateMarker(arr, msg)
   groupMessages(arr, msg, isLastMessage)
-  
   return arr
 }
 

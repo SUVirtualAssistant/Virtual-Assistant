@@ -40,7 +40,6 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
 
     background-color: ${({ theme }) => theme.colors.background};
-    transition: all 0.3s linear;
 
     -webkit-overflow-scrolling: touch;
   }

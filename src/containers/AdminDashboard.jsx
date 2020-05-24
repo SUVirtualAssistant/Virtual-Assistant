@@ -1,11 +1,10 @@
-import Layout            from '@components/layouts'
 import MetricsView       from '@components/metrics'
 import metrics           from '@components/metrics/metrics.json'
 import CloudWatchService from '@services/AWS_Cloudwatch/CloudWatchService'
 import React             from 'react'
 import styled            from 'styled-components'
 
-const ChartContainer = styled.div`
+const DashboardContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: calc(50vh - 50px);
@@ -17,27 +16,15 @@ const ChartContainer = styled.div`
   }
 `
 
-const Admin = ({
-  apiCredentials
-}) => {
+const AdminDashboard = props => {
   const metricData = new CloudWatchService(metrics)
-  metricData.setEndpoint(apiCredentials.key, apiCredentials.endpoint)
+  metricData.setEndpoint(props.apiCredentials.key, props.apiCredentials.endpoint)
   
-  return <ChartContainer>
-    <MetricsView data={metricData}/>
-  </ChartContainer>
+  return (
+    <DashboardContainer>
+      <MetricsView data={metricData}/>
+    </DashboardContainer>
+  )
 }
 
-export const getStaticProps = async () => ({
-  props: {
-    apiCredentials: {
-      key     : process.env.API_KEY,
-      endpoint: process.env.API_ENDPOINT
-    }
-  }
-})
-
-Admin.Layout = Layout
-
-export default Admin
-
+export default AdminDashboard

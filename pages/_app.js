@@ -1,43 +1,44 @@
-import { useDarkMode }    from '@shared/hooks'
-import { GlobalStyle }    from '@shared/styles/GlobalStyles'
-import themes             from '@shared/styles/theme'
-import { configureStore } from '@state/store'
+import Auth                          from '@aws-amplify/auth'
+import Amplify                       from '@aws-amplify/core'
+import { authConfig, cognitoConfig } from '@services/AWS_Cognito/config'
 
-import withRedux      from 'next-redux-wrapper'
+import { useDarkMode } from '@shared/hooks'
+import { wrapper }     from '@state/store'
+import { GlobalStyle } from '@styles/GlobalStyles'
+import themes          from '@styles/theme'
+
 import { DefaultSeo } from 'next-seo'
 import SEO            from 'next-seo.config'
 
 import React             from 'react'
-import { Provider }      from 'react-redux'
 import { ThemeProvider } from 'styled-components'
+
+Amplify.configure(cognitoConfig)
+Auth.configure(authConfig)
+
+const Noop = ({ children }) => children
 
 const VirtualAssistant = ({
   Component,
-  pageProps,
-  store
+  pageProps
 }) => {
   const [theme, toggleTheme, componentMounted] = useDarkMode()
   const themeMode = theme === 'light' ? themes.light : themes.dark
-
+  
   if (!componentMounted) return <div/>
-
-  // allows for persistent layouts, each page needs to import getLayout from @components/layouts
-  // const getLayout = Component.getLayout || (page => <SiteLayout toggleTheme={toggleTheme}
-  //                                                               children={page}/>)
-  const Layout = Component.Layout ?
-                 Component.Layout : React.Fragment
-
+  
+  const Layout = Component.Layout || Noop
+  
   return (
     <ThemeProvider theme={themeMode}>
-      <Provider store={store}>
-        <DefaultSeo {...SEO} />
-        <GlobalStyle/>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Provider>
+      <DefaultSeo {...SEO} />
+      <GlobalStyle/>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   )
 }
 
-export default withRedux(configureStore)(VirtualAssistant)
+export default wrapper.withRedux(VirtualAssistant)
+

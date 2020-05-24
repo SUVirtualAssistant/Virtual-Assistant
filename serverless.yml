@@ -1,14 +1,8 @@
-name: virtual-assistant
-org: virtualassistant
-
-virtualAssistant:
+VirtualAssistant:
   component: serverless-next.js@1.11.5
   inputs:
-    domain:
-      - ${env.subdomain}
-      - ${env.domain}
-    bucketName: virtual-assistant-serverless
-    name:
-      defaultLambda: virtual-assistant-deployment
-    timeout: 20
+    name: virtual-assistant-deployment
     memory: 1024
+    timeout: 20
+    bucketName: virtual-assistant-serverless
+    domain: su-assistant.chat

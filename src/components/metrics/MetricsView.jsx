@@ -4,8 +4,6 @@ import BarGraph                       from './charts/Bar'
 export const MetricsView = ({
   data
 }) => {
-  console.log(data)
-  
   const [loaded, setLoaded] = useState(false)
   const [oldData, setOldData] = useState([])
   

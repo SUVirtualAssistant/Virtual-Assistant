@@ -1,6 +1,6 @@
-import * as types from './types'
+import * as lexActionTypes from './types'
 
-const initialState = {
+const lexInitialState = {
   bot: null,
   active: false,
   sendingMessage: false,
@@ -8,9 +8,9 @@ const initialState = {
   dialogState: ''
 }
 
-export default (state = initialState, action) => {
+export default (state = lexInitialState, action) => {
   switch (action.type) {
-    case types.SESSION_START_REQUEST:
+    case lexActionTypes.SESSION_START_REQUEST:
       return {
         ...state,
         bot: {
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
         }
       }
 
-    case types.SESSION_START_SUCCESS:
+    case lexActionTypes.SESSION_START_SUCCESS:
       return {
         ...state,
         active: true,
@@ -28,23 +28,23 @@ export default (state = initialState, action) => {
         dialogState: action.response.dialogState
       }
 
-    case types.SESSION_START_FAILURE:
+    case lexActionTypes.SESSION_START_FAILURE:
       return {}
 
     /* --- Messages ------------------------------------- */
-    case types.MESSAGE_SEND_REQUEST:
+    case lexActionTypes.MESSAGE_SEND_REQUEST:
       return {
         ...state,
         sendingMessage: action.status
       }
-    case types.MESSAGE_SEND_SUCCESS:
+    case lexActionTypes.MESSAGE_SEND_SUCCESS:
       return {
         ...state,
         sendingMessage: !state.sendingMessage,
         currentIntent: action.response.intentName,
         dialogState: action.response.dialogState
       }
-    case types.MESSAGE_SEND_FAILURE:
+    case lexActionTypes.MESSAGE_SEND_FAILURE:
       return {
         ...state,
         sendingMessage: !state.sendingMessage

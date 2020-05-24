@@ -5,13 +5,12 @@ let dataIndex = 0
 
 export const addData = lexResponse => {
   const view = lexResponse.intentName.split('_')[0]
-  
   const data = lexUtils.parseData(lexResponse.sessionAttributes)
   
-  return ({
+  return {
     type: types.ADD_DATA,
-    view: view,
-    name: view + "_" + dataIndex++,
+    view,
+    name: view + '_' + dataIndex++,
     data
-  })
+  }
 }

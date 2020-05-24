@@ -1,10 +1,13 @@
 import * as types  from './types'
 
-const initState = {
-  currentView: 'BOT',
+const canvasInitialState = {
+  currentView: 'BOT',       // Default d.c. view
 }
 
-export default (state = initState, action) => {
+export default (
+  state = canvasInitialState,
+  action
+) => {
   switch (action.type) {
     case types.ADD_DATA:
       return {

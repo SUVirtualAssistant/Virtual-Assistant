@@ -1,6 +1,7 @@
-import Link   from 'next/link'
-import React  from 'react'
-import styled from 'styled-components'
+import Link                from 'next/link'
+import React               from 'react'
+import styled              from 'styled-components'
+import { useAuthFunctions } from 'aws-cognito-next'
 
 const Nav = styled.nav`
   float: right;
@@ -20,7 +21,6 @@ const NavLink = styled.a`
   padding-left: 20px;
   padding-right: 20px;
   height: 30px;
-  margin-top: 30px;
 
   border: none;
   background-color: transparent;
@@ -53,20 +53,33 @@ const NavLink = styled.a`
     position: relative;
     line-height: 40px;
   }
+  
+  button:focus {
+    outline: none !important;
+  }
 `
 
 const links = [
-  { name: 'Admin', to: '/admin' },
+  { name: 'Admin', to: '/admin' }
 ]
 
-const NavBar = () =>
-  <Nav>
-    {links.map((link, index) => (
-      <Link href={link.to} key={index}>
-        <NavLink>{link.name}</NavLink>
-      </Link>
-    ))}
-    <NavLink href={'https://docs.su-assistant.chat'}>Docs</NavLink>
-  </Nav>
-
+const NavBar = auth => {
+  const { login, logout } = useAuthFunctions()
+  
+  return (
+    <Nav>
+      {links.map((link, index) => (
+        <Link href={link.to} key={index}>
+          <NavLink>{link.name}</NavLink>
+        </Link>
+      ))}
+      <NavLink href={'https://docs.su-assistant.chat'}>Docs</NavLink>
+      {auth
+       ? (<NavLink as="button" type="button" onClick={() => logout()}>Logout</NavLink>)
+       : (<NavLink as="button" type="button" onClick={() => login()}>Login</NavLink>)
+      }
+    </Nav>
+  )
+}
+  
 export default NavBar

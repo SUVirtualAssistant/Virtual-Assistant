@@ -1,7 +1,7 @@
-import NavBar    from './NavBar'
-import Link      from 'next/link'
-import React     from 'react'
-import styled    from 'styled-components'
+import Link   from 'next/link'
+import React  from 'react'
+import styled from 'styled-components'
+import NavBar from './NavBar'
 
 const MainHeader = styled.header`
   position: fixed;
@@ -47,7 +47,8 @@ const HeaderTitle = styled.a`
 
 const title = {
   name: 'SU Virtual Assistant',
-  to: '/' }
+  to  : '/'
+}
 
 const Header = ({
   toggleTheme

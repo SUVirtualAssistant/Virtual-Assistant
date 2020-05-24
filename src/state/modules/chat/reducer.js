@@ -1,22 +1,18 @@
-import * as types from './types'
-
-/*
- [
- }
- ],
- lastSelectionIndex: 3
- */
+import * as chatActionTypes from './types'
 
 export default (
   state = [],
-  { type, ...payload }
+  action
 ) => {
-  switch (type) {
-    case types.ADD_MESSAGE:
-      const { author, text, timestamp } = payload
+  switch (action.type) {
+    case chatActionTypes.ADD_MESSAGE:
       return [
         ...state,
-        { author, text, timestamp }
+        {
+          timestamp: action.timestamp,
+          text: action.text,
+          author: action.author
+        }
       ]
     default:
       return state

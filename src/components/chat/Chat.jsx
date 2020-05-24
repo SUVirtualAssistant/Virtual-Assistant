@@ -1,9 +1,8 @@
 import { useOnClickOutside }      from '@shared/hooks'
 import { convertMsgsToViewItems } from '@shared/utils/view-items'
-import { lexActions as Lex }      from '@state/modules/lex'
 
+import PropTypes                                           from 'prop-types'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector }                        from 'react-redux'
 import styled                                              from 'styled-components'
 
 import ChatInputField from './ChatInputField'
@@ -74,24 +73,15 @@ const renderMessageList = ({
                                                      {...other}/>)
 }
 
-const Chat = ({ placeholder }) => {
+const Chat = ({
+  messages,
+  sendMessage,
+  placeholder
+}) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null)
   
   const messageListRef = useRef(null)
   const inputRef = useRef(null)
-  
-  const messages = useSelector(state => state.chat)
-  const active = useSelector(state => state.lex.active)
-  
-  const dispatch = useDispatch()
-  
-  /**
-   * Runs on page load.
-   */
-  useEffect(() => {
-    if (!active)
-      dispatch(Lex.startSession())
-  }, [])
   
   /**
    * Runs whenever the messages array changes.
@@ -104,20 +94,9 @@ const Chat = ({ placeholder }) => {
     })
   }, [messages])
   
-  /**
-   * Call hook passing in the ref and a function to call on outside click
-   */
   useOnClickOutside(messageListRef, useCallback(() => {
     setSelectedItemIndex(null)
   }, []))
-  
-  /**
-   * dispatches a new message to lex
-   * @type {function(*=): *}
-   */
-  const addNewMessage = useCallback(message =>
-    dispatch(Lex.sendMessage(message)), [dispatch]
-  )
   
   const onMessageSelected = useCallback(clickedItemIndex => {
     setSelectedItemIndex(clickedItemIndex)
@@ -129,20 +108,20 @@ const Chat = ({ placeholder }) => {
                    aria-live='polite'>
         <MessageListContent ref={messageListRef}>
           <DateMarker timestamp={new Date()}/>
-          {
-            renderMessageList({
-              messages,
-              selectedItemIndex,
-              onMessageSelected
-            })
-          }
+          {renderMessageList({ messages, selectedItemIndex, onMessageSelected })}
         </MessageListContent>
       </MessageList>
-      <ChatInputField onMessageSend={addNewMessage}
+      <ChatInputField onMessageSend={sendMessage}
                       placeholder={placeholder}
                       ref={inputRef}/>
     </ChatContainer>
   )
+}
+
+Chat.propTypes = {
+  messages   : PropTypes.arrayOf(PropTypes.object).isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  placeholder: PropTypes.string
 }
 
 export { Chat }

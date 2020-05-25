@@ -28,6 +28,9 @@ const ChartContainer = styled.div`
   grid-column: 1;
 `
 
+/**
+ * api credentials are captured server side and passed to this component at runtime
+ */
 const AdminDashboard = props => {
   const options = {
     credentials    : props.apiCredentials,

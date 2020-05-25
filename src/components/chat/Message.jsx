@@ -75,8 +75,6 @@ const Message = ({
     onMessageSelected(-1)
   }, [selected])
   
-  console.log(item)
-  
   return (
     <ChatMessage tabIndex={item.selectionIndex}
                  selected={selected}

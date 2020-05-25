@@ -1,6 +1,6 @@
+import NavBar from '@containers/NavBar'
 import React  from 'react'
 import styled from 'styled-components'
-import Header from './Header'
 
 const Content = styled.main`
   position: fixed;
@@ -16,20 +16,14 @@ const Content = styled.main`
 `
 
 const Layout = ({
-  theme,
   toggleTheme,
   children
-}) => {
-  
-  return (
-    <>
-      <Header theme={theme}
-              toggleTheme={toggleTheme}/>
-      <Content>
-        {children}
-      </Content>
-    </>
-  )
-}
+}) =>
+  <>
+    <NavBar toggleTheme={toggleTheme}/>
+    <Content>
+      {children}
+    </Content>
+  </>
 
 export default Layout

@@ -8,7 +8,10 @@ const lexInitialState = {
   dialogState: ''
 }
 
-export default (state = lexInitialState, action) => {
+export default (
+  state = lexInitialState,
+  action
+) => {
   switch (action.type) {
     case lexActionTypes.SESSION_START_REQUEST:
       return {

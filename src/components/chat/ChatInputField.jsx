@@ -28,7 +28,7 @@ const ChatInput = styled.input`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  color: ${({ theme }) => theme.inverse[1]};
+  color: ${({ theme }) => theme.text[1]};
   background: none;
 
   &:focus::placeholder {
@@ -45,10 +45,11 @@ const SubmitButton = styled.button`
   cursor: pointer;
   text-align: center;
   user-select: none;
-  color: inherit;
+  
   background: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
+  
   &::before,
   &::after {
     display: none;
@@ -60,7 +61,10 @@ const SubmitButton = styled.button`
     height: 100%;
     transition: color .2s ease-in-out;
     fill: ${({ theme }) => theme.icon[2]};
-    &:hover { fill: ${({ theme }) => theme.hoverPrimary}; }
+    
+    &:hover {
+      fill: ${({ theme }) => theme.hover.primary};
+    }
   }
 `
 

@@ -1,11 +1,6 @@
-/**
- * https://codepen.io/himalayasingh/pen/PdqbqV
- */
-import { func } from 'prop-types'
-import React    from 'react'
-import styled   from 'styled-components'
+import styled from 'styled-components'
 
-const HiddenToggle = styled.input.attrs({
+export const HiddenToggle = styled.input.attrs({
   type: 'checkbox'
 })`
   width: 100%;
@@ -21,7 +16,7 @@ const HiddenToggle = styled.input.attrs({
   z-index: 2;
 `
 
-const ToggleSpan = styled.span`
+export const ToggleSpan = styled.span`
   position: absolute;
   top: 0;
   right: 0;
@@ -56,7 +51,7 @@ const ToggleSpan = styled.span`
   }
 `
 
-const Toggle = styled.div`
+export const Toggle = styled.div`
   position: relative;
   width: 80px;
   height: 40px;
@@ -82,21 +77,3 @@ const Toggle = styled.div`
       transform: translate(29px,0px);
   }
 `
-
-const ThemeToggle = ({
-  theme,
-  toggleTheme
-}) => {
-  return (
-    <Toggle>
-      <HiddenToggle onClick={toggleTheme} />
-      <ToggleSpan/>
-    </Toggle>
-  )
-}
-
-ThemeToggle.propTypes = {
-  toggleTheme: func.isRequired
-}
-
-export default ThemeToggle

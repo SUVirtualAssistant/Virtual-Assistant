@@ -1,10 +1,10 @@
 import Canvas   from '@components/canvas'
 import { Chat } from '@components/chat'
-import * as Lex from '@state/modules/lex/actions'
+import { lexActions } from '@state/modules/lex'
 
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector }      from 'react-redux'
-import styled                       from 'styled-components'
+import styled                            from 'styled-components'
 
 const ChatContainer = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const ChatContainer = styled.div`
   }
 `
 
-const ChatPageContainer = props => {
+const ChatPageContainer = () => {
   const dispatch = useDispatch()
   
   const currentView = useSelector(state => state.canvas.currentView)
@@ -29,11 +29,11 @@ const ChatPageContainer = props => {
   
   useEffect(() => {
     if (!active)
-      dispatch(Lex.startSession())
+      dispatch(lexActions.startSession())
   }, [])
   
   const sendMessage = useCallback(message =>
-    dispatch(Lex.sendMessage(message)), [dispatch])
+    dispatch(lexActions.sendMessage(message)), [dispatch])
   
   return (
     <ChatContainer>

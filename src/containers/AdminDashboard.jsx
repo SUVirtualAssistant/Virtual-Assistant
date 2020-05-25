@@ -14,6 +14,9 @@ const DashboardContainer = styled.div`
   }
 `
 
+/**
+ * api credentials are captured server side and passed to this component at runtime
+ */
 const AdminDashboard = props => {
   const options = {
     credentials    : props.apiCredentials,

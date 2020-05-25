@@ -1,5 +1,17 @@
 # Lambda
+## **Overview**
+    AWS Lambda is a system for creating asynchronous web functions in a variety of 
+    languates. These functions can be called by and access many of the resources 
+    within AWS, so they make integration very simple.  
 
+## **Use In Virtual Assistant**
+    The Virtual Assistnat relies on many Lambda functions to operate. Mostly, these
+    functions are used to pull data into and out of the dynamoDB tables, and perform
+    web searches. These functions are written in both Python (using the amazon Boto3 
+    resource library), or JavaScript (using Node.js and the AWS-SDK). 
+
+## **Testing**
+    Each Lambda function has associated tests, which are accessible 
 AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running.  
 
 ## Resources 

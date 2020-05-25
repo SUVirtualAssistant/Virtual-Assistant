@@ -2,9 +2,9 @@
 
 AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running.  
 
-## Resources
+## Resources 
 
-AWS Lambda webpage: https://aws.amazon.com/lambda/ 
+AWS Lambda webpage: https://aws.amazon.com/lambda/
 AWS Lambda developer guide: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html 
 
 [**DevFacultyDataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DevFacultyDataPush?tab=configuration)

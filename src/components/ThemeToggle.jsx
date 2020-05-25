@@ -5,7 +5,9 @@ import { func } from 'prop-types'
 import React    from 'react'
 import styled   from 'styled-components'
 
-const HiddenToggle = styled.input.attrs({ type: 'checkbox' })`
+const HiddenToggle = styled.input.attrs({
+  type: 'checkbox'
+})`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -81,10 +83,13 @@ const Toggle = styled.div`
   }
 `
 
-const ThemeToggle = toggleTheme => {
+const ThemeToggle = ({
+  theme,
+  toggleTheme
+}) => {
   return (
     <Toggle>
-      <HiddenToggle onClick={toggleTheme} {...props} />
+      <HiddenToggle onClick={toggleTheme} />
       <ToggleSpan/>
     </Toggle>
   )

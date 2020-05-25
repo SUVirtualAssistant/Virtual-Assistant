@@ -16,7 +16,6 @@ const combinedReducer = combineReducers(reducers)
 
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
-    console.log('HYDRATE', state, action)
     
     const nextState = {
       ...state,           // use previous state
@@ -36,4 +35,4 @@ const initStore = () => {
   return createStore(reducer, bindMiddleware([thunkMiddleware]))
 }
 
-export const wrapper = createWrapper(initStore, { debug: true })
+export const wrapper = createWrapper(initStore)

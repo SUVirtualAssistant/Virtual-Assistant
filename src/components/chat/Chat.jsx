@@ -11,24 +11,22 @@ import MessageGroup   from './MessageGroup'
 
 const ChatContainer = styled.div`
   box-sizing: border-box;
-  outline: 0;
-
   display: flex;
   flex-direction: column;
+  
+  outline: 0;
+  margin: auto;
+  
+  background: ${({ theme }) => theme.ui[1]};
+  
+  ${({ theme }) => theme.type.bodyShort[2]};
+  
   overflow: hidden;
-  height: calc(100vh - 50px);
   width: 100%;
   min-width: 400px;
-  margin: auto;
-
-  font-family: ${({ theme }) => theme.chat.font_family};
-  font-size:   ${({ theme }) => theme.chat.text};
-  line-height: ${({ theme }) => theme.chat.line_height};
-
-  background:   ${({ theme }) => theme.colors.chat.bg};
-  border-color: ${({ theme }) => theme.colors.chat.border};
-
+  height: calc(100vh - 50px);
   @media (max-width: 1100px) {
+    ${({ theme }) => theme.type.bodyShort[1]};
     height: calc(100vh - 40px);
   }
 `
@@ -40,12 +38,14 @@ const MessageList = styled.div`
   align-items: flex-start;
 
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 `
 
 const MessageListContent = styled.div`
-  padding: ${({ theme }) => theme.chat.message_list_padding_y} ${({ theme }) => theme.chat.message_list_padding_x};
+  padding: ${({ theme }) => theme.chat.message_list_padding_y}
+           ${({ theme }) => theme.chat.message_list_padding_x};
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -53,10 +53,9 @@ const MessageListContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   overflow: hidden;
   scroll-behavior: smooth;
-
+  
   > * + * {
     margin-top: ${({ theme }) => theme.chat.message_list_spacing};
   }
@@ -69,6 +68,7 @@ const renderMessageList = ({
   const msgs = messages.length > 0 ? convertMsgsToViewItems(messages) : []
   
   return msgs.map((viewItem, index) => <MessageGroup key={index}
+                                                     index={index}
                                                      group={viewItem}
                                                      {...other}/>)
 }

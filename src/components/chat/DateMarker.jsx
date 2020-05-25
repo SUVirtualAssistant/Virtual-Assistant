@@ -3,15 +3,12 @@ import React       from 'react'
 import styled      from 'styled-components'
 
 const StyledDateMarker = styled.div`
+  ${({ theme }) => theme.type.label};
   text-transform: uppercase;
   opacity: 0.7;
-  font-size: smaller;
-  line-height: normal;
   text-align: center;
   align-self: stretch;
-  font-family: "IBM Plex Sans", serif;
-
-  color: ${({ theme }) => theme.colors.navBarLink};
+  color: ${({ theme }) => theme.text[5]};
 `
 
 const DateMarker = ({ timestamp }) => <StyledDateMarker>{getDate(timestamp)}</StyledDateMarker>

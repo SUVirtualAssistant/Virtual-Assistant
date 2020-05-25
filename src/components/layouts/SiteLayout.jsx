@@ -1,7 +1,6 @@
-import Header from './Header'
 import React  from 'react'
-import styled               from 'styled-components'
-import { useAuth } from '@services/AWS_Cognito/auth'
+import styled from 'styled-components'
+import Header from './Header'
 
 const Content = styled.main`
   position: fixed;
@@ -17,13 +16,15 @@ const Content = styled.main`
 `
 
 const Layout = ({
+  theme,
   toggleTheme,
   children
 }) => {
   
   return (
     <>
-      <Header toggleTheme={toggleTheme}/>
+      <Header theme={theme}
+              toggleTheme={toggleTheme}/>
       <Content>
         {children}
       </Content>

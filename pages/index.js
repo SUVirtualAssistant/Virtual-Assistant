@@ -1,7 +1,6 @@
 import Layout            from '@components/layouts'
 import ChatPageContainer from '@containers/ChatPage'
-
-import React from 'react'
+import React             from 'react'
 
 const ChatPage = () => <ChatPageContainer/>
 

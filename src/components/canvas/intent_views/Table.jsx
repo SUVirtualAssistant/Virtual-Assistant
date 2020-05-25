@@ -25,14 +25,12 @@ const getRowsData = data => {
   })
 }
 
-export const Table = props => {
-  return <table>
-      <thead>
+export const Table = props =>
+  <table>
+    <thead>
       <tr>{getHeader(props.data)}</tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       {getRowsData(props.data)}
-      </tbody>
-    </table>
-
-}
+    </tbody>
+  </table>

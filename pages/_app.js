@@ -33,7 +33,8 @@ const VirtualAssistant = ({
     <ThemeProvider theme={themeMode}>
       <DefaultSeo {...SEO} />
       <GlobalStyle/>
-      <Layout>
+      <Layout theme={theme}
+              toggleTheme={toggleTheme}>
         <Component {...pageProps} />
       </Layout>
     </ThemeProvider>

@@ -3,7 +3,7 @@ import AdminDashboard from '@containers/AdminDashboard'
 import { wrapper }    from '@state/store'
 import React          from 'react'
 
-const Admin = props =>
+const Dashboard = props =>
   <AdminDashboard apiCredentials={props.apiCredentials}/>
 
 export const getStaticProps = wrapper.getStaticProps(
@@ -18,6 +18,6 @@ export const getStaticProps = wrapper.getStaticProps(
     }
   })
 
-Admin.Layout = Layout
+Dashboard.Layout = Layout
 
-export default Admin
+export default Dashboard

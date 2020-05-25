@@ -1,5 +1,3 @@
-import { isAuthor as isUser } from '@shared/utils'
-
 import PropTypes       from 'prop-types'
 import React           from 'react'
 import styled, { css } from 'styled-components'

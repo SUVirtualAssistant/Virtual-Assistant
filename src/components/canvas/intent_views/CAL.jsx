@@ -20,7 +20,6 @@ const Event = styled.li`
   font-family: "IBM Plex Sans", serif;
   color: inherit;
   text-decoration: none;
-
 `
 
 const checkForDuplicates = arr =>

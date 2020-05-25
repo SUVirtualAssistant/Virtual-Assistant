@@ -11,10 +11,6 @@ const LinkCard = styled.div`
   
   align-items: center;
   padding: 10px;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.chat.user_bubble_bg};
-  }
 `
 
 const L = styled.a`
@@ -22,7 +18,6 @@ const L = styled.a`
   font-family: "IBM Plex Sans", serif;
   color: inherit;
   text-decoration: none;
-
 `
 
 export const WS = ({

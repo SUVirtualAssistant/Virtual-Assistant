@@ -3,11 +3,11 @@
  * styled-reset to reset the userAgentStyleSheets that browsers inject
  * by default.
  */
-import { normalize }         from 'polished'
 import { createGlobalStyle } from 'styled-components'
+import { normalize } from 'styled-normalize'
 
 export const GlobalStyle = createGlobalStyle`
-  ${normalize()}
+  ${normalize}
 
   @font-face {
     font-family: 'Bungee', cursive;
@@ -39,13 +39,14 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: auto;         // allows scrolling on the page itself
     overflow-x: hidden;
 
-    background-color: ${({ theme }) => theme.colors.background};
-
-    -webkit-overflow-scrolling: touch;
+    color: ${({ theme }) => theme.text[1]};
+    background: ${({ theme }) => theme.background};
+    font-family: ${({ theme }) => theme.type.sans};
+    
+    transition: all 0.3s ease-in-out;
   }
 
-  h1 {
-    font-family: Bungee, serif;
-    font-size: ${props => props.theme.font.size.lg};
+  h1, h2, h3 {
+    font-family: ${({ theme }) => theme.type.serif};
   }
 `

@@ -3,14 +3,14 @@ import React, { forwardRef } from 'react'
 import styled                from 'styled-components'
 
 const ChatForm = styled.form`
-  padding: ${({ theme }) => theme.chat.input_padding_y} ${({ theme }) => theme.chat.input_padding_x};
-  justify-self: flex-end;
-  border-width: 1px 0 0;
-  border-style: solid;
+  padding: ${({ theme }) => theme.chat.input_padding_y}
+           ${({ theme }) => theme.chat.input_padding_x};
   flex: 0 0 auto;
+  justify-self: flex-end;
   display: flex;
   flex-flow: row nowrap;
-
+  
+  background: ${({ theme }) => theme.field[2]};
   @media (max-width: 1100px) {
     max-height: 47px;
   }
@@ -18,21 +18,18 @@ const ChatForm = styled.form`
 
 const ChatInput = styled.input`
   display: inline-block;
-  overflow: hidden;
-
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   border: 0;
-
-  font: inherit;
-  text-overflow: ellipsis;
-
   flex: 1 1 auto;
   outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
+  color: ${({ theme }) => theme.inverse[1]};
   background: none;
-  color: ${({ theme }) => theme.colors.chat.bubble_text};
 
   &:focus::placeholder {
     color: transparent;
@@ -40,22 +37,18 @@ const ChatInput = styled.input`
 `
 
 const SubmitButton = styled.button`
-  padding: 0;
   flex-shrink: 0;
-  text-align: center;
-
+  justify-content: center;
+  padding: 0;
   height: 30px;
   width: 30px;
-  justify-content: center;
-
-  border-color: transparent !important;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
   color: inherit;
   background: none !important;
+  border-color: transparent !important;
   box-shadow: none !important;
-
-  cursor: pointer;
-  user-select: none;
-  
   &::before,
   &::after {
     display: none;
@@ -63,14 +56,11 @@ const SubmitButton = styled.button`
 
   svg {
     display: inline-block;
-
     width: 100%;
     height: 100%;
     transition: color .2s ease-in-out;
-
-    fill: ${({ theme }) => theme.colors.buttonText};
-
-    &:hover { fill: ${({ theme }) => theme.colors.buttonHover}; }
+    fill: ${({ theme }) => theme.icon[2]};
+    &:hover { fill: ${({ theme }) => theme.hoverPrimary}; }
   }
 `
 

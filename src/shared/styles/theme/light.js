@@ -1,120 +1,113 @@
-import { darken, getLuminance, lighten } from 'polished'
-
-const contrast_wcag = (color, dark = '#000000', light = '#ffffff') => {
-  const luma = getLuminance(color)
-
-  return luma < 0.5 ? light : dark
-}
-
-const primary = '#ff6358'
-
-const base = {
-  bg      : '#f6f6f6',
-  text    : '#656565',
-  border  : 'rbga(black, .08)',
-  gradient: '#f6f6f6, ' + darken(0.20, '#f6f6f6')
-}
-
-const app = {
-  bg    : lighten(0.01, '#f6f6f6'),
-  text  : base.text,
-  border: base.border
-}
-
-const body = {
-  bg  : '#ffffff',
-  text: '#656565'
-}
-
-const component = {
-  bg    : body.bg,
-  text  : body.text,
-  border: 'rgba(black, .08)'
-}
-
-const button = {
-  border: ''
-}
-
-const input = {
-  bg    : component.bg,
-  text  : component.text,
-  border: button.border,
-  shadow: null
-}
+import { colors } from '../colors'
 
 export const lightMode = {
-
-  buttonBackgound: '#e3e1e3',
-  sendBtnFilter  : 'invert(0%)',
-
+  background : colors.white[0],
+  interactive: {
+    1: colors.blue[60],
+    2: colors.grey[80],
+    3: colors.blue[60],
+    4: colors.blue[60]
+  },
+  danger     : colors.red[60],
+  ui         : {
+    1: colors.grey[10],
+    2: colors.white[0],
+    3: colors.grey[20],
+    4: colors.grey[50],
+    5: colors.grey[100]
+  },
+  text       : {
+    1    : colors.grey[100],
+    2    : colors.grey[80],
+    3    : colors.grey[40],
+    4    : colors.white[0],
+    5    : colors.grey[60],
+    error: colors.red[60],
+    link : colors.blue[60]
+  },
+  icon       : {
+    1: colors.grey[100],
+    2: colors.grey[70],
+    3: colors.white[0]
+  },
+  field      : {
+    1: colors.grey[10],
+    2: colors.white[0]
+  },
+  support    : {
+    1: colors.red[60],
+    2: colors.green[50],
+    3: colors.yellow[30],
+    4: colors.blue[70]
+  },
+  overlay    : {
+    1: colors.grey[100]
+  },
+  inverse    : {
+    1      : colors.white[0],
+    2      : colors.grey[80],
+    link   : colors.blue[40],
+    support: {
+      1: colors.red[50],
+      2: colors.green[40],
+      3: colors.yellow[30],
+      4: colors.blue[50]
+    }
+  },
+  
+  // Interaction States
+  focus         : colors.blue[60],
+  inverseFocusUi: colors.white[0],
+  
+  hover: {
+    primary    : '#0353e9',
+    primaryText: colors.blue[70],
+    secondary  : '#4c4c4c',
+    tertiary   : '#0353e9',
+    UI         : '#e5e5e5',
+    inverseUI  : '#4c4c4c',
+    selectedUI : '#cacaca',
+    row        : '#e5e5e5',
+    danger     : '#ba1b23'
+  },
+  
+  active: {
+    primary  : colors.blue[80],
+    secondary: colors.grey[60],
+    tertiary : colors.grey[80],
+    UI       : colors.grey[30],
+    danger   : colors.red[80]
+  },
+  
+  selected: {
+    UI     : colors.grey[20],
+    lightUI: colors.grey[70]
+  },
+  
+  visitedLink: colors.purple[60],
+  highlight  : colors.blue[20],
+  
+  disabled: {
+    1: colors.grey[10],
+    2: colors.grey[30],
+    3: colors.grey[50]
+  },
+  
+  skeleton: {
+    1: '#e5e5e5',
+    2: colors.grey[30]
+  },
+  
   colors: {
-    primary  : '',
-    secondary: '',
-
-    errors     : '',
-    header     : '',
-    headerHover: '',
-    sideDrawer : '',
-    border     : '',
-    card       : '',
-
-    text          : '#363537',
-    title         : '',
-    pageBackground: '#E2D2E2',
-
-    modalTitle     : '',
-    modalBackground: '',
-
-    buttonText      : '',
-    buttonBackground: '',
-    buttonHover     : '',
-
+    navBarHover: 'rgba(204, 159, 38, 0.87)',
+    buttonHover: 'rgba(204, 159, 38, 0.87)',
     themeToggle: {
-      toggleBorder  : '#FFF',
-      toggleGradient: 'linear-gradient(#39598A, #79D7ED)'
+      toggleBorder  : '#6B9096',
+      toggleGradient: 'linear-gradient(#091236, #1E215D)'
     },
-
-    chat: {
-      bg    : '#424242',
-      text  : 'rgba(black, 0.87)',
-      border: 'rgba(white, 0.12)',
-
-      bubble_bg             : '#424242',
-      bubble_text           : 'rgba(black, 0.87)',
-      bubble_border         : '#424242',
-      bubble_shadow         : '0 1px 2px rgba(0, 0, 0, .08)',
-      bubble_hover_shadow   : '0 1px 2px rgba( 0, 0, 0, .16)',
-      bubble_selected_shadow: '0 3px 10px rgba( 0, 0, 0, .16)',
-
-      alt_bubble_bg             : '#3f51b5',
-      alt_bubble_text           : contrast_wcag('#ffffff'),
-      alt_bubble_border         : '#3f51b5',
-      alt_bubble_shadow         : '0 1px 2px rgba(#ff6358, .2)',
-      alt_bubble_hover_shadow   : '0 1px 2px rgba(#ff6358, .2)',
-      alt_bubble_selected_shadow: '0 3px 10px rgba(#ff6358, .4 )',
-
-      quick_reply_bg    : 'transparent',
-      quick_reply_text  : primary,
-      quick_reply_border: primary,
-
-      quick_reply_hover_bg    : primary,
-      quick_reply_hover_text  : contrast_wcag(primary),
-      quick_reply_hover_border: primary,
-
-      message_box_bg          : input.bg,
-      message_box_text        : input.text,
-      message_box_border      : 'inherit',
-      message_box_focus_shadow: '0 0 40px rgba(' + input.text + ', .1 )',
-
-      message_box_button_hover_text: primary,
-
-      background: '#232429',
-      input     : '#1a1b1f',
-
-      userText   : '#F7f7f8',
-      userMessage: '#FFF3E4',
-      botMessage : '#343333'
+    chat       : {
+      user_bubble_bg    : '#ef4135',
+      user_bubble_border: '#ef4135'
     }
   }
 }

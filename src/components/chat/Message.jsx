@@ -7,63 +7,48 @@ const ChatMessage = styled.div`
   max-width: 100%;
   margin: 2px 0 0;
   position: relative;
-  transition: margin .2s ease-in-out;
   outline: none;
-
-  &:hover {
-    box-shadow: 0 -2px 10px rgba( 0, 0, 0, 1);
-  }
+  transition: margin ease-in-out .3s;
 
   ${props => props.selected && css`
-    margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
-    border: 0;
-    color: inherit;
-    background: none;
-
-    ${Time} { opacity: 1; };
-  `}
+      margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
+      border: 0;
+      ${Time} { opacity: 1; };
+  `};
 `
 
 const Bubble = styled.div`
-  border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
-  padding:       ${({ theme }) => theme.chat.bubble_padding_y} ${({ theme }) => theme.chat.bubble_padding_x};
-  line-height:   ${({ theme }) => theme.chat.bubble_line_height};
-  
   word-wrap: break-word;
-  
-  color:      ${props => !!props.user ? props.theme.colors.chat.user_bubble_text
-                                      : props.theme.colors.chat.bubble_text};
-  background: ${props => !!props.user ? props.theme.colors.chat.user_bubble_bg
-                                      : props.theme.colors.chat.bubble_bg};
-  border:     ${props => !!props.user ? props.theme.colors.chat.user_bubble_border
-                                      : props.theme.colors.chat.bubble_border} 1px solid;
+  line-height:   ${({ theme }) => theme.chat.bubble_line_height};
+  border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
+  padding:       ${({ theme }) => theme.chat.bubble_padding_y}
+                 ${({ theme }) => theme.chat.bubble_padding_x};
+  background: ${props => !!props.user ? props.theme.ui[2]
+                                      : props.theme.colors.chat.user_bubble_bg};
+  border:     ${props => !!props.user ? props.theme.ui[1]
+                                      : props.theme.colors.chat.user_bubble_border} 1px solid;
 `
 
 const Time = styled.time`
+  position: absolute;
   top: 50%;
   left: ${props => !props.user && '100%'};
-
-  margin-left: ${({ theme }) => theme.chat.item_spacing_x};
-
-  white-space: nowrap;
-  pointer-events: none;
-  position: absolute;
-
-  font-size: smaller;
-  line-height: normal;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.navBarLink};
-  opacity: 0;
-
   transform: translateY(-50%);
-  transition: opacity .2s ease-in-out;
-
+  
+  ${({ theme }) => theme.type.label};
+  margin-left: ${({ theme }) => theme.chat.item_spacing_x};
+  
   ${props => props.user && css`
     right: 100%;
     text-align: right;
-
     margin-right: ${({ theme }) => theme.chat.item_spacing_x};
-  `}
+  `};
+
+  pointer-events: none;
+  color: ${({ theme }) => theme.text[5]};
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity ease-in-out .3s;
 `
 
 const getTimestampView = (timestamp, selected, user) => timestamp &&
@@ -86,8 +71,16 @@ const Message = ({
     onMessageSelected(item.selectionIndex)
   }, [selected])
   
+  const onBlur = useCallback(() => {
+    onMessageSelected(-1)
+  }, [selected])
+  
+  console.log(item)
+  
   return (
-    <ChatMessage selected={selected}
+    <ChatMessage tabIndex={item.selectionIndex}
+                 selected={selected}
+                 onBlur={onBlur}
                  onClick={handleSelection}>
       {getMainView(isUser, item.text)}
       {getTimestampView(item.timestamp, selected, isUser)}

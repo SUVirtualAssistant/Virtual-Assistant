@@ -29,7 +29,7 @@ Intents are a set of actions that we want Mercury to fulfill. Mercury has multip
 * [**Help**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a generic user request for help, such as "Help me"
 * [**Thanks**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to an expression of gratitude form a user, such as "Thank you"
 
-  **Off-Topic and small talk**
+####**Off-Topic and small talk**
 
 * [**OT\_BadFeedback**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a negative or rude message from a user, such as "You are terrible"
 * [**OT\_GoodFeeback**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a positive feedback from a user, such as "You are great" 
@@ -40,7 +40,7 @@ Intents are a set of actions that we want Mercury to fulfill. Mercury has multip
 * [**OT\_WhoMadeYou**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a user's inquiry on who has developed Mercury.
 * [**OT\_Redirect**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to a user who wants to talk to a real person. Redirects the user to SU Service Center.
 
-  **Web scraping for data**
+####**Web scraping for data**
 
 * [**WS\_Academics**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury)
   * This intent is fulfilled by [devSUWebscrape2](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/devSUWebscrape2?tab=configuration) lambda fucntion that scrapes the [Seattle U academics webpage](https://www.seattleu.edu/academics/) to match user query in real time.
@@ -49,7 +49,7 @@ Intents are a set of actions that we want Mercury to fulfill. Mercury has multip
 * [**WS\_SearchSU**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury)
   * This intent is fulfilled by [DevSUWebscrape](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DevSUWebscrape?tab=configuration) lambda function that scrapes the [Seattle U IT Supporting Articles](https://www.seattleu.edu/its/support/support-articles/) to match user query in real time.
 
-#### **DynamoDB for data**
+####**DynamoDB for data**
 
 * [**DIR\_GetEmailByName**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) 
   * This intent is fulfilled by [VAFacultyDirectoryGet](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/VAFacultyDirectoryGet?tab=configuration) lambda function that connects to DynamoDB for data.

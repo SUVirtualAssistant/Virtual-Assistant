@@ -1,4 +1,3 @@
-import MetricsView       from '@components/metrics'
 import metrics           from '@components/metrics/metrics.json'
 import CloudWatchService from '@services/AWS_Cloudwatch/CloudWatchService'
 import React             from 'react'
@@ -16,12 +15,27 @@ const DashboardContainer = styled.div`
 `
 
 const AdminDashboard = props => {
-  const metricData = new CloudWatchService(metrics)
-  metricData.setEndpoint(props.apiCredentials.key, props.apiCredentials.endpoint)
+  const options = {
+    credentials    : props.apiCredentials,
+    periodMinutes  : 5,
+    backfillMinutes: 120,
+    refreshMinutes : 10
+  }
+  
+  const dash = new CloudWatchService(options, metrics)
+  
+  const handleClick = () => {
+    dash.update()
+  }
+  
+  const logData =() => {
+    console.log(dash.datasets)
+  }
   
   return (
     <DashboardContainer>
-      <MetricsView data={metricData}/>
+      <button onClick={handleClick}>Log API Response</button>
+      <button onClick={logData}>Log dash data</button>
     </DashboardContainer>
   )
 }

@@ -1,7 +1,5 @@
-import { lexActions }  from '@state/modules/lex'
-import React           from 'react'
-import styled          from 'styled-components'
-import { useDispatch } from 'react-redux'
+import React  from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,24 +19,15 @@ const Text = styled.p`
 `
 
 export const Default = () => {
-  const dispatch = useDispatch()
-  
-  const getSessionDeets = () => {
-    dispatch(lexActions.getSessionDetails())
-  }
-  
-  
   return (
     <Wrapper>
       <Text>
-        <button onClick={getSessionDeets}>Log Session Deets</button>
         Hi! <br/> <br/>
         I'm Mercury, a virtual assistant for Seattle University. So far
         I can help you find calendar events, faculty & staff contact information,
         and links from the SU website.
       </Text>
     </Wrapper>
-    
   )
 }
 

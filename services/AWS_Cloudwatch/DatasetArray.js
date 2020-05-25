@@ -1,3 +1,5 @@
+import objectAssignDeep from 'object-assign-deep'
+
 export default class DatasetArray {
   constructor() {
     this.array = []

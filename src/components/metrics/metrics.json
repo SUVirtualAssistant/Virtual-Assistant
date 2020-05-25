@@ -1,15 +1,24 @@
-{
-  "start": "2020-05-19T06:56:04.072Z",
-  "periodMinutes": 5,
-  "metrics": [
-    {
-      "id": "durationCreate",
-      "tags": ["duration"],
-      "label": "Duration",
-      "dimensionName": "FunctionName",
-      "dimensionValue": "CloudwatchMetrics",
-      "name": "Duration",
-      "namespace": "AWS/Lambda"
-    }
-  ]
-}
+[
+  {
+    "id": "durationCreate",
+    "tags": [
+      "duration"
+    ],
+    "label": "Duration",
+    "dimensionName": "FunctionName",
+    "dimensionValue": "CloudwatchMetrics",
+    "name": "Duration",
+    "namespace": "AWS/Lambda"
+  },
+  {
+    "id": "durationMET",
+    "tags": [
+      "duration"
+    ],
+    "label": "Duration",
+    "dimensionName": "FunctionName",
+    "dimensionValue": "MET_getUsageMetrics",
+    "name": "Duration",
+    "namespace": "AWS/Lambda"
+  }
+]

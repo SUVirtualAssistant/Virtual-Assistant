@@ -17,6 +17,11 @@ Intents are a set of actions that we want Mercury to fulfill. Mercury has multip
 
 #### **Generic**
 
+* [**BOT_BeginConversation**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - greeting displayed on bot launch.
+* [**BOT_EndConversation**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - farewell displayed on conversation close.
+* [**BOT_Fallback**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - error handling message.
+* [**BOT_Feedback**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury)
+* [**BOT_Recover**] (https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - error recovery.
 * [**Greeting**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - respond to a greeting message from a user, such as "Hello"
 * [**Farewell**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - respond to a farewell message from a user, such as "Bye"
 * [**Affirmations**](https://us-west-2.console.aws.amazon.com/lex/home?region=us-west-2#bot-editor:bot=Mercury) - responds to affirmative message from a user, such as "Yes"

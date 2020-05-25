@@ -8,7 +8,7 @@ export const StyledHeader = styled.div`
   left: 0;
   z-index: 10;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 800px) {
     height: 40px;
   }
   
@@ -27,7 +27,7 @@ export const StyledHeader = styled.div`
     font-family: ${({ theme }) => theme.type.serif};
 
     &:hover {
-      transition: all 0.15s ease;
+      transition: color 0.15s ease;
       color: ${({ theme }) => theme.colors.buttonHover};
     }
 

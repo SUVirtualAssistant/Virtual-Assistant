@@ -20,25 +20,32 @@ AWS.config = {
 
 const lexInstance = new LexRuntime()
 
-const _startSession = params => (
+const _getSessionDetails = params =>
+  new Promise((res, rej) => {
+    lexInstance.getSession(params, (err, data) => {
+      if (err) return rej(err)
+      res(data)
+    })
+  })
+
+const _startSession = params =>
   new Promise((res, rej) => {
     lexInstance.putSession(params, (err, data) => {
       if (err) return rej(err)
       res(data)
     })
   })
-)
 
-const _postText = params => (
+const _postText = params =>
   new Promise((res, rej) => {
     lexInstance.postText(params, (err, data) => {
       if (err) return rej(err)
       res(data)
     })
   })
-)
 
 export default {
+  _getSessionDetails,
   _startSession,
   _postText
 }

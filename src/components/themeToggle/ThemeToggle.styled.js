@@ -1,79 +1,107 @@
-import styled from 'styled-components'
-
-export const HiddenToggle = styled.input.attrs({
-  type: 'checkbox'
-})`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 2;
-`
-
-export const ToggleSpan = styled.span`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  opacity: 1;
-  background-color: #fff;
-  border-radius: 40px;
-  transition: 0.2s ease background-color, 0.2s ease opacity;
-
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    top: 6px;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    transition: 0.5s ease transform, 0.2s ease background-color;
-  }
-
-  &:before {
-    background-color: #fff;
-    transform: translate(-28px,0px);
-    z-index: 1;
-  }
-
-  &:after {
-    background-color: #000;
-    transform: translate(8px,0px);
-    z-index: 0;
-  }
-`
+import styled, { css } from 'styled-components'
 
 export const Toggle = styled.div`
-  position: relative;
-  width: 80px;
-  height: 40px;
-  margin: 10px auto;
-  border-radius: 40px;
-
-
-  & ${HiddenToggle}:checked + ${ToggleSpan} {
-    background-color: #000;
-  }
-
-  & ${HiddenToggle}:active + ${ToggleSpan} {
-    opacity: 0.5;
-  }
-
-  & ${HiddenToggle}:checked + ${ToggleSpan}:before {
-      background-color: #000;
-      transform: translate(56px,-19px);
-  }
-
-  & ${HiddenToggle}:checked + ${ToggleSpan}:after {
-      background-color: #fff;
-      transform: translate(29px,0px);
-  }
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background-color .5s ease;
+  
+  align-self: center;
 `
+
+export const ToggleButton = styled.div`
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #f5f8f8;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color .5s ease;
+  
+  :before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    background: #A5abb0;
+    transition: border-radius .5s ease,
+                background-color .5s ease,
+                width .5s ease,
+                transform .5s ease;
+  };
+  
+  :after {
+    content: "Light mode";
+    white-space: nowrap;
+    text-indent: 60px;
+    line-height: 45px;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid #f5f8f8;
+    box-shadow: 0 0 0 0 #f5f8f8,
+                0 0 0 3px #a5abb0,
+                0 0 0 100px #f5f8f8;
+    box-sizing: border-box;
+    transition: border-color .5s ease,
+                box-shadow .5s ease;
+  };
+  
+  ${props => props.theme === 'dark' && css`
+    background-color: #a5abb0;
+    
+    :before {
+      background: #3f3f4c;
+      border-radius: 50%;
+      width: 150%;
+      transform: translate(-5%, -35%)
+                 rotate(-25deg);
+    };
+    
+    :after {
+      content: "Dark mode";
+      box-shadow: 0 0 0 0 #3f3f4c,
+                  0 0 0 0 #3f3f4c,
+                  0 0 0 3px #a5abb0,
+                  0 0 0 100px #3f3f4c;
+      border-color: #3f3f4c;
+    };
+  `};
+`
+
+// position: relative;
+// width: 80px;
+// height: 40px;
+// margin: 10px auto;
+// border-radius: 40px;
+//
+//
+// & ${HiddenToggle}:checked + ${ToggleSpan} {
+//   background-color: #000;
+// }
+//
+// & ${HiddenToggle}:active + ${ToggleSpan} {
+//   opacity: 0.5;
+// }
+//
+// & ${HiddenToggle}:checked + ${ToggleSpan}:before {
+//   background-color: #000;
+//   transform: translate(56px,-19px);
+// }
+//
+// & ${HiddenToggle}:checked + ${ToggleSpan}:after {
+//   background-color: #fff;
+//   transform: translate(29px,0px);
+// }
+

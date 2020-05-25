@@ -9,9 +9,8 @@ const DashboardContainer = styled.div`
   flex-direction: row;
   height: calc(50vh - 50px);
   width: 80vw;
-  background-color : #12171c;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 800px) {
     height: calc(100vh - 40px);
   }
 `

@@ -13,6 +13,7 @@ const DynamicCanvasContainer = styled.div`
   overflow-y: auto;
   box-sizing: border-box;
   outline: 0;
+  background: ${({ theme }) => theme.ui[1]};
 `
 
 const view = {

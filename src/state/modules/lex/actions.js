@@ -1,6 +1,7 @@
 import lex, { lexUtils } from '@services/AWS_Lex'
 import { canvasActions } from '@state/modules/canvas'
 import { chatActions }   from '@state/modules/chat'
+import { lexActions }    from 'src/state/modules/lex/index'
 import { uuid }          from 'uuidv4'
 import * as types        from './types'
 
@@ -14,6 +15,13 @@ const user = {
   id        : 1,
   session_id: uuid()
 }
+
+export const getSessionDetails = () =>
+  dispatch =>
+    lex._getSessionDetails({ userId: user.session_id })
+       .then(response =>
+               dispatch({ type: types.SESSION_DETAILS, response }),
+             err => console.log(err))
 
 export const startSession = () => {
   const request = (name, alias) => ({ type: types.SESSION_START_REQUEST, name, alias })
@@ -65,6 +73,8 @@ export const sendMessage = message => {
                 if (lexResponse.sessionAttributes !== undefined && lexResponse.dialogState === 'Fulfilled')
                   try         { dispatch(canvasActions.addData(lexResponse)) }
                   catch (err) { console.error(err)                           }
+                
+                dispatch(lexActions.getSessionDetails())
               }, error => dispatch(failure(error)))
   }
 }

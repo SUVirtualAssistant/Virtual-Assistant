@@ -1,6 +1,13 @@
 import { colors } from '../colors'
 
 export const darkMode = {
+  su_red: {
+    1: colors.su_red,
+    inverse: {
+      1: colors.inverse_su[1],
+      2: colors.inverse_su[2]
+    }
+  },
   background : colors.grey[100],
   interactive: {
     1: colors.blue[60],

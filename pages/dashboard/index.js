@@ -7,7 +7,7 @@ const Dashboard = props =>
   <AdminDashboard apiCredentials={props.apiCredentials}/>
 
 export const getStaticProps = wrapper.getStaticProps(
-  async ({ store }) => {
+  async () => {
     return {
       props: {
         apiCredentials: {

@@ -13,20 +13,23 @@ const ChatMessage = styled.div`
   ${props => props.selected && css`
       margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
       border: 0;
-      ${Time} { opacity: 1; };
   `};
 `
 
+// : props.theme.colors.chat.user_bubble_bg};
 const Bubble = styled.div`
   word-wrap: break-word;
+  cursor: default;
   line-height:   ${({ theme }) => theme.chat.bubble_line_height};
   border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
   padding:       ${({ theme }) => theme.chat.bubble_padding_y}
                  ${({ theme }) => theme.chat.bubble_padding_x};
-  background: ${props => !!props.user ? props.theme.ui[2]
-                                      : props.theme.colors.chat.user_bubble_bg};
+  color: ${props => !!props.user ? props.theme.text[1]
+                                 : props.theme.background};
+  background: ${props => !!props.user ? props.theme.ui[1]
+                                      : props.theme.su_red[1]};
   border:     ${props => !!props.user ? props.theme.ui[1]
-                                      : props.theme.colors.chat.user_bubble_border} 1px solid;
+                                      : props.theme.su_red[1]};
 `
 
 const Time = styled.time`
@@ -45,14 +48,17 @@ const Time = styled.time`
   `};
 
   pointer-events: none;
-  color: ${({ theme }) => theme.text[5]};
+  
+  line-height: normal;
   white-space: nowrap;
-  opacity: 0;
+  color: ${({ theme }) => theme.text[5]};
+  opacity: ${props => props.selected ? '1' : '0'};
   transition: opacity ease-in-out .3s;
 `
 
 const getTimestampView = (timestamp, selected, user) => timestamp &&
   <Time user={user}
+        selected={selected}
         aria-hidden={!selected}>
     {getMessageTime(timestamp)}
   </Time>

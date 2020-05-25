@@ -10,8 +10,9 @@ const ChatForm = styled.form`
   display: flex;
   flex-flow: row nowrap;
   
-  background: ${({ theme }) => theme.field[2]};
-  @media (max-width: 1100px) {
+  border-top: 1px solid ${({ theme }) => theme.ui[3]};
+  background: ${({ theme }) => theme.field[1]};
+  @media (max-width: 800px) {
     max-height: 47px;
   }
 `
@@ -63,7 +64,7 @@ const SubmitButton = styled.button`
     fill: ${({ theme }) => theme.icon[2]};
     
     &:hover {
-      fill: ${({ theme }) => theme.hover.primary};
+      fill: ${({ theme }) => theme.su_red[1]};
     }
   }
 `

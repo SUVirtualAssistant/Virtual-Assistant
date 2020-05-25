@@ -1,4 +1,9 @@
 export const colors = {
+  su_red: '#aa0000',
+  inverse_su: {
+    1: '#c7c7c7',
+    2: '#a2a2a2',
+  },
   white: {
     0: '#ffffff'
   },

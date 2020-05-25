@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 export const StyledBurger = styled.button`
   position: absolute;
-  top: 10%;
+  top: 20%;
   right: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background: transparent;
   border: none;
   padding: 0;
@@ -21,10 +21,10 @@ export const StyledBurger = styled.button`
   }
   
   div {
-    width: 2rem;
+    width: 1.8rem;
     height: 0.25rem;
-    background: ${({ theme, open }) => open ? theme.inverse[1]
-                                            : theme.inverse[2]};
+    background: ${({ theme, open }) => open ? theme.su_red[1]
+                                            : theme.icon[1]};
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;

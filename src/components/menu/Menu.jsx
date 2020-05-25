@@ -10,12 +10,11 @@ const Menu = ({
   auth,
   login,
   logout,
+  theme,
   toggleTheme
 }) => {
   return (
     <StyledMenu open={open}>
-      <span>Theme</span>
-      <ThemeToggle toggleTheme={toggleTheme} />
       {
         links.map((link, index) =>
           <Link key={index}
@@ -34,6 +33,8 @@ const Menu = ({
         auth ? <a onClick={() => logout()}>Logout</a>
              : <a onClick={() => login()}>Login</a>
       }
+      <ThemeToggle theme={theme}
+                   toggleTheme={toggleTheme} />
     </StyledMenu>
   )
 }

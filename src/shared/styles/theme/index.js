@@ -2,7 +2,6 @@ import * as layoutStyles from '../layout'
 import { chat }          from '@styles/layout/chat'
 
 import * as typeStyles from '../type'
-import { scale }        from '../type/scale'
 
 import { darkMode }  from './dark'
 import { lightMode } from './light'

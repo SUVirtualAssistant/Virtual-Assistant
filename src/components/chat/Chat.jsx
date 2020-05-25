@@ -17,7 +17,8 @@ const ChatContainer = styled.div`
   outline: 0;
   margin: auto;
   
-  background: ${({ theme }) => theme.ui[1]};
+  background: ${({ theme }) => theme.background};
+  border-right: 1px solid ${({ theme }) => theme.ui[3]};
   
   ${({ theme }) => theme.type.bodyShort[2]};
   

@@ -32,7 +32,11 @@ export default (
       }
 
     case lexActionTypes.SESSION_START_FAILURE:
-      return {}
+      return state
+    
+    case lexActionTypes.SESSION_DETAILS:
+      console.log(action.response)
+      return state
 
     /* --- Messages ------------------------------------- */
     case lexActionTypes.MESSAGE_SEND_REQUEST:

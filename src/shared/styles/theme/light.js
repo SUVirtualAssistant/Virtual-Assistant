@@ -1,6 +1,13 @@
 import { colors } from '../colors'
 
 export const lightMode = {
+  su_red: {
+    1: colors.su_red,
+    inverse: {
+      1: colors.inverse_su[1],
+      2: colors.inverse_su[2]
+    }
+  },
   background : colors.white[0],
   interactive: {
     1: colors.blue[60],
@@ -74,7 +81,7 @@ export const lightMode = {
   active: {
     primary  : colors.blue[80],
     secondary: colors.grey[60],
-    tertiary : colors.grey[80],
+    tertiary : colors.blue[80],
     UI       : colors.grey[30],
     danger   : colors.red[80]
   },

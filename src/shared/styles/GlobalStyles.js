@@ -30,6 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     position: fixed;          // prevents scroll bounce
     overflow: hidden;
     margin: 0;
+    
+    ${({ theme }) => theme.type.bodyShort[2]};
   }
 
   body {

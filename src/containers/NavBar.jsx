@@ -15,8 +15,9 @@ const StyledNavBar = styled.div`
   top: 0;
   left: 0;
   z-index: 10;
+  border-bottom: 1px solid ${({ theme }) => theme.ui[3]};
 
-  @media (max-width: 1100px) {
+  @media (max-width: 800px) {
     height: 40px;
   }
 `
@@ -56,10 +57,13 @@ const NavBar = props => {
       <Header title={title}/>
       <Burger open={open}
               setOpen={setMenu}/>
-      <Menu links={links} open={open}
-            auth={auth} login={login}
-            logout={logout} toggleTheme={props.toggleTheme}
-      />
+      <Menu links={links}
+            open={open}
+            auth={auth}
+            login={login}
+            logout={logout}
+            theme={props.theme}
+            toggleTheme={props.toggleTheme}/>
     </StyledNavBar>
   )
 }

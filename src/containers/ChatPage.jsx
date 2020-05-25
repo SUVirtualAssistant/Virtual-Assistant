@@ -1,5 +1,5 @@
-import Canvas   from '@components/canvas'
-import { Chat } from '@components/chat'
+import Canvas         from '@components/canvas'
+import { Chat }       from '@components/chat'
 import { lexActions } from '@state/modules/lex'
 
 import React, { useCallback, useEffect } from 'react'

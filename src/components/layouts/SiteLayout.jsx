@@ -16,11 +16,13 @@ const Content = styled.main`
 `
 
 const Layout = ({
+  theme,
   toggleTheme,
   children
 }) =>
   <>
-    <NavBar toggleTheme={toggleTheme}/>
+    <NavBar theme={theme}
+            toggleTheme={toggleTheme}/>
     <Content>
       {children}
     </Content>

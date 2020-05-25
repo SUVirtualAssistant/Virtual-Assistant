@@ -8,7 +8,8 @@ const Burger = ({
 }) => {
   return (
     <StyledBurger open={open}
-                  onClick={() => setOpen(!open)}>
+                  onClick={() => setOpen(!open)}
+                  aria-label="Open menu">
       <div/>
       <div/>
       <div/>

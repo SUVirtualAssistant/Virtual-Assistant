@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react'
 import BarGraph                       from './charts/Bar'
 import LineGraph from './charts/Line'
 import Loader from "@components/metrics/Loader";
-
 let updateTime;
 
 export const MetricsView = ({
-    style, data, usesURL, dashboard
+    style, data, url, dashboard
 }) => {
     const [loaded, setLoaded] = useState(false)
     const [oldData, setOldData] = useState(null)
 
   useEffect(() => {
-      if (usesURL && !loaded) {
-          const url = 'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'
+      if (!loaded) {
           setLoaded(true);
           fetch(url)
               .then(res => res.json())

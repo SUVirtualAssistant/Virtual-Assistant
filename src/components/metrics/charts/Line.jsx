@@ -14,10 +14,10 @@ const LineGraph = ({data
                 }}>
 
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x" />
-                <YAxis dataKey="y"/>
+                <XAxis dataKey="name" />
+                <YAxis dataKey="users"/>
                 <Tooltip />
 
-                <Line type="monotone" dataKey="y" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="users" stroke="#aa0000" />
             </LineChart>
 export default LineGraph

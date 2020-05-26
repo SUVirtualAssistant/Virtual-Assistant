@@ -24,5 +24,5 @@ export const WS = ({
   data
 }) => data.map((e, index) =>
   <LinkCard key={index}>
-    <L href={'https://' + e.Link} target="_blank">{e.Title}</L>
+    <L href={e.Link} target="_blank">{e.Title}</L>
   </LinkCard>)

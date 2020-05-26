@@ -13,10 +13,11 @@ export const MetricsView = ({
   useEffect(() => {
       if (!loaded) {
           setLoaded(true);
-          fetch(url)
-              .then(res => res.json())
-              .then(result => setOldData(Object.entries(result['body'])
-                  .map(([x, y]) => ({ name: x, users: y }))), error => console.error(error));
+          if(url)
+            fetch(url)
+                .then(res => res.json())
+                .then(result => setOldData(Object.entries(result['body'])
+                    .map(([x, y]) => ({ name: x, users: y }))), error => console.error(error));
     }
 
   }, []);

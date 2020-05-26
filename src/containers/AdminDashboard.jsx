@@ -72,9 +72,9 @@ const AdminDashboard = props => {
               <MetricsView style={"Bar"} url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'}/>
           </ChartContainer>
 
-          <InfoCard title={"Verified Users"} value={"1"} />
-          <InfoCard title={"Anonymous Users"} value={"50"} />
-          <InfoCard title={"Average Latency"} value={"1ms"} />
+          <InfoCard title={"Verified Users"} value = {"1"} />
+          <InfoCard title={"Anonymous Users"} value = {"50"} />
+          <InfoCard title={"Average Latency"} value = {"1ms"} />
 
           <ChartContainer>
               <h1>Lambda errors this week</h1>

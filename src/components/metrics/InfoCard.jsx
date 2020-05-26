@@ -58,7 +58,6 @@ export const InfoCard = ({title}) => {
                 <h3> {oldData}</h3>
             </Card>);
     }
-
 }
 
 export default InfoCard;

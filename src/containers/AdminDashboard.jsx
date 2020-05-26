@@ -60,7 +60,6 @@ const AdminDashboard = props => {
 
   const logData =() => {
     console.log(dash.datasets);
-
   }
 
   setInterval(update, 1000);

@@ -1,24 +1,48 @@
 [
   {
-    "id": "durationCreate",
+    "id": "lex",
     "tags": [
-      "duration"
+      "runtimeSuccessfulRequestLatency"
     ],
-    "label": "Duration",
-    "dimensionName": "FunctionName",
-    "dimensionValue": "CloudwatchMetrics",
-    "name": "Duration",
-    "namespace": "AWS/Lambda"
+    "label": "RuntimeSuccessfulRequestLatency",
+    "dimensions": [
+      {
+        "Name": "BotVersion",
+        "Value": "$LATEST"
+      },
+      {
+        "Name": "Operation",
+        "Value": "PutSession"
+      },
+      {
+        "Name": "BotName",
+        "Value": "Mercury"
+      }
+    ],
+    "name": "RuntimeSucessfulRequestLatency",
+    "namespace": "AWS/Lex"
   },
   {
-    "id": "durationMET",
+    "id": "numUsers",
     "tags": [
-      "duration"
+      "numusers"
     ],
-    "label": "Duration",
-    "dimensionName": "FunctionName",
-    "dimensionValue": "MET_getUsageMetrics",
-    "name": "Duration",
-    "namespace": "AWS/Lambda"
+    "label": "SignUpSuccesses",
+    "dimensions": [
+      {
+        "Name": "UserPool",
+        "Value": "us-west-2_fxRt1SBrY"
+      },
+      {
+        "Name": "UserPoolClient",
+        "Value": "9u63af3khdtg86dnenaqc9lrn"
+      }
+    ],
+    "name": "SignUpSuccesses",
+    "namespace": "AWS/Cognito"
   }
 ]
+
+
+
+

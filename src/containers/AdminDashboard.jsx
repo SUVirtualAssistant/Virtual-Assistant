@@ -3,8 +3,8 @@ import metrics           from '@components/metrics/metrics.json'
 import CloudWatchService from '@services/AWS_Cloudwatch/CloudWatchService'
 import React             from 'react'
 import styled            from 'styled-components'
-
 import InfoCard from "@components/metrics/InfoCard";
+import BarGraph from "@components/metrics/charts/Bar";
 import Loader from "@components/metrics/Loader";
 
 const GridContainer = styled.div`
@@ -24,13 +24,14 @@ const ChartContainer = styled.div`
   display: table;
   flex-direction: row;
   background-color : #AAAAAA;
-  padding: 10px;
   grid-column: 1;
+  height: 300px;
 `
 
 /**
  * api credentials are captured server side and passed to this component at runtime
  */
+
 const AdminDashboard = props => {
   const options = {
     credentials    : props.apiCredentials,
@@ -39,35 +40,45 @@ const AdminDashboard = props => {
     refreshMinutes : 10
   }
 
-  const dash = new CloudWatchService(options, metrics)
+  console.log("Initializing");
+  let dash = new CloudWatchService(options, metrics);
+  let updateTime;
+  let errorData;
+
+  function update()
+  {
+      if(dash.updatedAt != updateTime) {
+          updateTime = dash.updatedAt;
+          errorData = dash.datasets.array[0];
+
+      }
+  }
 
   const handleClick = () => {
     dash.update()
   }
 
   const logData =() => {
-    console.log(dash.datasets)
+    console.log(dash.datasets);
+
   }
-  
+
+  setInterval(update, 1000);
+
   return (
       <GridContainer>
-
           <ChartContainer>
               <h1>Lambda usage this week</h1>
-              <MetricsView/>
+              <MetricsView style={"Bar"} usesURL={true}/>
           </ChartContainer>
 
           <InfoCard title={"Verified Users"} value={"1"} />
           <InfoCard title={"Anonymous Users"} value={"50"} />
           <InfoCard title={"Average Latency"} value={"1ms"} />
 
-          <div>
-                <button onClick={handleClick}>Log API Response</button>
-                <button onClick={logData}>Log dash data</button>
-          </div>
-
       </GridContainer>
   )
+
 }
 
 export default AdminDashboard

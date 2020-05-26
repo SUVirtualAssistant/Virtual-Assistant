@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import BarGraph                       from './charts/Bar'
+import LineGraph from './charts/Line'
 import Loader from "@components/metrics/Loader";
 
+let updateTime;
+
 export const MetricsView = ({
-  data
+    style, data, usesURL, dashboard
 }) => {
     const [loaded, setLoaded] = useState(false)
     const [oldData, setOldData] = useState(null)
 
   useEffect(() => {
-      if (!loaded) {
+      if (usesURL && !loaded) {
           const url = 'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'
           setLoaded(true);
           fetch(url)
@@ -17,13 +20,14 @@ export const MetricsView = ({
               .then(result => setOldData(Object.entries(result['body'])
                   .map(([x, y]) => ({ name: x, users: y }))), error => console.error(error));
     }
-  }, [])
 
+  }, []);
   if(oldData) {
-      return <BarGraph data={oldData}/>
-  }
-  else {
-      return <Loader/>;
-  }
-
-}
+      if (style == "Bar")
+          return <BarGraph data={oldData}/>
+      else
+          return <LineGraph data={oldData}/>
+    }
+    else
+        return <Loader/>;
+    }

@@ -1,7 +1,7 @@
 import * as types  from './types'
 
 const canvasInitialState = {
-  currentView: 'BOT',       // Default d.c. view
+  currentView: 'HOME',       // Default d.c. view
 }
 
 export default (

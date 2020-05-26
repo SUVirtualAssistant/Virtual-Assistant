@@ -21,8 +21,7 @@ const common = {
     },
     line_height: {
       sm     : '1.2',
-      lg     : '1.5',
-      em     : '$line-height * 1em'
+      lg     : '1.5'
     },
     weight     : {
       light : '300',

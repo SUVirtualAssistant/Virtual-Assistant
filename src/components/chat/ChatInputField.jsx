@@ -12,6 +12,7 @@ const ChatForm = styled.form`
   
   border-top: 1px solid ${({ theme }) => theme.ui[3]};
   background: ${({ theme }) => theme.field[1]};
+  
   @media (max-width: 800px) {
     max-height: 47px;
   }

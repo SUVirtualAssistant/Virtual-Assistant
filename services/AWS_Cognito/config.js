@@ -33,7 +33,7 @@ export const cognitoConfig = {
       // Optional - Cookie secure flag
       // Either true of false, indicating whether the cookie
       // transmission requires a secure protocol (https).
-      secure : true
+      secure : false
     }
   }
 }

@@ -1,18 +1,16 @@
 /**
  * https://codepen.io/himalayasingh/pen/PdqbqV
  */
-import { func }   from 'prop-types'
-import React      from 'react'
-import { Toggle, ToggleButton } from './ThemeToggle.styled'
+import { func }         from 'prop-types'
+import React            from 'react'
+import { ToggleButton } from './ThemeToggle.styled'
 
 const ThemeToggle = ({
   theme,
   toggleTheme
 }) => {
-  return <Toggle>
-    <ToggleButton theme={theme}
-            onClick={toggleTheme}/>
-  </Toggle>
+  return <ToggleButton themeMode={theme}
+                       onClick={toggleTheme}/>
 }
 
 ThemeToggle.propTypes = {

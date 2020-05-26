@@ -45,8 +45,9 @@ const NavBar = props => {
   const dispatch = useDispatch()
   
   useOnClickOutside(menuRef, useCallback(() => {
-    setMenu(false)
-  }, []))
+    if (open)
+      setMenu(false)
+  }, [open]))
   
   const setMenu = useCallback(visibility => {
     dispatch(uiActions.toggleMenu(visibility))

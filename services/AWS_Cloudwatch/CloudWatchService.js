@@ -39,7 +39,6 @@ export default class CloudWatchService {
     fetch("https://api.su-assistant.chat/admin/metrics", requestOptions)
     .then(response => response.text())
     .then(result => {
-      console.log(result)
       this.updatedAt = new Date()
       this.appendData(JSON.parse(result))
     })
@@ -51,6 +50,7 @@ export default class CloudWatchService {
       this.datasets.upsert(this.tagAndLabel(newDataset))
     })
     this.datasets.removeDataDuplicates(this.maxDatapoints)
+    console.log(this.datasets)
   }
   
   tagAndLabel (dataset) {

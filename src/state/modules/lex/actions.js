@@ -1,9 +1,11 @@
-import lex, { lexUtils } from '@services/AWS_Lex'
-import { canvasActions } from '@state/modules/canvas'
-import { chatActions }   from '@state/modules/chat'
-import { lexActions }    from 'src/state/modules/lex/index'
-import { uuid }          from 'uuidv4'
-import * as types        from './types'
+import lex, { lexUtils }    from '@services/AWS_Lex'
+import { hasJsonStructure } from '@shared/utils'
+import { canvasActions }    from '@state/modules/canvas'
+import { chatActions }      from '@state/modules/chat'
+import _                    from 'lodash'
+import { lexActions }       from 'src/state/modules/lex/index'
+import { uuid }             from 'uuidv4'
+import * as types           from './types'
 
 const bot = {
   id   : 0,
@@ -42,9 +44,10 @@ export const startSession = () => {
     return lex._startSession(params)
               .then(lexResponse => {
                 dispatch(success(lexResponse))
-      
-                const messages = lexUtils.parseMessage(lexResponse)
-                messages.forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
+                
+                const cleanMessage = lexUtils.parse(lexResponse)
+                cleanMessage._message
+                            .forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
               }, error => dispatch(failure(error)))
   }
 }
@@ -66,13 +69,13 @@ export const sendMessage = message => {
     return lex._postText(lexMessage)
               .then(lexResponse => {
                 dispatch(success(lexResponse))
+                
+                const cleanMessage = lexUtils.parse(lexResponse)
+                cleanMessage._message
+                            .forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
       
-                const messages = lexUtils.parseMessage(lexResponse)
-                messages.forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
-      
-                if (lexResponse.sessionAttributes !== undefined && lexResponse.dialogState === 'Fulfilled')
-                  try         { dispatch(canvasActions.addData(lexResponse)) }
-                  catch (err) { console.error(err)                           }
+                if (_.has(cleanMessage, '_sessionAttributes') && cleanMessage._dialogState !== 'ElicitSlot')
+                  dispatch(canvasActions.addData(cleanMessage))
                 
                 dispatch(lexActions.getSessionDetails())
               }, error => dispatch(failure(error)))

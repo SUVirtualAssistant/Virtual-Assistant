@@ -17,7 +17,8 @@ const DynamicCanvasContainer = styled.div`
 `
 
 const view = {
-  BOT  : Components.Default,
+  BOT  : Components.BOT,
+  HOME : Components.Default,
   Error: Components.Error,
   CAL  : Components.CAL,
   Hal  : Components.Hal9000,

@@ -1,4 +1,5 @@
-export { default as lex }    from './lex'
-export { default as chat }   from './chat'
 export { default as canvas } from './canvas'
+export { default as chat }   from './chat'
+export { default as lex }    from './lex'
 export { default as ui }     from './ui'
+export { loadingBarReducer } from 'react-redux-loading-bar'

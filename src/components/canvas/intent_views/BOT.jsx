@@ -33,6 +33,7 @@ const flash = keyframes`
 const Hal = styled.div`
   border: .15em solid rgba(0,0,0,.28);
   box-shadow: 0 0 1em rgba(0,0,0,.2), 0 .5em .5em rgba(0,0,0,.2);
+  height: 325px;
   position: relative;
   margin: 2em auto;
   transition: height .15s ease, width .15s ease;
@@ -113,8 +114,6 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   
-  align-content: center;
-  
   ${Hal}, ${Hal}:before, ${Hal}:after,
   ${Eye}, ${Eye}:before, ${Eye}:after {
     border-radius: 100%;
@@ -128,10 +127,12 @@ const Container = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0;
   }
 `
 
-export const Hal9000 = () =>
+export const BOT = () =>
   <Container>
     <Hal>
       <Eye/>

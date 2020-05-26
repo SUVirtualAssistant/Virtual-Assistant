@@ -10,12 +10,13 @@ class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <meta name="theme-color" content="#000"/>
           <meta name="Description" content="SU Virtual Assistant"/>
+          <meta name="keywords" content="Seattle University, Chatbot, Virtual Assistant" />
           
           {/* --- Fonts --- */}
           <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
           
-          {/* --- PAGE ICON --- */}
+          <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
           <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
           <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>

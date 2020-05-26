@@ -26,7 +26,8 @@ const ChatContainer = styled.div`
   width: 100%;
   min-width: 400px;
   height: calc(100vh - 50px);
-  @media (max-width: 1100px) {
+  
+  @media (max-width: 800px) {
     ${({ theme }) => theme.type.bodyShort[1]};
     height: calc(100vh - 40px);
   }

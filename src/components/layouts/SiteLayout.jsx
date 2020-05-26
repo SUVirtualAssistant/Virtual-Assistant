@@ -9,7 +9,7 @@ const Content = styled.main`
   overflow-y: auto;
   margin-top: 50px;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 800px) {
     margin-top: 40px;
     height: calc(100vh - 40px);
   }

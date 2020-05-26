@@ -1,6 +1,7 @@
 import { createWrapper, HYDRATE }                        from 'next-redux-wrapper'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware                                   from 'redux-thunk'
+import { loadingBarReducer, loadingBarMiddleware } from 'react-redux-loading-bar'
 import * as reducers                                     from './modules'
 
 const bindMiddleware = middleware => {
@@ -12,7 +13,10 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
-const combinedReducer = combineReducers(reducers)
+const combinedReducer = combineReducers({
+  ...reducers,
+  loadingBar: loadingBarReducer
+})
 
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
@@ -31,8 +35,11 @@ const reducer = (state, action) => {
   }
 }
 
-const initStore = () => {
-  return createStore(reducer, bindMiddleware([thunkMiddleware]))
-}
+const initStore = () => createStore(
+  reducer,
+  bindMiddleware([
+    thunkMiddleware
+  ])
+)
 
 export const wrapper = createWrapper(initStore)

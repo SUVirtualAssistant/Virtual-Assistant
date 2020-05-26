@@ -35,8 +35,10 @@ export default (
       return state
     
     case lexActionTypes.SESSION_DETAILS:
-      console.log(action.response)
-      return state
+      return {
+        ...state,
+        history: action.response
+      }
 
     /* --- Messages ------------------------------------- */
     case lexActionTypes.MESSAGE_SEND_REQUEST:

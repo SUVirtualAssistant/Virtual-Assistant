@@ -24,6 +24,8 @@ export const StyledMenu = styled.nav`
     transition: color 0.3s linear;
     cursor: pointer;
     
+    z-index: 10000;
+    
     text-decoration: none;
     color: ${({ theme }) => theme.text[1]};
     

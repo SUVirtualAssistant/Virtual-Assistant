@@ -1,0 +1,30 @@
+[
+  {
+    "id": "lambda",
+    "tags": [
+      "concurrent executions"
+    ],
+    "label": "ConcurrentExecutions",
+    "name": "ConcurrentExecutions",
+    "namespace": "AWS/Lambda"
+  },
+  {
+    "id": "numUsers",
+    "tags": [
+      "numusers"
+    ],
+    "label": "SignUpSuccesses",
+    "dimensions": [
+      {
+        "Name": "UserPool",
+        "Value": "us-west-2_fxRt1SBrY"
+      },
+      {
+        "Name": "UserPoolClient",
+        "Value": "9u63af3khdtg86dnenaqc9lrn"
+      }
+    ],
+    "name": "SignUpSuccesses",
+    "namespace": "AWS/Cognito"
+  }
+]

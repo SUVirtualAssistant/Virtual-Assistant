@@ -20,6 +20,10 @@ export const StyledBurger = styled.button`
     outline: none;
   }
   
+  @media (max-width: 800px) {
+    top: 15%;
+  }
+  
   div {
     width: 1.8rem;
     height: 0.25rem;

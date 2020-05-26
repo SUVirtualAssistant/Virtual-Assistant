@@ -1,89 +1,55 @@
-import MetricsView       from '@components/metrics'
-import metrics           from '@components/metrics/metrics.json'
+import InfoCard          from '@components/metrics/card'
+import Chart             from '@components/metrics/chart'
 import CloudWatchService from '@services/AWS_Cloudwatch/CloudWatchService'
+import metrics           from '@services/AWS_Cloudwatch/metrics.json'
+import { useInterval }   from '@shared/hooks'
 import React             from 'react'
 import styled            from 'styled-components'
-import InfoCard from "@components/metrics/InfoCard";
-import BarGraph from "@components/metrics/charts/Bar";
-import Loader from "@components/metrics/Loader";
 
 const GridContainer = styled.div`
-    display: grid;
-    grid-template-columns: 550px 200px 200px 200px;
-    grid-gap: 10px;
-    background-color: #2e2e2e;
-    
-    h1 {
-      color: AA0000;
-      font-size: 15px;
-      text-align: center; 
-    }
+  display: grid;
+  grid-template-columns: 550px 200px 200px 200px;
+  grid-gap: 10px;
 `
-
-const ChartContainer = styled.div`
-  display: table;
-  flex-direction: row;
-  background-color : #AAAAAA;
-  grid-column: 1;
-  height: 300px;
-`
-
-/**
- * api credentials are captured server side and passed to this component at runtime
- */
 
 const AdminDashboard = props => {
+  useInterval(() => {
+    update()
+  }, 1000)
+  
   const options = {
     credentials    : props.apiCredentials,
     periodMinutes  : 5,
     backfillMinutes: 120,
-    refreshMinutes : 10
+    refreshMinutes : 1
   }
-
-  console.log("Initializing");
-  let dash = new CloudWatchService(options, metrics);
-  let updateTime;
-  let errorData;
-
-  function update()
-  {
-      if(dash.updatedAt != updateTime) {
-          updateTime = dash.updatedAt;
-          errorData = dash.datasets.array[0];
-
-      }
+  
+  let dash = new CloudWatchService(options, metrics)
+  let updateTime
+  let errorData
+  
+  const update = () => {
+    if (dash.updatedAt !== updateTime) {
+      updateTime = dash.updatedAt
+      errorData = dash.datasets.array[0]
+    }
   }
-
-  const handleClick = () => {
-    dash.update()
-  }
-
-  const logData =() => {
-    console.log(dash.datasets);
-
-  }
-
-  setInterval(update, 1000);
-
+  
   return (
-      <GridContainer>
-          <ChartContainer>
-              <h1>Lambda usage this week</h1>
-              <MetricsView style={"Bar"} url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'}/>
-          </ChartContainer>
-
-          <InfoCard title={"Verified Users"} value = {"1"} />
-          <InfoCard title={"Anonymous Users"} value = {"50"} />
-          <InfoCard title={"Average Latency"} value = {"1ms"} />
-
-          <ChartContainer>
-              <h1>Lambda errors this week</h1>
-              <MetricsView style={"Line"} url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod/errors'}/>
-          </ChartContainer>
-
-      </GridContainer>
+    <GridContainer>
+      <Chart title='Lambda usage this week'
+             type='Bar'
+             url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod'}/>
+      
+      <InfoCard title='Verified Users'/>
+      <InfoCard title='Anonymous Users'/>
+      <InfoCard title='Average Latency'/>
+      
+      <Chart title='Lambda errors this week'
+             type='Line'
+             url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod/errors'}/>
+    </GridContainer>
   )
-
 }
 
 export default AdminDashboard

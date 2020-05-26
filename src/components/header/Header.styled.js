@@ -28,10 +28,10 @@ export const StyledHeader = styled.div`
 
     &:hover {
       transition: color 0.15s ease;
-      color: ${({ theme }) => theme.colors.buttonHover};
+      color: ${({ theme }) => theme.su_red[1]};
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 800px) {
       margin-left: 7px;
       font-size: 30px;
       line-height: 40px;

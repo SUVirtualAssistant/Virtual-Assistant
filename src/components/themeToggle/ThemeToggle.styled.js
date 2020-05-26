@@ -1,40 +1,37 @@
 import styled, { css } from 'styled-components'
 
-export const Toggle = styled.div`
+export const ToggleButton = styled.div`
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  transition: background-color .5s ease;
   
   align-self: center;
-`
-
-export const ToggleButton = styled.div`
   position: absolute;
-  z-index: -1;
   left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+  right: 9%;
+  top: 80%;
   margin: auto;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #f5f8f8;
   box-sizing: border-box;
   cursor: pointer;
-  transition: background-color .5s ease;
+  transition: background .5s ease;
+  
+  @media (max-width: 300px) {
+    content: "";
+  }
   
   :before {
     content: "";
     z-index: 1;
     position: absolute;
-    width: 100%;
     height: 100%;
-    left: 50%;
-    background: #A5abb0;
+    width: 100%;
+    left: 50px;
+    background: ${({ theme }) => theme.background};
     transition: border-radius .5s ease,
-                background-color .5s ease,
+                background .5s ease,
                 width .5s ease,
                 transform .5s ease;
   };
@@ -45,63 +42,33 @@ export const ToggleButton = styled.div`
     text-indent: 60px;
     line-height: 45px;
     z-index: 2;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 4px solid #f5f8f8;
-    box-shadow: 0 0 0 0 #f5f8f8,
-                0 0 0 3px #a5abb0,
-                0 0 0 100px #f5f8f8;
+    border: 4px solid ${({ theme }) => theme.active['UI']};
+    box-shadow: 0 0 0 0 ${({ theme }) => theme.active['UI']},
+                0 0 0 3px ${({ theme }) => theme.background},
+                0 0 0 100px ${({ theme }) => theme.active['UI']};
     box-sizing: border-box;
-    transition: border-color .5s ease,
-                box-shadow .5s ease;
+    transition: border-color .5s ease, box-shadow .5s ease;
   };
   
-  ${props => props.theme === 'dark' && css`
-    background-color: #a5abb0;
-    
+  ${props => props.themeMode === 'dark' && css`
     :before {
-      background: #3f3f4c;
+      background: ${({ theme }) => theme.background};
       border-radius: 50%;
       width: 150%;
-      transform: translate(-5%, -35%)
-                 rotate(-25deg);
+      transform: translate(-5%, -35%) rotate(-25deg);
     };
     
     :after {
       content: "Dark mode";
-      box-shadow: 0 0 0 0 #3f3f4c,
-                  0 0 0 0 #3f3f4c,
-                  0 0 0 3px #a5abb0,
-                  0 0 0 100px #3f3f4c;
-      border-color: #3f3f4c;
+      box-shadow: 0 0 0 0 ${({ theme }) => theme.active['UI']},
+                  0 0 0 0 ${({ theme }) => theme.active['UI']},
+                  0 0 0 3px ${({ theme }) => theme.background},
+                  0 0 0 100px ${({ theme }) => theme.active['UI']};
+      border-color: ${({ theme }) => theme.active['UI']};
     };
   `};
 `
-
-// position: relative;
-// width: 80px;
-// height: 40px;
-// margin: 10px auto;
-// border-radius: 40px;
-//
-//
-// & ${HiddenToggle}:checked + ${ToggleSpan} {
-//   background-color: #000;
-// }
-//
-// & ${HiddenToggle}:active + ${ToggleSpan} {
-//   opacity: 0.5;
-// }
-//
-// & ${HiddenToggle}:checked + ${ToggleSpan}:before {
-//   background-color: #000;
-//   transform: translate(56px,-19px);
-// }
-//
-// & ${HiddenToggle}:checked + ${ToggleSpan}:after {
-//   background-color: #fff;
-//   transform: translate(29px,0px);
-// }
-

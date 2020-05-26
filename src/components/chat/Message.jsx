@@ -25,8 +25,8 @@ const Bubble = styled.div`
   padding:       ${({ theme }) => theme.chat.bubble_padding_y}
                  ${({ theme }) => theme.chat.bubble_padding_x};
   color: ${props => !!props.user ? props.theme.text[1]
-                                 : props.theme.background};
-  background: ${props => !!props.user ? props.theme.ui[1]
+                                 : props.theme.text[1]};
+  background: ${props => !!props.user ? props.theme.ui[3]
                                       : props.theme.su_red[1]};
   border:     ${props => !!props.user ? props.theme.ui[1]
                                       : props.theme.su_red[1]};

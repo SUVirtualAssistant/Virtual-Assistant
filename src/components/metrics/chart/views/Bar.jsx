@@ -1,6 +1,5 @@
 import React                                                   from 'react'
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts'
-import Loader from "@components/metrics/Loader";
 
 const BarGraph = ({
   data
@@ -14,6 +13,5 @@ const BarGraph = ({
     <Tooltip/>
     <Bar dataKey="users" fill="#AA0000"/>
   </BarChart>
-
 
 export default BarGraph

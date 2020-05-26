@@ -10,12 +10,13 @@ const Wrapper = styled.div`
 
 const Text = styled.p`
   margin: 20px;
+  padding: 2rem;
   box-sizing: border-box;
 
   ${({ theme }) => theme.type.display[2]};
   color: ${({ theme }) => theme.text[1]};
   font-size: 28px;
-  text-justify: inter-character;
+  text-align: justify;
 `
 
 export const Default = () => {

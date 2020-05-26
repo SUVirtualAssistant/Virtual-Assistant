@@ -1,6 +1,5 @@
 import { useAuthRedirect } from '@services/AWS_Cognito/auth'
 import { useRouter }       from 'next/router'
-import queryString         from 'query-string'
 import React               from 'react'
 
 const extractFirst = value => Array.isArray(value) ? value[0] : value
@@ -20,11 +19,8 @@ export default () => {
     // We are not using the router here, since the query object will be empty
     // during the prerendering if the page is statically optimized.
     // So the router's location would return no search the first time.
-    const redirectUriAfterSignIn =
-            extractFirst(queryString.parse(window.location.search).to || "") || "/"
-    
-    router.replace(redirectUriAfterSignIn)
+    router.replace('/dashboard')
   })
   
-  return <div />
+  return <div/>
 }

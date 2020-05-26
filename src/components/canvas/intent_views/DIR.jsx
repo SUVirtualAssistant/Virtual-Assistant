@@ -10,9 +10,12 @@ const StyledDir = styled.div`
   justify-content: center;
   align-content: center;
   
-  color: rgba(0, 0, 0.87);
-  border-color: rgba(0, 0, 0.12);
-  background-color: white;
+  color: ${({ theme }) => theme.text[1]};
+  background: ${({ theme }) => theme.ui[1]};
+`
+
+const Text = styled.div`
+  padding: 5rem;
 `
 
 const capitalize = s => {
@@ -29,12 +32,14 @@ export const DIR = ({
   
   return (
     <StyledDir>
-      <h1>{Fname} {LName}</h1>
-      {notEqual(JTitle, 'N/A') && <h3>{capitalize(JTitle)}</h3>}
-      {notEqual(Department, 'N/A') && <h3>{Department}</h3>}
-      {notEqual(Phone, 'N/A') && <div>P: {Phone}</div>}
-      {notEqual(Email, 'N/A') && <div>E: {Email}</div>}
-      {notEqual(Address, 'N/A') && <div>A: {Address}</div>}
+      <Text>
+        <h1>{Fname} {LName}</h1>
+        {notEqual(JTitle, 'N/A') && <h3>{capitalize(JTitle)}</h3>}
+        {notEqual(Department, 'N/A') && <h3>{Department}</h3>}
+        {notEqual(Phone, 'N/A') && <div>P: {Phone}</div>}
+        {notEqual(Email, 'N/A') && <div>E: {Email}</div>}
+        {notEqual(Address, 'N/A') && <div>A: {Address}</div>}
+      </Text>
     </StyledDir>
   )
 }

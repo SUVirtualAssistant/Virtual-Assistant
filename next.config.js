@@ -14,7 +14,9 @@ module.exports = phase => {
           AUTH_COOKIE_DOMAIN: 'localhost',
         },
         target : 'serverless',
-        webpack: (config) => config
+        webpack: (config) => {
+          return config
+        }
       }
   default:
       return {
@@ -28,7 +30,9 @@ module.exports = phase => {
           AUTH_COOKIE_DOMAIN: 'auth.su-assistant.chat',
         },
         target : 'serverless',
-        webpack: config => config
+        webpack: config => {
+          return config
+        }
       }
   }
 }

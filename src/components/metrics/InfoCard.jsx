@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Loader from "@components/metrics/Loader";
 
 const load = <Loader/>
-
 const Card = styled.div`
     background-color: #AAAAAA;  
     height: 300px;
@@ -20,13 +19,12 @@ const Card = styled.div`
 `
 
 export const InfoCard = ({title}) => {
-
     const [loaded, setLoaded] = useState(false)
     const [oldData, setOldData] = useState(null)
-
     const verifiedUserURL = 'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod/users';
     const latencyURL = 'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod/latency';
     let url = '';
+
     switch(title)
     {
         case 'Verified Users': url = verifiedUserURL; break;

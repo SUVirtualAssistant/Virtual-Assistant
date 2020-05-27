@@ -1,7 +1,6 @@
 import Loading                        from '@components/loading'
 import React, { useEffect, useState } from 'react'
 import styled                         from 'styled-components'
-
 import * as Views                     from './views'
 
 const ChartContainer = styled.div`
@@ -46,7 +45,7 @@ export const Chart = ({
         fetch(url)
         .then(res => res.json())
         .then(result => setOldData(Object.entries(result['body'])
-        .map(([x, y]) => ({ name: x, users: y }))), error => console.error(error))
+        .map(([x, y]) => ({ name: x, occurrences: y }))), error => console.error(error))
     }
   }, [])
   

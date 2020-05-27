@@ -10,9 +10,9 @@ const LineGraph = ({
              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
     <CartesianGrid strokeDasharray="3 3"/>
     <XAxis dataKey="name"/>
-    <YAxis dataKey="users"/>
+    <YAxis dataKey="occurrences"/>
     <Tooltip/>
-    <Line type="monotone" dataKey="users" stroke="#aa0000"/>
+    <Line type="monotone" dataKey="occurrences" stroke="#aa0000"/>
   </LineChart>
 
 export default LineGraph

@@ -34,7 +34,6 @@ const MiddleSpinner = styled.div`
   }
 `
 
-
 export const Loading = () =>
   <LoadingSpinner>
       <MiddleSpinner>

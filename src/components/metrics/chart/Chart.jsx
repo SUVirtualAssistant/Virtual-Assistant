@@ -26,7 +26,7 @@ const Title = styled.h1`
 
 const chartTypes = {
   Bar : Views.BarGraph,
-  Line: Views.BarGraph
+  Line: Views.LineGraph
 }
 
 export const Chart = ({

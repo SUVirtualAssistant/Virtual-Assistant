@@ -10,18 +10,24 @@ const ChartContainer = styled.div`
   flex-direction: row;
   background-color : ${({ theme }) => theme.ui[3]};
   grid-column: 1;
-  height: 300px;
+  height: 310px;
 `
 
 const Title = styled.h1`
-  color: ${({ theme }) => theme.su_red[1]};
-  font-size: 15px;
+  color: #f4f4f4;
+  font-family: ${({ theme }) => theme.type.sans};
+  font-size: 20px;
+  background-color: ${({theme}) => theme.su_red[1]};
+  top: 0px;
+  position: relative;
   text-align: center;
+  margin-top: 0px;
+  padding: 10px;
 `
 
 const chartTypes = {
   Bar : Views.BarGraph,
-  Line: Views.LineGraph
+  Line: Views.BarGraph
 }
 
 export const Chart = ({

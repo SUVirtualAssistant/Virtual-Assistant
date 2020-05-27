@@ -5,6 +5,7 @@ import metrics           from '@services/AWS_Cloudwatch/metrics.json'
 import { useInterval }   from '@shared/hooks'
 import React             from 'react'
 import styled            from 'styled-components'
+import Loading           from '@components/loading'
 
 const GridContainer = styled.div`
   display: grid;
@@ -48,7 +49,9 @@ const AdminDashboard = props => {
       <Chart title='Lambda errors this week'
              type='Line'
              url={'https://ea7k8rm5oc.execute-api.us-west-2.amazonaws.com/Prod/errors'}/>
+
     </GridContainer>
+
   )
 }
 

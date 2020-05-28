@@ -17,18 +17,38 @@ const Card = styled.div`
   }
 `
 
+const TitleBar = styled.div`
+    background-color: rgba(170, 0, 0, 1);
+    height: 70px;
+    position: static;
+    
+     h2, h3 {
+      font-family: ${({ theme }) => theme.type.sans};
+      text-align: center;
+     }
+`
+
 const CardTitle = styled.h2`
   flex: 1;
   justify-self: center;
   padding-top: 1rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+  
+  h2, h3 {
+    font-family: ${({ theme }) => theme.type.sans};
+    text-align: center;
+  }
 `
 
 const CardValue = styled.h3`
   flex: 1;
   justify-self: flex-end;
   font-size: 3rem;
+  font-family: ${({ theme }) => theme.type.sans};
+  text-align: center;
+  position: relative;
+  top: 40%;  
 `
 
 const urls = {
@@ -54,12 +74,20 @@ export const InfoCard = ({
   }, [])
   
   return (
-    <Card>
-      <CardTitle>{title}</CardTitle>
+
+      <div>
+
+        <TitleBar>
+          <CardTitle>{title}</CardTitle>
+        </TitleBar>
+
+        <Card>
       {oldData
         ? <CardValue>{oldData}</CardValue>
         : <Loading/>}
     </Card>
+
+      </div>
   )
 }
 

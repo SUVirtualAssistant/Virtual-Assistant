@@ -20,10 +20,20 @@ const StyledNavBar = styled.div`
   @media (max-width: 800px) {
     height: 40px;
   }
+  
+  a {
+    left: 40px;
+  }
+`
+
+const Logo = styled.img`
+  position: relative;
+  height: 80%;
+  margin: 5px;
 `
 
 const title = {
-  name     : 'SU Virtual Assistant',
+  name     : 'Mercury',
   to       : '/',
   ariaLabel: 'Home'
 }
@@ -55,6 +65,7 @@ const NavBar = props => {
   
   return (
     <StyledNavBar ref={menuRef}>
+      <Logo src = 'https://files.slack.com/files-pri/TNWC0U7S9-F014B8NFJ5R/logo8.png' alt={title}/>
       <Header title={title}/>
       <Burger open={open}
               setOpen={setMenu}/>

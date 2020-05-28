@@ -9,9 +9,9 @@ const BarGraph = ({
             data={data}>
     <CartesianGrid strokeDasharray="6 6"/>
     <XAxis dataKey="name"/>
-    <YAxis dataKey="users"/>
+    <YAxis dataKey="occurrences"/>
     <Tooltip/>
-    <Bar dataKey="users" fill="#AA0000"/>
+    <Bar dataKey="occurrences" fill="#AA0000"/>
   </BarChart>
 
 export default BarGraph

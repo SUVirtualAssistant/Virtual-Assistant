@@ -1,7 +1,6 @@
 import { createWrapper, HYDRATE }                        from 'next-redux-wrapper'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware                                   from 'redux-thunk'
-import { loadingBarReducer, loadingBarMiddleware } from 'react-redux-loading-bar'
 import * as reducers                                     from './modules'
 
 const bindMiddleware = middleware => {
@@ -14,8 +13,7 @@ const bindMiddleware = middleware => {
 }
 
 const combinedReducer = combineReducers({
-  ...reducers,
-  loadingBar: loadingBarReducer
+  ...reducers
 })
 
 const reducer = (state, action) => {

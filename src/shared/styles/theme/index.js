@@ -31,9 +31,8 @@ const common = {
   },
   
   type: {
-    mono: "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
-    sans: "'Open Sans', 'Helvetica Neue', Arial, sans-serif",
-    serif: "'Bungee', serif",
+    display: typeStyles.fontFamilies.display,
+    regular: typeStyles.fontFamilies.regular,
     
     caption: typeStyles.caption,
     label  : typeStyles.label,
@@ -80,7 +79,7 @@ const common = {
       2: typeStyles.quote[2]
     },
   
-    display: {
+    displayStyle: {
       1: typeStyles.display[1],
       2: typeStyles.display[2],
       3: typeStyles.display[3],

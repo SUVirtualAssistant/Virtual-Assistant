@@ -1,7 +1,6 @@
 export const fontFamilies = {
-  mono: "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
-  sans: "'Open Sans', 'Helvetica Neue', Arial, sans-serif",
-  serif: "'Bungee', serif",
+  display: "'Roboto Mono', monospace",
+  regular: "'Open Sans', sans-serif",
 }
 
 export const fontFamily = name => {

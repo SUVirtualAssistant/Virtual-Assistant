@@ -44,13 +44,13 @@ export const Chart = ({
     }
   }, [])
   
-  const View = chartTypes[type]
+  const ChartType = chartTypes[type]
   
   return (
     <ChartContainer>
       <Title>{title}</Title>
       {oldData
-        ? <View data={oldData}/>
+        ? <ChartType data={oldData}/>
         : <Loading/>}
     </ChartContainer>
   )

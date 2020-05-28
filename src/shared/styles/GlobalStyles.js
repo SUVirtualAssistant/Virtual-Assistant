@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   ${normalize}
 
   @font-face {
-    font-family: 'Bungee', cursive;
+    font-family: 'Roboto Mono', monospace;
     font-display:auto;
   }
   
@@ -31,7 +31,11 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     margin: 0;
     
-    ${({ theme }) => theme.type.bodyShort[2]};
+    
+    font-size: ${({ theme }) => theme.type.bodyShort[2].fontSize};
+    font-weight: ${({ theme }) => theme.type.bodyShort[2].fontWeight};
+    line-height: ${({ theme }) => theme.type.bodyShort[2].lineHeight};
+    letter-spacing: ${({ theme }) => theme.type.bodyShort[2].letterSpacing};
   }
 
   body {
@@ -43,12 +47,24 @@ export const GlobalStyle = createGlobalStyle`
 
     color: ${({ theme }) => theme.text[1]};
     background: ${({ theme }) => theme.background};
-    font-family: ${({ theme }) => theme.type.sans};
+    
+    font-family: ${({ theme }) => theme.type.regular};
+    
+    font-size: ${({ theme }) => theme.type.expressiveHeading[2].fontSize};
+    font-weight: ${({ theme }) => theme.type.expressiveHeading[2].fontWeight};
+    line-height: ${({ theme }) => theme.type.expressiveHeading[2].lineHeight};
+    letter-spacing: ${({ theme }) => theme.type.expressiveHeading[2].letterSpacing};
     
     transition: all 0.3s ease-in-out;
   }
 
-  h1, h2, h3 {
-    font-family: ${({ theme }) => theme.type.serif};
+  h1 {
+    font-family: ${({ theme }) => theme.type.display};
+    
+    // font-size: ${({ theme }) => theme.type.expressiveHeading[2].fontSize};
+    font-size: 1.142857143rem;
+    font-weight: ${({ theme }) => theme.type.expressiveHeading[2].fontWeight};
+    line-height: ${({ theme }) => theme.type.expressiveHeading[2].lineHeight};
+    letter-spacing: ${({ theme }) => theme.type.expressiveHeading[2].letterSpacing};
   }
 `

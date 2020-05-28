@@ -4,16 +4,12 @@ import { wrapper }    from '@state/store'
 import React          from 'react'
 
 const Dashboard = props =>
-  <AdminDashboard apiCredentials={props.apiCredentials}/>
+  <AdminDashboard />
 
 export const getServerSideProps = wrapper.getServerSideProps(
   async () => {
     return {
       props: {
-        apiCredentials: {
-          key: process.env.API_KEY,
-          endpoint: process.env.API_ENDPOINT
-        },
         data: {}
       }
     }

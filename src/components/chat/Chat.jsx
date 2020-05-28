@@ -20,8 +20,6 @@ const ChatContainer = styled.div`
   background: ${({ theme }) => theme.background};
   border-right: 1px solid ${({ theme }) => theme.ui[3]};
   
-  ${({ theme }) => theme.type.bodyShort[2]};
-  
   overflow: hidden;
   width: 100%;
   min-width: 400px;
@@ -38,7 +36,7 @@ const MessageList = styled.div`
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
-
+  
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;

@@ -9,6 +9,10 @@ const ChatMessage = styled.div`
   position: relative;
   outline: none;
   transition: margin ease-in-out .3s;
+  
+  font-size: ${({ theme }) => theme.type.bodyShort[2].fontSize};
+  font-weight: ${({ theme }) => theme.type.bodyShort[2].fontWeight};
+  letter-spacing: ${({ theme }) => theme.type.bodyShort[2].letterSpacing};
 
   ${props => props.selected && css`
       margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};

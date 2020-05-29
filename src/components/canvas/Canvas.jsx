@@ -6,6 +6,9 @@ import styled               from 'styled-components'
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
+  overflow-y: scroll;
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
   width: 100%;

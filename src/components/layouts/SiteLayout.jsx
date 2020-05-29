@@ -6,7 +6,7 @@ const Content = styled.main`
   position: fixed;
   height: calc(100vh - 50px);
   width: 100vw;
-  overflow-y: auto;
+  overflow: hidden;
   margin-top: 50px;
 
   @media (max-width: 800px) {

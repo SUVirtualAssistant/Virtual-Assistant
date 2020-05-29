@@ -8,8 +8,12 @@ const LinkCard = styled.div`
   
   position: relative;
   padding: 2rem;
-  box-shadow: inset  0    0   0 4px ${({ theme }) => theme.inverse['background']},
-              inset -4px -4px 0 6px ${({ theme }) => theme.ui[4]};
+  padding: 20px;
+  
+  border-color: ${({ theme }) => theme.inverse['background']};
+  border-style: solid;
+  border-width: 1px 1px; 
+ 
   background-color: ${({ theme }) => theme.ui[1]};
   cursor: pointer;
   
@@ -36,7 +40,7 @@ const LinkCard = styled.div`
 const L = styled.a`
   color: ${({ theme }) => theme.text[1] };
   position: relative;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.333;
   transition: .4s ease-out;

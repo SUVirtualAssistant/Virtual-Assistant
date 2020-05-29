@@ -15,7 +15,7 @@ const ChatContainer = styled.div`
   flex-direction: column;
   
   outline: 0;
-  margin: auto;
+  margin: 0;
   
   background: ${({ theme }) => theme.background};
   border-right: 1px solid ${({ theme }) => theme.ui[3]};

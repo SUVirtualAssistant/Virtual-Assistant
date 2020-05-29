@@ -11,7 +11,6 @@ const StyledMessageGroup = styled.div`
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-
   align-items: flex-start;
   text-align: left;
 

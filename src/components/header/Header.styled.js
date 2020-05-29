@@ -13,7 +13,7 @@ export const StyledHeader = styled.div`
 `
 
 export const HeaderSVG = styled(logo)`
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 10px;
   height: 55px;
   

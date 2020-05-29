@@ -36,9 +36,9 @@ export const DIR = ({
         {notEqual(JTitle, 'N/A') && <h3>{capitalize(JTitle)}</h3>}
         {notEqual(Department, 'N/A') && <h3>{department[0]}</h3>}
         { Array.isArray(department) && <h3>{department[1]}</h3>}
-        {notEqual(Phone, 'N/A') && <div>P: {Phone}</div>}
-        {notEqual(Email, 'N/A') && <div>E: {Email}</div>}
-        {notEqual(Address, 'N/A') && <div>A: {Address}</div>}
+        {notEqual(Phone, 'N/A') && <div> {Phone}</div>}
+        {notEqual(Email, 'N/A') && <div> {Email}</div>}
+        {notEqual(Address, 'N/A') && <div> {Address}</div>}
       </Text>
     </StyledDir>
   )

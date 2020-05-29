@@ -18,7 +18,7 @@ export const chat = {
   bubble_spacing    : '2px',
   bubble_line_height: '18px',
   
-  bubble_border_radius   : '12px',
+  bubble_border_radius   : '10px',
   bubble_border_radius_sm: '2px',
   
   input_padding_x: '16px',

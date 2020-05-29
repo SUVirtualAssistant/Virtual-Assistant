@@ -6,7 +6,7 @@ import React             from 'react'
 const ChatPage = () =>
   <>
     <Head>
-      <title>SU Virtual Assistant</title>
+      <title>Mercury</title>
     </Head>
     <ChatPageContainer/>
   </>

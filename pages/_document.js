@@ -9,7 +9,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <meta name="theme-color" content="#000"/>
-          <meta name="Description" content="SU Virtual Assistant"/>
+          <meta name="Description" content="Mercury"/>
           <meta name="keywords" content="Seattle University, Chatbot, Virtual Assistant" />
           
           {/* --- Fonts --- */}

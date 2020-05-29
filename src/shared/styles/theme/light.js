@@ -1,8 +1,9 @@
 import { colors } from '../colors'
 
 export const lightMode = {
-  su_red: {
-    1: colors.su_red,
+  su_red     : {
+    1      : colors.su_red,
+    text   : colors.white[0],
     inverse: {
       1: colors.inverse_su[1],
       2: colors.inverse_su[2]
@@ -51,10 +52,11 @@ export const lightMode = {
     1: colors.grey[100]
   },
   inverse    : {
-    1      : colors.white[0],
-    2      : colors.grey[80],
-    link   : colors.blue[40],
-    support: {
+    1         : colors.white[0],
+    2         : colors.grey[80],
+    background: colors.grey[100],
+    link      : colors.blue[40],
+    support   : {
       1: colors.red[50],
       2: colors.green[40],
       3: colors.yellow[30],
@@ -103,18 +105,5 @@ export const lightMode = {
   skeleton: {
     1: '#e5e5e5',
     2: colors.grey[30]
-  },
-  
-  colors: {
-    navBarHover: 'rgba(204, 159, 38, 0.87)',
-    buttonHover: 'rgba(204, 159, 38, 0.87)',
-    themeToggle: {
-      toggleBorder  : '#6B9096',
-      toggleGradient: 'linear-gradient(#091236, #1E215D)'
-    },
-    chat       : {
-      user_bubble_bg    : '#ef4135',
-      user_bubble_border: '#ef4135'
-    }
   }
 }

@@ -9,7 +9,7 @@ const StyledDateMarker = styled.div`
   opacity: 0.7;
   text-align: center;
   align-self: stretch;
-  color: ${({ theme }) => theme.text[4]};
+  color: ${({ theme }) => theme.text[1]};
 `
 
 const DateMarker = ({ timestamp }) =>

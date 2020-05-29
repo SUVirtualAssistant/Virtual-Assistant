@@ -1,5 +1,5 @@
 import { notEqual } from '@shared/utils'
-import { getDate }   from '@shared/utils/date-time'
+import { getDate }  from '@shared/utils/date-time'
 import React        from 'react'
 import styled       from 'styled-components'
 
@@ -28,16 +28,17 @@ export const CAL = ({
   data
 }) =>
   <Card>
-    {checkForDuplicates(_.values(data)).map((event, index) =>
-      <Event key={index}>
-        <h1>{event.Summary}</h1>
-        <h2>{getDate(event.Date)}</h2>
-        { notEqual(event.Time, '00:00:00')
-          && <>
-               <h3>Time: {Date.parse(event.Time)}</h3>
-               <h3>Location: {event.Location}</h3>
-             </>}
-      </Event>)
+    {_.values(data)
+      .map((event, index) =>
+        <Event key={index}>
+          <h1>{event.Summary}</h1>
+          <h2>{getDate(event.Date)}</h2>
+          {notEqual(event.Time, '00:00:00') &&
+            <>
+              <h3>Time: {Date.parse(event.Time)}</h3>
+              <h3>Location: {event.Location}</h3>
+            </>}
+        </Event>)
     }
   </Card>
 

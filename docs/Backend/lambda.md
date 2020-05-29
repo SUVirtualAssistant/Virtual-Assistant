@@ -37,10 +37,13 @@ AWS Lambda developer guide: https://docs.aws.amazon.com/lambda/latest/dg/welcome
 
 ## [**facstaff_dynamoDB**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/facstaff_dynamoDB?tab=configuration)
 
-## [**devSUWebscrape2**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/devSUWebscrape2?tab=configuration)  
+## [**WS_Academics**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/WS_Academics?tab=configuration)  
 
 This lambda function is implemented for scraping and searching Seattle U's website for url's carrying information on academics. Function scrapes the Parent url for Childeren urls. Each child url is then scraped for its own children urls. Data is stored in a dictionary mapping { url title : url }  
-  
+It is connected to Lex intent WS_Academics for fulfillment.  
+Web scraping library, beautiful soup, is utilized for gathering data. 
+This lambda function contains in-line comments that serve as a guidance to developers.
+
 Parent url: www.seattleu.edu/academics/  
 Children url's (at time of writing):  
       - www.seattleu.edu/undergraduate-admissions/academics/programs/  
@@ -50,5 +53,7 @@ Children url's (at time of writing):
       - www.seattleu.edu/cce/  
       - www.seattleu.edu/sas/  
       - www.seattleu.edu/abroad/  
-      
-   
+Resources: 
+*  [**Beautiful Soup documentation**](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
+    

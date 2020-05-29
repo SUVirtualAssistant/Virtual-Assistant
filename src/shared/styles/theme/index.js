@@ -1,35 +1,12 @@
-import * as layoutStyles from '../layout'
-import { chat }          from '@styles/layout/chat'
-
-import * as typeStyles from '../type'
+import * as animationStyles from '../animations'
+import * as layoutStyles    from '../layout'
+import { chat }             from '../layout/chat'
+import * as typeStyles      from '../type'
 
 import { darkMode }  from './dark'
 import { lightMode } from './light'
 
 const common = {
-  font: {
-    regular    : 'Open Sans, sans-serif',
-    display    : 'Bungee, serif',
-    size       : {
-      default : '14px',
-      xs      : '10px',
-      sm      : '13px',
-      lg      : '19px',
-      xl      : '19px',
-      sm_title: '26px',
-      lg_title: '32px'
-    },
-    line_height: {
-      sm     : '1.2',
-      lg     : '1.5'
-    },
-    weight     : {
-      light : '300',
-      normal: '400',
-      bold  : '700'
-    },
-  },
-  
   type: {
     display: typeStyles.fontFamilies.display,
     regular: typeStyles.fontFamilies.regular,
@@ -42,7 +19,7 @@ const common = {
       1: typeStyles.bodyShort[1],
       2: typeStyles.bodyShort[2]
     },
-  
+    
     bodyLong: {
       1: typeStyles.bodyLong[1],
       2: typeStyles.bodyLong[2]
@@ -78,13 +55,18 @@ const common = {
       1: typeStyles.quote[1],
       2: typeStyles.quote[2]
     },
-  
+    
     displayStyle: {
       1: typeStyles.display[1],
       2: typeStyles.display[2],
       3: typeStyles.display[3],
       4: typeStyles.display[4]
     }
+  },
+  
+  // animations
+  animations: {
+    scale: animationStyles.scale
   },
   
   // layout

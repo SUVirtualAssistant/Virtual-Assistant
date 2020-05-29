@@ -9,9 +9,6 @@ const StyledDir = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-content: center;
-  
-  color: ${({ theme }) => theme.text[1]};
-  background: ${({ theme }) => theme.ui[1]};
 `
 
 const Text = styled.div`
@@ -30,12 +27,15 @@ export const DIR = ({
           Email, Fname, JTitle,
           LName, Phone } = data
   
+  const department = Department.split('-')
+  
   return (
     <StyledDir>
       <Text>
-        <h1>{Fname} {LName}</h1>
+        <h1>{capitalize(Fname)} {capitalize(LName)}</h1>
         {notEqual(JTitle, 'N/A') && <h3>{capitalize(JTitle)}</h3>}
-        {notEqual(Department, 'N/A') && <h3>{Department}</h3>}
+        {notEqual(Department, 'N/A') && <h3>{department[0]}</h3>}
+        { Array.isArray(department) && <h3>{department[1]}</h3>}
         {notEqual(Phone, 'N/A') && <div>P: {Phone}</div>}
         {notEqual(Email, 'N/A') && <div>E: {Email}</div>}
         {notEqual(Address, 'N/A') && <div>A: {Address}</div>}

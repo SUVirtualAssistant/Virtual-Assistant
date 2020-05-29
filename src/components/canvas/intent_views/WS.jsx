@@ -1,6 +1,6 @@
+import _      from 'lodash'
 import React  from 'react'
 import styled from 'styled-components'
-import _ from 'lodash'
 
 const LinkCard = styled.div`
   flex: 1 1 auto;
@@ -22,6 +22,6 @@ export const WS = ({
   data
 }) => _.values(data)
        .map((e, index) =>
-  <LinkCard key={index}>
-    <L href={e.Link} target="_blank">{e.Title}</L>
-  </LinkCard>)
+         <LinkCard key={index}>
+           <L href={e.Link} target="_blank">{e.Title}</L>
+         </LinkCard>)

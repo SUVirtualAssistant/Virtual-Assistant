@@ -21,7 +21,7 @@ export const StyledBurger = styled.button`
   }
   
   @media (max-width: 800px) {
-    top: 15%;
+   top: 15%;
   }
   
   div {

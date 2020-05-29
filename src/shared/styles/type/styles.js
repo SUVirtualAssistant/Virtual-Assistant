@@ -3,67 +3,67 @@ import { fontWeights } from './fontWeight'
 import { scale }       from './scale'
 
 export const caption = {
-  fontSize     : rem(scale[0]),
-  fontWeight   : fontWeights.regular,
-  lineHeight   : rem(16),
-  letterSpacing: px(0.32)
+  'font-size'     : rem(scale[0]),
+  'font-weight'   : fontWeights.regular,
+  'line-height'   : rem(16),
+  'letter-spacing': px(0.32)
 }
 
 export const label = {
-  fontSize     : rem(scale[0]),
-  fontWeight   : fontWeights.regular,
-  lineHeight   : rem(16),
-  letterSpacing: px(0.32)
+  'font-size'     : rem(scale[0]),
+  'font-weight'   : fontWeights.regular,
+  'line-height'   : rem(16),
+  'letter-spacing': px(0.32)
 }
 
 export const helper = {
-  fontSize     : rem(scale[0]),
-  lineHeight   : rem(16),
-  letterSpacing: px(0.32)
+  'font-size'     : rem(scale[0]),
+  'line-height'   : rem(16),
+  'letter-spacing': px(0.32)
 }
 
 export const bodyShort = {
   1: {
-    fontSize     : rem(scale[1]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(18),
-    letterSpacing: px(0.16)
+    'font-size'     : rem(scale[1]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(18),
+    'letter-spacing': px(0.16)
   },
   2: {
-    fontSize     : rem(scale[2]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(22),
-    letterSpacing: 0
+    'font-size'     : rem(scale[2]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(22),
+    'letter-spacing': 0
   }
 }
 
 export const bodyLong = {
   1: {
-    fontSize     : rem(scale[1]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(20),
-    letterSpacing: px(0.16)
+    'font-size'     : rem(scale[1]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(20),
+    'letter-spacing': px(0.16)
   },
   2: {
-    fontSize     : rem(scale[2]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(24),
-    letterSpacing: 0
+    'font-size'     : rem(scale[2]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(24),
+    'letter-spacing': 0
   }
 }
 
 export const Heading = {
   1: {
-    fontSize     : rem(scale[1]),
-    fontWeight   : fontWeights.semibold,
-    lineHeight   : rem(18),
-    letterSpacing: px(0.16)
+    'font-size'     : rem(scale[6]),
+    'font-weight'   : fontWeights.semibold,
+    'line-height'   : rem(18),
+    'letter-spacing': px(0.16)
   },
   2: {
-    fontSize     : rem(scale[2]),
-    fontWeight   : fontWeights.semibold,
-    lineHeight   : rem(22),
-    letterSpacing: 0
+    'font-size'     : rem(scale[2]),
+    'font-weight'   : fontWeights.semibold,
+    'line-height'   : rem(22),
+    'letter-spacing': 0
   }
 }
 
@@ -71,133 +71,137 @@ export const productiveHeading = {
   1: Heading[1],
   2: Heading[2],
   3: {
-    fontSize     : rem(scale[4]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(28),
-    letterSpacing: 0
+    'font-size'     : rem(scale[4]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(28),
+    'letter-spacing': 0
   },
   4: {
-    fontSize     : rem(scale[6]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(36),
-    letterSpacing: 0
+    'font-size'     : rem(scale[6]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(36),
+    'letter-spacing': 0
   },
   5: {
-    fontSize     : rem(scale[7]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : rem(40),
-    letterSpacing: 0
+    'font-size'     : rem(scale[7]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : rem(40),
+    'letter-spacing': 0
   },
   6: {
-    fontSize     : rem(scale[9]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : rem(50),
-    letterSpacing: 0
+    'font-size'     : rem(scale[9]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : rem(50),
+    'letter-spacing': 0
   },
   7: {
-    fontSize     : rem(scale[11]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : rem(64),
-    letterSpacing: 0
+    'font-size'     : rem(scale[11]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : rem(64),
+    'letter-spacing': 0
   }
 }
 
 export const expressiveHeading = {
   1: {
     ...Heading[1],
-    lineHeight: rem(20)
+    'line-height': rem(20)
   },
   2: {
     ...Heading[2],
-    lineHeight: rem(24)
+    'line-height': rem(24)
   },
   3: {
-    fontSize     : rem(scale[4]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : '140%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[4]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : '140%',
+    'letter-spacing': 0,
+    breakpoints     : {
       xlg: {
-        fontSize  : rem(scale[4]),
-        lineHeight: '125%'
+        'font-size'  : rem(scale[4]),
+        'line-height': '125%'
       },
-      max: { fontSize: rem(scale[5]) }
+      max: {
+        'font-size': rem(scale[5])
+      }
     }
   },
   4: {
-    fontSize     : rem(scale[6]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : '129%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[6]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : '129%',
+    'letter-spacing': 0,
+    breakpoints     : {
       xlg: {
-        fontSize  : rem(scale[6]),
-        lineHeight: '125%'
+        'font-Size'  : rem(scale[6]),
+        'line-height': '125%'
       },
-      max: { fontSize: rem(scale[7]) }
+      max: {
+        'font-size': rem(scale[7])
+      }
     }
   },
   5: {
-    fontSize     : rem(scale[7]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : '125%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[7]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : '125%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize     : rem(scale[8]),
-        fontWeight   : fontWeights.light,
-        lineHeight   : '122%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[8]),
+        'font-weight'   : fontWeights.light,
+        'line-height'   : '122%',
+        'letter-spacing': 0
       },
       lg : {
-        fontSize     : rem(scale[9]),
-        fontWeight   : fontWeights.light,
-        lineHeight   : '119%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[9]),
+        'font-weight'   : fontWeights.light,
+        'line-height'   : '119%',
+        'letter-spacing': 0
       },
       xlg: {
-        fontSize     : rem(scale[10]),
-        fontWeight   : fontWeights.light,
-        lineHeight   : '117%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[10]),
+        'font-weight'   : fontWeights.light,
+        'line-height'   : '117%',
+        'letter-spacing': 0
       },
       max: {
-        fontSize     : rem(scale[12]),
-        fontWeight   : fontWeights.light,
-        lineHeight   : rem(70),
-        letterSpacing: 0
+        'font-size'     : rem(scale[12]),
+        'font-weight'   : fontWeights.light,
+        'line-height'   : rem(70),
+        'letter-spacing': 0
       }
     }
   },
   6: {
-    fontSize     : rem(scale[7]),
-    fontWeight   : fontWeights.semibold,
-    lineHeight   : '125%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[7]),
+    'font-weight'   : fontWeights.semibold,
+    'line-height'   : '125%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize     : rem(scale[8]),
-        fontWeight   : fontWeights.semibold,
-        lineHeight   : '122%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[8]),
+        'font-weight'   : fontWeights.semibold,
+        'line-height'   : '122%',
+        'letter-spacing': 0
       },
       lg : {
-        fontSize     : rem(scale[9]),
-        fontWeight   : fontWeights.semibold,
-        lineHeight   : '119%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[9]),
+        'font-weight'   : fontWeights.semibold,
+        'line-height'   : '119%',
+        'letter-spacing': 0
       },
       xlg: {
-        fontSize     : rem(scale[10]),
-        fontWeight   : fontWeights.semibold,
-        lineHeight   : '117%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[10]),
+        'font-weight'   : fontWeights.semibold,
+        'line-height'   : '117%',
+        'letter-spacing': 0
       },
       max: {
-        fontSize     : rem(scale[12]),
-        fontWeight   : fontWeights.semibold,
-        lineHeight   : rem(70),
-        letterSpacing: 0
+        'font-size'     : rem(scale[12]),
+        'font-weight'   : fontWeights.semibold,
+        'line-height'   : rem(70),
+        'letter-spacing': 0
       }
     }
   }
@@ -205,73 +209,73 @@ export const expressiveHeading = {
 
 export const expressiveParagraph = {
   1: {
-    fontSize     : rem(scale[5]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : '125%',
-    letterSpacing: 0,
-    lg           : {
-      fontSize  : rem(scale[6]),
-      lineHeight: '129%'
+    'font-size'     : rem(scale[5]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : '125%',
+    'letter-spacing': 0,
+    lg              : {
+      'font-size'  : rem(scale[6]),
+      'line-height': '129%'
     },
-    max          : {
-      fontSize  : rem(scale[7]),
-      lineHeight: '125%'
+    max             : {
+      'font-size'  : rem(scale[7]),
+      'line-height': '125%'
     }
   }
 }
 
 export const quote = {
   1: {
-    fontSize     : rem(scale[4]),
-    fontWeight   : fontWeights.regular,
-    lineHeight   : '130%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[4]),
+    'font-weight'   : fontWeights.regular,
+    'line-height'   : '130%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize     : rem(scale[4]),
-        fontWeight   : fontWeights.regular,
-        letterSpacing: 0
+        'font-size'     : rem(scale[4]),
+        'font-weight'   : fontWeights.regular,
+        'letter-spacing': 0
       },
       lg : {
-        fontSize     : rem(scale[5]),
-        fontWeight   : fontWeights.regular,
-        lineHeight   : '125%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[5]),
+        'font-weight'   : fontWeights.regular,
+        'line-height'   : '125%',
+        'letter-spacing': 0
       },
       xlg: {
-        fontSize     : rem(scale[6]),
-        fontWeight   : fontWeights.regular,
-        lineHeight   : '129%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[6]),
+        'font-weight'   : fontWeights.regular,
+        'line-height'   : '129%',
+        'letter-spacing': 0
       },
       max: {
-        fontSize     : rem(scale[7]),
-        fontWeight   : fontWeights.regular,
-        lineHeight   : '125%',
-        letterSpacing: 0
+        'font-size'     : rem(scale[7]),
+        'font-weight'   : fontWeights.regular,
+        'line-height'   : '125%',
+        'letter-spacing': 0
       }
     }
   },
   2: {
-    fontSize     : rem(scale[7]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : '125%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[7]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : '125%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize  : rem(scale[8]),
-        lineHeight: '122%'
+        'font-size'  : rem(scale[8]),
+        'line-height': '122%'
       },
       lg : {
-        fontSize  : rem(scale[9]),
-        lineHeight: '119%'
+        'font-size'  : rem(scale[9]),
+        'line-height': '119%'
       },
       xlg: {
-        fontSize  : rem(scale[10]),
-        lineHeight: '117%'
+        'font-size'  : rem(scale[10]),
+        'line-height': '117%'
       },
       max: {
-        fontSize: rem(scale[12])
+        'font-size': rem(scale[12])
       }
     }
   }
@@ -279,99 +283,99 @@ export const quote = {
 
 export const display = {
   1: {
-    fontSize     : rem(scale[9]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : '119%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[9]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : '119%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize: rem(scale[9])
+        'font-size': rem(scale[9])
       },
       lg : {
-        fontSize: rem(scale[11])
+        'font-size': rem(scale[11])
       },
       xlg: {
-        fontSize  : rem(scale[12]),
-        lineHeight: '117%'
+        'font-size'  : rem(scale[12]),
+        'line-height': '117%'
       },
       max: {
-        fontSize  : rem(scale[14]),
-        lineHeight: '113%'
+        'font-size'  : rem(scale[14]),
+        'line-height': '113%'
       }
     }
   },
   2: {
-    fontSize     : rem(scale[9]),
-    fontWeight   : fontWeights.semibold,
-    lineHeight   : '119%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[9]),
+    'font-weight'   : fontWeights.semibold,
+    'line-height'   : '119%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize: rem(scale[9])
+        'font-size': rem(scale[9])
       },
       lg : {
-        fontSize: rem(scale[11])
+        'font-size': rem(scale[11])
       },
       xlg: {
-        fontSize  : rem(scale[12]),
-        lineHeight: '116%'
+        'font-size'  : rem(scale[12]),
+        'line-height': '116%'
       },
       max: {
-        fontSize  : rem(scale[14]),
-        lineHeight: '113%'
+        'font-size'  : rem(scale[14]),
+        'line-height': '113%'
       }
     }
   },
   3: {
-    fontSize     : rem(scale[9]),
-    fontWeight   : fontWeights.light,
-    lineHeight   : '119%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[9]),
+    'font-weight'   : fontWeights.light,
+    'line-height'   : '119%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize  : rem(scale[13]),
-        lineHeight: '115%'
+        'font-size'  : rem(scale[13]),
+        'line-height': '115%'
       },
       lg : {
-        fontSize     : rem(scale[16]),
-        lineHeight   : '111%',
-        letterSpacing: px(-0.64)
+        'font-size'     : rem(scale[16]),
+        'line-height'   : '111%',
+        'letter-spacing': px(-0.64)
       },
       xlg: {
-        fontSize  : rem(scale[19]),
-        lineHeight: '107%'
+        'font-size'  : rem(scale[19]),
+        'line-height': '107%'
       },
       max: {
-        fontSize     : rem(scale[22]),
-        lineHeight   : '105%',
-        letterSpacing: px(-0.96)
+        'font-size'     : rem(scale[22]),
+        'line-height'   : '105%',
+        'letter-spacing': px(-0.96)
       }
     }
   },
   4: {
-    fontSize     : rem(scale[9]),
-    fontWeight   : fontWeights.semibold,
-    lineHeight   : '119%',
-    letterSpacing: 0,
-    breakpoints  : {
+    'font-size'     : rem(scale[9]),
+    'font-weight'   : fontWeights.semibold,
+    'line-height'   : '119%',
+    'letter-spacing': 0,
+    breakpoints     : {
       md : {
-        fontSize  : rem(scale[13]),
-        lineHeight: '115%'
+        'font-size'  : rem(scale[13]),
+        'line-height': '115%'
       },
       lg : {
-        fontSize     : rem(scale[16]),
-        lineHeight   : '111%',
-        letterSpacing: px(-0.64)
+        'font-size'     : rem(scale[16]),
+        'line-height'   : '111%',
+        'letter-spacing': px(-0.64)
       },
       xlg: {
-        fontSize     : rem(scale[19]),
-        lineHeight   : '107%',
-        letterSpacing: px(-0.64)
+        'font-size'     : rem(scale[19]),
+        'line-height'   : '107%',
+        'letter-spacing': px(-0.64)
       },
       max: {
-        fontSize     : rem(scale[22]),
-        lineHeight   : '105%',
-        letterSpacing: px(-0.96)
+        'font-size'     : rem(scale[22]),
+        'line-height'   : '105%',
+        'letter-spacing': px(-0.96)
       }
     }
   }

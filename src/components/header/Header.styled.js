@@ -18,13 +18,13 @@ export const StyledHeader = styled.div`
     top: 0; bottom: 0;
     float: left;
     margin: auto auto auto 30px;
-    text-decoration: none;
     color: ${({ theme }) => theme.text[1]};
     
     cursor: pointer;
     
-    ${({ theme }) => theme.type.display[1]};
-    font-family: ${({ theme }) => theme.type.serif};
+    ${({ theme }) => theme.type.heading[1]};
+    font-family: ${({ theme }) => theme.type.display};
+    text-transform: uppercase;
 
     &:hover {
       transition: color 0.15s ease;

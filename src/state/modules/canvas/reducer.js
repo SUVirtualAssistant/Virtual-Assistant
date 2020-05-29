@@ -2,6 +2,7 @@ import * as types  from './types'
 
 const canvasInitialState = {
   currentView: 'HOME',       // Default d.c. view
+  loading: false
 }
 
 export default (

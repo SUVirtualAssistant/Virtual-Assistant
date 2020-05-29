@@ -15,21 +15,12 @@ const StyledNavBar = styled.div`
   top: 0;
   left: 0;
   z-index: 10;
+  
   border-bottom: 1px solid ${({ theme }) => theme.ui[3]};
 
   @media (max-width: 800px) {
     height: 40px;
   }
-  
-  a {
-    left: 40px;
-  }
-`
-
-const Logo = styled.img`
-  position: relative;
-  height: 80%;
-  margin: 5px;
 `
 
 const title = {
@@ -65,7 +56,7 @@ const NavBar = props => {
   
   return (
     <StyledNavBar ref={menuRef}>
-      <Logo src = 'https://files.slack.com/files-pri/TNWC0U7S9-F014B8NFJ5R/logo8.png' alt={title}/>
+      {/*<Logo src = 'https://files.slack.com/files-pri/TNWC0U7S9-F014B8NFJ5R/logo8.png' alt={title}/>*/}
       <Header title={title}/>
       <Burger open={open}
               setOpen={setMenu}/>

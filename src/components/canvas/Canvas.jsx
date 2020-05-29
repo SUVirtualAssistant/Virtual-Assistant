@@ -1,18 +1,19 @@
-import React  from 'react'
-import styled from 'styled-components'
+import { Pixels }           from '@components/loading/spinners'
+import { useDelayedRender } from '@shared/hooks'
+import React                from 'react'
+import styled               from 'styled-components'
 
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
 
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   box-sizing: border-box;
-  outline: 0;
+  
   background: ${({ theme }) => theme.ui[1]};
 `
 
@@ -21,12 +22,15 @@ const view = {
   HOME : Components.Default,
   Error: Components.Error,
   CAL  : Components.CAL,
-  Hal  : Components.Hal9000,
   DIR  : Components.DIR,
   WS   : Components.WS
 }
 
+const DelayedRender = ({ delay, children }) =>
+  useDelayedRender(delay)(() => children)
+
 const Canvas = ({
+  loading,
   type,
   data
 }) => {
@@ -34,7 +38,11 @@ const Canvas = ({
   
   return (
     <DynamicCanvasContainer>
-      <CanvasComponent data={data}/>
+        {loading
+          ? <DelayedRender delay={1000}>
+              <Pixels/>
+            </DelayedRender>
+          : <CanvasComponent data={data}/>}
     </DynamicCanvasContainer>
   )
 }

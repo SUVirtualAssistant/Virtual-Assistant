@@ -1,11 +1,10 @@
-import lex, { lexUtils }    from '@services/AWS_Lex'
-import { hasJsonStructure } from '@shared/utils'
-import { canvasActions }    from '@state/modules/canvas'
-import { chatActions }      from '@state/modules/chat'
-import _                    from 'lodash'
-import { lexActions }       from 'src/state/modules/lex/index'
-import { uuid }             from 'uuidv4'
-import * as types           from './types'
+import lex, { lexUtils } from '@services/AWS_Lex'
+import { canvasActions } from '@state/modules/canvas'
+import { chatActions }   from '@state/modules/chat'
+import _                 from 'lodash'
+import { lexActions }    from 'src/state/modules/lex/index'
+import { uuid }          from 'uuidv4'
+import * as types        from './types'
 
 const bot = {
   id   : 0,
@@ -21,8 +20,7 @@ const user = {
 export const getSessionDetails = () =>
   dispatch =>
     lex._getSessionDetails({ userId: user.session_id })
-       .then(response =>
-               dispatch({ type: types.SESSION_DETAILS, response }),
+       .then(response => dispatch({ type: types.SESSION_DETAILS, response }),
              err => console.log(err))
 
 export const startSession = () => {
@@ -44,7 +42,7 @@ export const startSession = () => {
     return lex._startSession(params)
               .then(lexResponse => {
                 dispatch(success(lexResponse))
-                
+      
                 const cleanMessage = lexUtils.parse(lexResponse)
                 cleanMessage._message
                             .forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
@@ -58,8 +56,9 @@ export const sendMessage = message => {
   const failure = error => ({ type: types.MESSAGE_SEND_FAILURE, error })
   
   const lexMessage = {
-    inputText: message.text,
-    userId   : user.session_id
+    inputText        : message.text,
+    userId           : user.session_id,
+    sessionAttributes: null
   }
   
   return dispatch => {
@@ -69,15 +68,19 @@ export const sendMessage = message => {
     return lex._postText(lexMessage)
               .then(lexResponse => {
                 dispatch(success(lexResponse))
-                
+      
                 const cleanMessage = lexUtils.parse(lexResponse)
                 cleanMessage._message
-                            .forEach(msg => dispatch(chatActions.addMessage(new Date(), msg, bot)))
+                            .forEach(msg =>
+                              dispatch(chatActions.addMessage(new Date(), msg, bot)))
       
                 if (_.has(cleanMessage, '_sessionAttributes') && cleanMessage._dialogState !== 'ElicitSlot')
                   dispatch(canvasActions.addData(cleanMessage))
-                
+      
                 dispatch(lexActions.getSessionDetails())
-              }, error => dispatch(failure(error)))
+              }, error => {
+                dispatch(failure(error))
+                // TODO: Show error screen
+              })
   }
 }

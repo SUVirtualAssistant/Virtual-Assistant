@@ -3,8 +3,9 @@ export const getDate = date => {
     year   : 'numeric', month: 'long', day: 'numeric',
     weekday: 'long'
   }
-
-  return new Intl.DateTimeFormat('default', dateOptions).format(date)
+  const d = new Date(date)
+  
+  return new Intl.DateTimeFormat(undefined, dateOptions).format(d)
 }
 
 export const getMessageTime = date => {

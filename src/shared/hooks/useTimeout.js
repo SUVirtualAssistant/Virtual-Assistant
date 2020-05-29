@@ -1,11 +1,22 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 /**
  * useTimeout hook
  */
-export const useTimeout = (fn, delay) => {
+export const useTimeout = (callback, delay) => {
+  const savedCallback = useRef()
+  
   useEffect(() => {
-    const id = setTimeout(fn, delay)
-    return () => clearTimeout(id)
-  })
+    savedCallback.current = callback
+  }, [callback])
+  
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current()
+    }
+    if (delay !== null) {
+      let id = setTimeout(tick, delay)
+      return () => clearTimeout(id)
+    }
+  }, [delay])
 }

@@ -8,3 +8,8 @@ export const addData = data => ({
   name: data._intent + '_' + dataIndex++,
   data: data._sessionAttributes
 })
+
+export const changeCanvas = view => ({
+  type: types.CHANGE_VIEW,
+  view: view
+})

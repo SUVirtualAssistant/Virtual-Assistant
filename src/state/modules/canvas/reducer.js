@@ -20,6 +20,11 @@ export default (
           data: action.data
         }
       }
+    case types.CHANGE_VIEW:
+      return {
+        ...state,
+        currentView: action.view
+      }
     default:
       return state
   }

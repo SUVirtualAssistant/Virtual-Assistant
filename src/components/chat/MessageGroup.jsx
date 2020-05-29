@@ -5,13 +5,12 @@ import styled, { css } from 'styled-components'
 import Message from './Message'
 
 const StyledMessageGroup = styled.div`
+  position: relative;
   max-width: 80%;
-  background: none;
   box-sizing: border-box;
   display: flex;
-  flex-shrink: 0;
   flex-direction: column;
-  position: relative;
+  flex-shrink: 0;
 
   align-items: flex-start;
   text-align: left;

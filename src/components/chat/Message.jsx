@@ -10,10 +10,6 @@ const ChatMessage = styled.div`
   outline: none;
   transition: margin ease-in-out .3s;
   
-  font-size: ${({ theme }) => theme.type.bodyShort[2].fontSize};
-  font-weight: ${({ theme }) => theme.type.bodyShort[2].fontWeight};
-  letter-spacing: ${({ theme }) => theme.type.bodyShort[2].letterSpacing};
-
   ${props => props.selected && css`
       margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
       border: 0;
@@ -24,12 +20,13 @@ const ChatMessage = styled.div`
 const Bubble = styled.div`
   word-wrap: break-word;
   cursor: default;
+  
   line-height:   ${({ theme }) => theme.chat.bubble_line_height};
   border-radius: ${({ theme }) => theme.chat.bubble_border_radius};
   padding:       ${({ theme }) => theme.chat.bubble_padding_y}
                  ${({ theme }) => theme.chat.bubble_padding_x};
-  color: ${props => !!props.user ? props.theme.text[1]
-                                 : props.theme.text[1]};
+                 
+  color: ${props => props.theme.text[1]};
   background: ${props => !!props.user ? props.theme.ui[3]
                                       : props.theme.su_red[1]};
   border:     ${props => !!props.user ? props.theme.ui[1]
@@ -37,12 +34,19 @@ const Bubble = styled.div`
 `
 
 const Time = styled.time`
+  pointer-events: none;
   position: absolute;
   top: 50%;
-  left: ${props => !props.user && '100%'};
+  
+  white-space: nowrap;
+  transition: opacity ease-in-out .3s;
+  left:    ${props => !props.user && '100%'};
+  opacity: ${props => props.selected ? '1' : '0'};
   transform: translateY(-50%);
   
-  ${({ theme }) => theme.type.label};
+  
+               ${({ theme }) => theme.type.label};
+  color:       ${({ theme }) => theme.text[5]};
   margin-left: ${({ theme }) => theme.chat.item_spacing_x};
   
   ${props => props.user && css`
@@ -51,13 +55,6 @@ const Time = styled.time`
     margin-right: ${({ theme }) => theme.chat.item_spacing_x};
   `};
 
-  pointer-events: none;
-  
-  line-height: normal;
-  white-space: nowrap;
-  color: ${({ theme }) => theme.text[5]};
-  opacity: ${props => props.selected ? '1' : '0'};
-  transition: opacity ease-in-out .3s;
 `
 
 const getTimestampView = (timestamp, selected, user) => timestamp &&

@@ -1,4 +1,4 @@
-import { hasJsonStructure } from '@shared/utils'
+import { hasJsonStructure, parseLodash } from '@shared/utils'
 import _                    from 'lodash'
 
 export const parse = msg => ({
@@ -12,7 +12,7 @@ export const parse = msg => ({
                                               : [msg.message],
   ...(msg.sessionAttributes && {
     _sessionAttributes: _.mapValues(
-      JSON.parse(_.get(msg.sessionAttributes, `data`)),
+      parseLodash(_.get(msg.sessionAttributes, `data`)),
       x => {
         try {
           return JSON.parse(x)

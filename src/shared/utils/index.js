@@ -1,3 +1,7 @@
+import { attempt } from 'lodash'
+
+export const parseLodash = str => attempt(JSON.parse.bind(null, str))
+
 export const isAuthor = (user, msg) =>
   user && msg.author && user.id === msg.author.id
 

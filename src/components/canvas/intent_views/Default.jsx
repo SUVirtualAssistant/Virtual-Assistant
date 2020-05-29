@@ -13,8 +13,7 @@ const Text = styled.p`
   padding: 2rem;
   box-sizing: border-box;
 
-  ${({ theme }) => theme.type.display[2]};
-  color: ${({ theme }) => theme.text[1]};
+  ${({ theme }) => theme.type.expressiveParagraph};
   font-size: 28px;
   text-align: justify;
 `

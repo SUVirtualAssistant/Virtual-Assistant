@@ -1,17 +1,22 @@
-import React                                                   from 'react'
-import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts'
+import React                                                                        from 'react'
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const BarGraph = ({
   data
-}) =>
-  <BarChart width={500}
-            height={250}
-            data={data}>
-    <CartesianGrid strokeDasharray="6 6"/>
-    <XAxis dataKey="name"/>
-    <YAxis dataKey="occurrences"/>
-    <Tooltip/>
-    <Bar dataKey="occurrences" fill="#AA0000"/>
-  </BarChart>
+}) => {
+  const labels = Object.keys(data[0])
+  
+  return (
+    <ResponsiveContainer height='85%' debounce={3}>
+      <BarChart data={data}>
+        <CartesianGrid stroke='#ccc' strokeDasharray="6 6"/>
+        <Tooltip wrapperStyle={{ color: '#000', backgroundColor: '#ccc', opacity: 0.7}}/>}/>
+        <YAxis dataKey={labels[1]}/>
+        <XAxis dataKey={labels[0]} />
+        <Bar dataKey="occurrences" fill='#aa0000'/>
+      </BarChart>
+    </ResponsiveContainer>
+  )
+}
 
 export default BarGraph

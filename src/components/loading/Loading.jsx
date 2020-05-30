@@ -2,15 +2,18 @@ import React  from 'react'
 import styled from 'styled-components'
 
 const LoadingSpinner = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: black;
+  background: ${({ theme }) => theme.background};
+  
+  width: 3rem;
+  height: 3rem;
   margin: auto;
   position: relative;
+  
   border-radius: 50%;
+  border: .1rem solid ${({ theme }) => theme.ui[2]};
+  border-top: .1rem solid #aa0000;
+  
   animation: spin 3s linear infinite;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #aa0000;
   
   @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -19,15 +22,17 @@ const LoadingSpinner = styled.div`
 `
 
 const MiddleSpinner = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: black;
+  width: .5rem;
+  height: .5rem;
   margin: auto;
   position: relative;
+  
   border-radius: 50%;
+  border: .1rem solid #f3f3f3;
+  border-top: .1rem solid #aa0000;
+  
   animation: spin 2s linear infinite;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #aa0000;
+  
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -36,7 +41,5 @@ const MiddleSpinner = styled.div`
 
 export const Loading = () =>
   <LoadingSpinner>
-      <MiddleSpinner>
-
-      </MiddleSpinner>
+      <MiddleSpinner/>
   </LoadingSpinner>

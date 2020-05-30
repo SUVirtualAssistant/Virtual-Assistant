@@ -14,14 +14,12 @@ const DynamicCanvasContainer = styled.div`
   width: 100%;
 
   overflow-x: hidden;
-  overflow-y: scroll;
   box-sizing: border-box;
   
   background: ${({ theme }) => theme.ui[1]};
 `
 
 const view = {
-  BOT  : Components.BOT,
   HOME : Components.Default,
   Error: Components.Error,
   CAL  : Components.CAL,

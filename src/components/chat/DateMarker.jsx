@@ -3,13 +3,14 @@ import React       from 'react'
 import styled      from 'styled-components'
 
 const StyledDateMarker = styled.div`
-  ${({ theme }) => theme.type.label};
-  
-  text-transform: uppercase;
-  opacity: 0.7;
-  text-align: center;
   align-self: stretch;
+  
+  opacity: 0.7;
+  
   color: ${({ theme }) => theme.text[1]};
+  ${({ theme }) => theme.type.label};
+  text-transform: uppercase;
+  text-align: center;
 `
 
 const DateMarker = ({ timestamp }) =>

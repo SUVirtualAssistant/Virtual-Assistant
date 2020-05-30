@@ -24,8 +24,14 @@ const reducer = (state, action) => {
       ...action.payload   // apply delta from hydration
     }
     
-    if (state.lex.active)        // preserve messages on client side nav
+    if (state.lex)        // preserve messages on client side nav
       nextState.lex = state.lex
+    
+    if (state.chat)
+      nextState.chat = state.chat
+    
+    if (state.canvas)
+      nextState.canvas = state.canvas
     
     return nextState
   } else {

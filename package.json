@@ -15,7 +15,6 @@
     "aws-sdk": "2.673.0",
     "lodash": "^4.17.15",
     "next": "9.4.0",
-    "next-fonts": "^1.1.0",
     "next-redux-wrapper": "6.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
@@ -27,14 +26,13 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.0",
     "styled-normalize": "^8.0.7",
-    "swr": "^0.2.2",
     "uuidv4": "^6.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "babel-plugin-inline-react-svg": "^1.1.1",
+    "babel-plugin-recharts": "^1.2.1",
     "babel-plugin-styled-components": "^1.10.7",
-    "jest": "^26.0.1",
     "next-seo": "^4.5.0",
     "react-is": "^16.13.1",
     "redux-devtools-extension": "^2.13.8",
@@ -47,7 +45,10 @@
       "next/babel"
     ],
     "plugins": [
-      ["inline-react-svg"],
+      [
+        "inline-react-svg"
+      ],
+      [ "recharts" ],
       [
         "styled-components",
         {

@@ -76,9 +76,6 @@ export const sendMessage = message => {
                             .forEach(msg =>
                               dispatch(chatActions.addMessage(new Date(), msg, bot)))
                 
-                if (cleanMessage._intent === 'BOT')
-                  dispatch(canvasActions.changeCanvas(cleanMessage._intent))
-      
                 if (_.has(cleanMessage, '_sessionAttributes') && !_.isEmpty(cleanMessage._sessionAttributes))
                   dispatch(canvasActions.addData(cleanMessage))
       

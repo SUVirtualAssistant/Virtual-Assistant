@@ -23,7 +23,6 @@ const ChatPageContainer = () => {
   const currentDataIdx = useSelector(state => state.canvas.currentDataIndex)
   
   const messages = useSelector(state => state.chat)
-  const sendingMessage = useSelector(state => state.lex.sendingMessage)
   const active = useSelector(state => state.lex.active)
   
   useEffect(() => {
@@ -39,8 +38,7 @@ const ChatPageContainer = () => {
       <Chat messages={messages}
             sendMessage={sendMessage}
             placeholder='Type a message...'/>
-      <Canvas loading={sendingMessage}
-              type={currentView}
+      <Canvas type={currentView}
               data={canvasData[currentDataIdx] && canvasData[currentDataIdx].data}/>
     </ChatContainer>
   )

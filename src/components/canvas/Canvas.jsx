@@ -1,7 +1,5 @@
-import { Pixels }           from '@components/loading/spinners'
-import { useDelayedRender } from '@shared/hooks'
-import React                from 'react'
-import styled               from 'styled-components'
+import React  from 'react'
+import styled from 'styled-components'
 
 import * as Components from './intent_views'
 
@@ -27,11 +25,7 @@ const view = {
   WS   : Components.WS
 }
 
-const DelayedRender = ({ delay, children }) =>
-  useDelayedRender(delay)(() => children)
-
 const Canvas = ({
-  loading,
   type,
   data
 }) => {
@@ -39,11 +33,7 @@ const Canvas = ({
   
   return (
     <DynamicCanvasContainer>
-        {loading
-          ? <DelayedRender delay={1000}>
-              <Pixels/>
-            </DelayedRender>
-          : <CanvasComponent data={data}/>}
+      <CanvasComponent data={data}/>}
     </DynamicCanvasContainer>
   )
 }

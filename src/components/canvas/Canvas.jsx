@@ -33,7 +33,7 @@ const Canvas = ({
   
   return (
     <DynamicCanvasContainer>
-      <CanvasComponent data={data}/>}
+      <CanvasComponent data={data}/>
     </DynamicCanvasContainer>
   )
 }

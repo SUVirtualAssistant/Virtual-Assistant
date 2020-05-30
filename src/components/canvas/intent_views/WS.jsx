@@ -50,6 +50,9 @@ export const WS = ({
   data
 }) => _.values(data)
        .map((e, index) =>
+       <a href={e.Link} target = '_blank'>
          <LinkCard key={index}>
            <L href={e.Link} target="_blank">{e.Title}</L>
-         </LinkCard>)
+         </LinkCard>
+       </a>
+       )

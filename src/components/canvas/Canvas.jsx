@@ -22,11 +22,10 @@ const DynamicCanvasContainer = styled.div`
 `
 
 const view = {
-  HOME : Components.Default,
-  Error: Components.Error,
-  CAL  : Components.CAL,
-  DIR  : Components.DIR,
-  WS   : Components.WS
+  HOME: Components.Default,
+  CAL : Components.CAL,
+  DIR : Components.DIR,
+  WS  : Components.WS
 }
 
 const Canvas = ({

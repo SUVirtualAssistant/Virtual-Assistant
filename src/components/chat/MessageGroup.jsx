@@ -21,15 +21,6 @@ const StyledMessageGroup = styled.div`
   `}
 `
 
-/**
- *
- * @param group
- * @param user
- * @param selectedItemIndex
- * @param other
- * @returns {*}
- * @constructor
- */
 const MessageGroup = ({
   group,
   selectedItemIndex,

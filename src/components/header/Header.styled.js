@@ -1,5 +1,5 @@
-import logo from '../../shared/icons/Mercury_Logo.svg'
-import styled    from 'styled-components'
+import styled from 'styled-components'
+import logo   from '../../shared/icons/Mercury_Logo.svg'
 
 export const StyledHeader = styled.div`
   position: fixed;

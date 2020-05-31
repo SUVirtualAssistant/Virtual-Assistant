@@ -1,7 +1,6 @@
-import * as animationStyles from '../animations'
-import * as layoutStyles    from '../layout'
-import { chat }             from '../layout/chat'
-import * as typeStyles      from '../type'
+import * as layoutStyles from '../layout'
+import { chat }          from '../layout/chat'
+import * as typeStyles   from '../type'
 
 import { darkMode }  from './dark'
 import { lightMode } from './light'
@@ -62,11 +61,6 @@ const common = {
       3: typeStyles.display[3],
       4: typeStyles.display[4]
     }
-  },
-  
-  // animations
-  animations: {
-    scale: animationStyles.scale
   },
   
   // layout

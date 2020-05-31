@@ -1,5 +1,0 @@
-# ToggleTheme
-
-## Usage
-
-## Resources

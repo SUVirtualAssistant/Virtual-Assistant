@@ -1,5 +1,0 @@
-# Hooks
-
-## Usage
-
-## Resources

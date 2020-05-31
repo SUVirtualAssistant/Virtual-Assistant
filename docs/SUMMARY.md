@@ -1,15 +1,14 @@
 # Table of contents
 
 * [Overview](README.md)
-* [Overview](overview.md)
 
 ## Backend
 
-* [Lex](backend/lex.md)
-* [Lambda](backend/lambda.md)
-* [DynamoDB](backend/dynamodb.md)
-* [APIGateway](backend/api.md)
-* [Access Management](backend/accesscontrol.md)
+* [Lex](Backend/lex.md)
+* [Lambda](Backend/lambda.md)
+* [DynamoDB](Backend/dynamodb.md)
+* [APIGateway](Backend/api.md)
+* [Access Management](Backend/accesscontrol.md)
 
 ## Frontend
 
@@ -22,18 +21,18 @@
   * [\_document](frontend/pages/_document.md)
   * [Chat](frontend/pages/chat.md)
   * [Admin](frontend/pages/admin.md)
-* [Components](frontend/components/README.md)
-  * [Chat](frontend/components/chat.md)
-  * [Canvas](frontend/components/canvas/README.md)
-    * [Default](frontend/components/canvas/default.md)
-    * [Error](frontend/components/canvas/error.md)
-    * [CAL](frontend/components/canvas/cal.md)
-    * [DIR](frontend/components/canvas/dir.md)
-    * [WS](frontend/components/canvas/ws.md)
-  * [Layouts](frontend/components/layouts/README.md)
-    * [SiteLayout](frontend/components/layouts/sitelayout.md)
-    * [Header](frontend/components/layouts/header.md)
-  * [ToggleTheme](frontend/components/toggletheme.md)
+* [Components](frontend/Components/README.md)
+  * [Chat](frontend/Components/chat.md)
+  * [Canvas](frontend/Components/canvas/README.md)
+    * [Default](frontend/Components/canvas/default.md)
+    * [Error](frontend/Components/canvas/error.md)
+    * [CAL](frontend/Components/canvas/cal.md)
+    * [DIR](frontend/Components/canvas/dir.md)
+    * [WS](frontend/Components/canvas/ws.md)
+  * [Layouts](frontend/Components/layouts/README.md)
+    * [SiteLayout](frontend/Components/layouts/sitelayout.md)
+    * [Header](frontend/Components/layouts/header.md)
+  * [ToggleTheme](frontend/Components/toggletheme.md)
 * [Hooks](frontend/hooks.md)
 * [State](frontend/state/README.md)
   * [Lex](frontend/state/lex.md)

@@ -21,16 +21,13 @@ const Text = styled.p`
   ${({ theme }) => theme.type.expressiveParagraph};
 `
 
-export const Default = () => {
-  return (
-    <Wrapper>
-      <Text>
-        Hi! <br/> <br/>
-        I'm Mercury, a virtual assistant for Seattle University. So far
-        I can help you find calendar events, faculty & staff contact information,
-        and links from the SU website.
-      </Text>
-    </Wrapper>
-  )
-}
+export const Default = () =>
+  <Wrapper>
+    <Text>
+      Hi! <br/> <br/>
+      I'm Mercury, a virtual assistant for Seattle University. So far
+      I can help you find calendar events, faculty & staff contact information,
+      and links from the SU website.
+    </Text>
+  </Wrapper>
 

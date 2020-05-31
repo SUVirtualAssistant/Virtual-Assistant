@@ -65,7 +65,7 @@ export const lightMode = {
   },
   
   // Interaction States
-  focus         : colors.blue[60],
+  focus         : colors.grey[100],
   inverseFocusUi: colors.white[0],
   
   hover: {

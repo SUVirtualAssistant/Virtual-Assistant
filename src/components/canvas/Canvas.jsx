@@ -1,20 +1,24 @@
-import React  from 'react'
-import styled from 'styled-components'
-
+import React           from 'react'
+import styled          from 'styled-components'
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
-  overflow-y: scroll;
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  overflow-x: hidden;
   box-sizing: border-box;
   
+  display: flex;
+  flex-direction: column;
+  
+  height: calc(100vh - 50px);
+  width: 100%;
+  
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
   background: ${({ theme }) => theme.ui[1]};
+  
+  @media (max-width: 800px) {
+    height: calc(100vh - 40px);
+  }
 `
 
 const view = {

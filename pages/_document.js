@@ -13,13 +13,12 @@ class MyDocument extends Document {
           <meta name="keywords" content="Seattle University, Chatbot, Virtual Assistant" />
           
           {/* --- Fonts --- */}
+          <link rel="preconnect" href="https://fonts.googleapis.com/" crossOrigin/>
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
           
           <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32"/>
           <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16"/>
           <meta name="application-name" content="&nbsp;"/>
-          <meta name="msapplication-TileColor" content="#000000"/>
-          <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png"/>
         </Head>
         <body>
         <Main/>

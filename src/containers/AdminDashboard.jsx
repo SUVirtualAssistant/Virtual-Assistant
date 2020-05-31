@@ -1,7 +1,8 @@
-import InfoCard from '@components/metrics/card'
-import Chart    from '@components/metrics/chart'
-import React    from 'react'
-import styled   from 'styled-components'
+import InfoCard    from '@components/metrics/card'
+import Chart       from '@components/metrics/chart'
+import { wrapper } from '@state/store'
+import React       from 'react'
+import styled      from 'styled-components'
 
 const StyledAdminDashboard = styled.div`
   box-sizing: border-box;
@@ -69,5 +70,9 @@ const AdminDashboard = () =>
                key={i}/>)}
     </ChartContainer>
   </StyledAdminDashboard>
+
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async () => ({ props: {} }))
 
 export default AdminDashboard

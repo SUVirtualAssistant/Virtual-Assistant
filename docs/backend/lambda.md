@@ -30,23 +30,27 @@ AWS Lambda is a compute service that lets you run code without provisioning or m
 AWS Lambda webpage: [https://aws.amazon.com/lambda/](https://aws.amazon.com/lambda/)  
 AWS Lambda developer guide: [https://docs.aws.amazon.com/lambda/latest/dg/welcome.html](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
 
-## [**DevFacultyDataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DevFacultyDataPush?tab=configuration)
-
 ## [**FacultyDataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/FacultyDataPush?tab=configuration)
+The FacultyDataPush Lambda is responsible for filling the directory table in DynamoDB. Currently, data must be provided manually to the lambda, 
+because we have not yet been able to find a direct and accessible source for this data. The data provided to this function 
+needs to match the DynamoDB 'FacultyDirectory' table format (Email, LName, Fname, Address, Aff, Department)
 
-## [**CalendarDataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/CalendarDataPush?tab=configuration)
-
-## [**DevCalDataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DevCalDataPush?tab=configuration)
-
-## [**CalendarDataGet**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/CalendarDataGet?tab=configuration)
+## [**Cal\_DataPush**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/CAL_DataPush?tab=configuration)
+Cal_DataPush is called once daily, and pulls the calendar events for SU's ICal page. Any events that are not registered in
+the DynamoDB table 'Calendar' will be added. 
 
 ## [**CAL\_GetEventByDescription**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/CAL_GetEventByDescription?tab=configuration)
+Cal_GetEventByDescription is a lambda function integrated with Lex. This function requires a targetText slot, which contains a 
+string that the user wants to search for in the calendar. The 'Calendar' table in DynamoDB is querired for this string using AWS cloudsearch. 
+All results are then returned within the data object of SessionAttributes.
 
 ## [**CAL\_GetUpcomingEvents**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/CAL_GetUpcomingEvents?tab=configuration)
+Cal_GetUpcoming events requires no parameters, and returns all events from the 'Calendar' table
+that are scheduled within the next week from today's date. The results are stored in the data object of 
+SessionAttributes.
 
-## [**DevFacultyDataGet**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/DevFacultyDataGet?tab=configuration)
-
-## [**facstaff\_dynamoDB**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/facstaff_dynamoDB?tab=configuration)
+## [**VAFacultyDirectoryGet**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/VAFacultyDirectoryGet?tab=configuration)
+This lambda returns an entry from the 'FacultyDirectory' table of DynamoDB when provided with a Fname and LName slot.
 
 ## [**WS\_Academics**](https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/WS_Academics?tab=configuration)
 

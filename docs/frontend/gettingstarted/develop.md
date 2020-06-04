@@ -27,13 +27,12 @@ components that contain both.
 After compilation, JSX expressions become regular JavaScript function calls
 and evaluate to JavaScript objects. 
 
-<details>
-    <summary markdown="span">JSX Notes</summary>
-    * Since JSX is closer to JavaScript than to HTML,
-      React DOM uses a `camelCase` naming convention instead
-      of HTML attribute names.
-    * Components must be capitalized. Capitalization indicates to JSX
-      that the tag refers to a React component. These tags get compiled into
-      a direct reference to the named variable. If you use the JSX `<Foo />`,
-      `Foo` must be in scope.
-</details>
+{% hint style="info" %}
+* Since JSX is closer to JavaScript than to HTML,
+  React DOM uses a ```camelCase``` naming convention instead
+  of HTML attribute names.
+* Components must be capitalized. Capitalization indicates to JSX
+  that the tag refers to a React component. These tags get compiled into
+  a direct reference to the named variable. If you use the JSX ```<Foo />```,
+  ```Foo``` must be in scope.
+{% endhint %}

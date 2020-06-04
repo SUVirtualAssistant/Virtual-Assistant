@@ -107,7 +107,7 @@ export const productiveHeading = {
 export const expressiveHeading = {
   1: {
     ...Heading[1],
-    'line-height': rem(35)
+    'line-height': rem(40)
   },
   2: {
     ...Heading[2],

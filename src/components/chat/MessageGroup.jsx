@@ -6,17 +6,18 @@ import Message from './Message'
 
 const StyledMessageGroup = styled.div`
   position: relative;
-  max-width: 80%;
   box-sizing: border-box;
+  
+  max-width: 80%;
+  
   display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
+  flex-flow: column nowrap;
+  
   align-items: flex-start;
   text-align: left;
 
   ${props => !!props.user && css`
     align-self: flex-end;
-    align-items: flex-end;
     text-align: right;
   `}
 `
@@ -29,7 +30,8 @@ const MessageGroup = ({
   const is_user = group.messages[0].author.id === 1
   
   return (
-    <StyledMessageGroup user={is_user}>
+    <StyledMessageGroup user={is_user}
+                        aria-label="Message-Group">
       {group.messages.map((msg, index) =>
         [<Message item={msg}
                   isUser={is_user}

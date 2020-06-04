@@ -1,19 +1,31 @@
 import * as chatActionTypes from './types'
 
 export default (
-  state = [],
+  state = {
+    messages          : [],
+    selectedItemIndex : undefined,
+    lastSelectionIndex: undefined
+  },
   action
 ) => {
   switch (action.type) {
     case chatActionTypes.ADD_MESSAGE:
-      return [
+      return {
         ...state,
-        {
-          timestamp: action.timestamp,
-          text: action.text,
-          author: action.author
-        }
-      ]
+        messages: [
+          ...state.messages,
+          {
+            timestamp: action.timestamp,
+            text     : action.text,
+            author   : action.author
+          }
+        ]
+      }
+    case chatActionTypes.SET_SELECTED_ITEM:
+      return {
+        ...state,
+        selectedItemIndex: action.selectedItemIndex
+      }
     default:
       return state
   }

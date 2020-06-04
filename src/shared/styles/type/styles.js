@@ -2,6 +2,8 @@ import { px, rem }     from '@styles/layout'
 import { fontWeights } from './fontWeight'
 import { scale }       from './scale'
 
+const Scalar = '2vw'
+
 export const caption = {
   'font-size'     : rem(scale[0]),
   'font-weight'   : fontWeights.regular,
@@ -54,13 +56,13 @@ export const bodyLong = {
 
 export const Heading = {
   1: {
-    'font-size'     : rem(scale[6]),
+    'font-size'     : `clamp(${scale[5]}px, ${Scalar}, ${scale[10]}px);`,
     'font-weight'   : fontWeights.semibold,
     'line-height'   : rem(18),
     'letter-spacing': px(0.16)
   },
   2: {
-    'font-size'     : rem(scale[2]),
+    'font-size'     : `clamp(${scale[6]}px, ${Scalar}, ${scale[12]}px);`,
     'font-weight'   : fontWeights.semibold,
     'line-height'   : rem(22),
     'letter-spacing': 0
@@ -105,122 +107,44 @@ export const productiveHeading = {
 export const expressiveHeading = {
   1: {
     ...Heading[1],
-    'line-height': rem(20)
+    'line-height': rem(35)
   },
   2: {
     ...Heading[2],
     'line-height': rem(24)
   },
   3: {
-    'font-size'     : rem(scale[4]),
+    'font-size'     : `clamp(${scale[7]}px, ${Scalar}, ${scale[14]}px);`,
     'font-weight'   : fontWeights.regular,
     'line-height'   : '140%',
-    'letter-spacing': 0,
-    breakpoints     : {
-      xlg: {
-        'font-size'  : rem(scale[4]),
-        'line-height': '125%'
-      },
-      max: {
-        'font-size': rem(scale[5])
-      }
-    }
+    'letter-spacing': 0
   },
   4: {
-    'font-size'     : rem(scale[6]),
+    'font-size'     : `clamp(${scale[8]}px, ${Scalar}, ${scale[16]}px);`,
     'font-weight'   : fontWeights.regular,
     'line-height'   : '129%',
-    'letter-spacing': 0,
-    breakpoints     : {
-      xlg: {
-        'font-Size'  : rem(scale[6]),
-        'line-height': '125%'
-      },
-      max: {
-        'font-size': rem(scale[7])
-      }
-    }
+    'letter-spacing': 0
   },
   5: {
-    'font-size'     : rem(scale[7]),
+    'font-size'     : `clamp(${scale[9]}px, ${Scalar}, ${scale[18]}px);`,
     'font-weight'   : fontWeights.regular,
     'line-height'   : '125%',
-    'letter-spacing': 0,
-    breakpoints     : {
-      md : {
-        'font-size'     : rem(scale[8]),
-        'font-weight'   : fontWeights.light,
-        'line-height'   : '122%',
-        'letter-spacing': 0
-      },
-      lg : {
-        'font-size'     : rem(scale[9]),
-        'font-weight'   : fontWeights.light,
-        'line-height'   : '119%',
-        'letter-spacing': 0
-      },
-      xlg: {
-        'font-size'     : rem(scale[10]),
-        'font-weight'   : fontWeights.light,
-        'line-height'   : '117%',
-        'letter-spacing': 0
-      },
-      max: {
-        'font-size'     : rem(scale[12]),
-        'font-weight'   : fontWeights.light,
-        'line-height'   : rem(70),
-        'letter-spacing': 0
-      }
-    }
+    'letter-spacing': 0
   },
   6: {
-    'font-size'     : rem(scale[7]),
+    'font-size'     : `clamp(${scale[10]}px, ${Scalar}, ${scale[20]}px);`,
     'font-weight'   : fontWeights.semibold,
     'line-height'   : '125%',
-    'letter-spacing': 0,
-    breakpoints     : {
-      md : {
-        'font-size'     : rem(scale[8]),
-        'font-weight'   : fontWeights.semibold,
-        'line-height'   : '122%',
-        'letter-spacing': 0
-      },
-      lg : {
-        'font-size'     : rem(scale[9]),
-        'font-weight'   : fontWeights.semibold,
-        'line-height'   : '119%',
-        'letter-spacing': 0
-      },
-      xlg: {
-        'font-size'     : rem(scale[10]),
-        'font-weight'   : fontWeights.semibold,
-        'line-height'   : '117%',
-        'letter-spacing': 0
-      },
-      max: {
-        'font-size'     : rem(scale[12]),
-        'font-weight'   : fontWeights.semibold,
-        'line-height'   : rem(70),
-        'letter-spacing': 0
-      }
-    }
+    'letter-spacing': 0
   }
 }
 
 export const expressiveParagraph = {
   1: {
-    'font-size'     : rem(scale[5]),
+    'font-size'     : `clamp(${scale[4]}px, ${Scalar}, ${scale[8]}px);`,
     'font-weight'   : fontWeights.light,
     'line-height'   : '125%',
-    'letter-spacing': 0,
-    lg              : {
-      'font-size'  : rem(scale[6]),
-      'line-height': '129%'
-    },
-    max             : {
-      'font-size'  : rem(scale[7]),
-      'line-height': '125%'
-    }
+    'letter-spacing': 0
   }
 }
 

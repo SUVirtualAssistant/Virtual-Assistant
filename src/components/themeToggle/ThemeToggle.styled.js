@@ -3,24 +3,18 @@ import styled, { css } from 'styled-components'
 export const ToggleButton = styled.div`
   font-size: 12px;
   letter-spacing: 2px;
+  text-align: center;
   text-transform: uppercase;
+  margin-left: 37%;
   
-  align-self: center;
   position: absolute;
-  left: 0;
-  right: 9%;
-  top: 80%;
-  margin: auto;
+  top: 75%;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   box-sizing: border-box;
   cursor: pointer;
   transition: background .5s ease;
-  
-  @media (max-width: 300px) {
-    content: "";
-  }
   
   :before {
     content: "";
@@ -39,8 +33,8 @@ export const ToggleButton = styled.div`
   :after {
     content: "Light mode";
     white-space: nowrap;
-    text-indent: 60px;
-    line-height: 45px;
+    text-indent: -25px;
+    line-height: 150px;
     z-index: 2;
     position: absolute;
     width: 100%;
@@ -49,7 +43,7 @@ export const ToggleButton = styled.div`
     border: 4px solid ${({ theme }) => theme.active['UI']};
     box-shadow: 0 0 0 0 ${({ theme }) => theme.active['UI']},
                 0 0 0 3px ${({ theme }) => theme.background},
-                0 0 0 100px ${({ theme }) => theme.active['UI']};
+                0 0 0 40px ${({ theme }) => theme.active['UI']};
     box-sizing: border-box;
     transition: border-color .5s ease, box-shadow .5s ease;
   };
@@ -58,8 +52,8 @@ export const ToggleButton = styled.div`
     :before {
       background: ${({ theme }) => theme.background};
       border-radius: 50%;
-      width: 150%;
-      transform: translate(-5%, -35%) rotate(-25deg);
+      width: 80%;
+      transform: translate(-10%, -35%) rotate(-25deg);
     };
     
     :after {
@@ -67,8 +61,12 @@ export const ToggleButton = styled.div`
       box-shadow: 0 0 0 0 ${({ theme }) => theme.active['UI']},
                   0 0 0 0 ${({ theme }) => theme.active['UI']},
                   0 0 0 3px ${({ theme }) => theme.background},
-                  0 0 0 100px ${({ theme }) => theme.active['UI']};
+                  0 0 0 40px ${({ theme }) => theme.active['UI']};
       border-color: ${({ theme }) => theme.active['UI']};
     };
   `};
+  
+  @media screen and (max-height: 700px) {
+    :after { content: ''; }
+  }
 `

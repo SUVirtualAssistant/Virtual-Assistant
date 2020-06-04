@@ -1,9 +1,9 @@
 import { useOnClickOutside }      from '@shared/hooks'
 import { convertMsgsToViewItems } from '@shared/utils/view-items'
 
-import PropTypes                                           from 'prop-types'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import styled                                              from 'styled-components'
+import PropTypes                                 from 'prop-types'
+import React, { useCallback, useEffect, useRef } from 'react'
+import styled                                    from 'styled-components'
 
 import ChatInputField from './ChatInputField'
 import DateMarker     from './DateMarker'
@@ -11,49 +11,48 @@ import MessageGroup   from './MessageGroup'
 
 const ChatContainer = styled.div`
   box-sizing: border-box;
+  
   display: flex;
   flex-direction: column;
   
   background: ${({ theme }) => theme.background};
   border-right: 1px solid ${({ theme }) => theme.ui[3]};
   
-  overflow: hidden;
   width: 100%;
   min-width: 400px;
   height: calc(100vh - 50px);
   
-  ${({ theme }) => theme.type.bodyShort[2]};
-  
-  @media (max-width: 800px) {
-    ${({ theme }) => theme.type.bodyShort[1]};
+  @media screen and (max-width: 800px) {
     height: calc(100vh - 40px);
   }
 `
 
 const MessageList = styled.div`
-  display: flex;
   flex: 1;
+  
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   
   overflow-x: hidden;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 `
 
 const MessageListContent = styled.div`
-  padding: ${({ theme }) => theme.chat.message_list_padding_y}
-           ${({ theme }) => theme.chat.message_list_padding_x};
-  width: 100%;
-  box-sizing: border-box;
   position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow: hidden;
-  scroll-behavior: smooth;
+  
+  width: 100%;
+  
+  padding: ${({ theme }) => theme.chat.message_list_padding_y}
+           ${({ theme }) => theme.chat.message_list_padding_x};
   
   > * + * {
     margin-top: ${({ theme }) => theme.chat.message_list_spacing};
@@ -75,12 +74,12 @@ const renderMessageList = ({
 const Chat = ({
   messages,
   sendMessage,
-  placeholder
+  placeholder,
+  selectedItemIndex,
+  setSelectedItem
 }) => {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null)
-  
-  const messageListRef = useRef(null)
-  const inputRef = useRef(null)
+  const messageListRef = useRef(null) // for click outside
+  const inputRef = useRef(null)       // for chat input
   
   /**
    * Runs whenever the messages array changes.
@@ -94,12 +93,9 @@ const Chat = ({
   }, [messages])
   
   useOnClickOutside(messageListRef, useCallback(() => {
-    setSelectedItemIndex(null)
+    if (selectedItemIndex)
+      setSelectedItem(undefined)
   }, []))
-  
-  const onMessageSelected = useCallback(clickedItemIndex => {
-    setSelectedItemIndex(clickedItemIndex)
-  }, [selectedItemIndex])
   
   return (
     <ChatContainer>
@@ -107,7 +103,7 @@ const Chat = ({
                    aria-live='polite'>
         <MessageListContent ref={messageListRef}>
           <DateMarker timestamp={new Date()}/>
-          {renderMessageList({ messages, selectedItemIndex, onMessageSelected })}
+          {renderMessageList({ messages, selectedItemIndex, setSelectedItem })}
         </MessageListContent>
       </MessageList>
       <ChatInputField onMessageSend={sendMessage}

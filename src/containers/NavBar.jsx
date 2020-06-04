@@ -1,12 +1,12 @@
-import Burger                                           from '@components/burger'
-import Header                                           from '@components/header'
-import Menu                                             from '@components/menu'
-import { getServerSideAuth, useAuth, useAuthFunctions } from '@services/AWS_Cognito/auth'
-import { useOnClickOutside }                            from '@shared/hooks'
-import { uiActions }                                    from '@state/modules/ui'
-import React, { useCallback, useRef }                   from 'react'
-import { useDispatch, useSelector }                     from 'react-redux'
-import styled                                           from 'styled-components'
+import Burger                         from '@components/burger'
+import Header                         from '@components/header'
+import Menu                           from '@components/menu'
+import { useAuth, useAuthFunctions }  from '@services/AWS_Cognito/auth'
+import { useOnClickOutside }          from '@shared/hooks'
+import { uiActions }                  from '@state/modules/ui'
+import React, { useCallback, useRef } from 'react'
+import { useDispatch, useSelector }   from 'react-redux'
+import styled                         from 'styled-components'
 
 const StyledNavBar = styled.div`
   position: fixed;
@@ -29,39 +29,31 @@ const title = {
   ariaLabel: 'Home'
 }
 
-const links = [
-  {
-    name: 'Dashboard',
-    to  : '/dashboard'
-  }
-]
-
 const NavBar = props => {
   const menuRef = useRef()
   const open = useSelector(state => state.ui.menu_visible)
   
-  const auth = useAuth(props.initialAuth)
+  const auth = useAuth(null)
   const { login, logout } = useAuthFunctions()
   
   const dispatch = useDispatch()
   
   useOnClickOutside(menuRef, useCallback(() => {
     if (open)
-      setMenu(false)
+      toggleMenu(false)
   }, [open]))
   
-  const setMenu = useCallback(visibility => {
+  const toggleMenu = useCallback(visibility => {
     dispatch(uiActions.toggleMenu(visibility))
   }, [dispatch])
   
   return (
-    <StyledNavBar ref={menuRef}>
-      {/*<Logo src = 'https://files.slack.com/files-pri/TNWC0U7S9-F014B8NFJ5R/logo8.png' alt={title}/>*/}
+    <StyledNavBar ref={menuRef}
+                  aria-label="Navigation Bar">
       <Header title={title}/>
       <Burger open={open}
-              setOpen={setMenu}/>
-      <Menu links={links}
-            open={open}
+              setOpen={toggleMenu}/>
+      <Menu open={open}
             auth={auth}
             login={login}
             logout={logout}
@@ -69,11 +61,6 @@ const NavBar = props => {
             toggleTheme={props.toggleTheme}/>
     </StyledNavBar>
   )
-}
-
-export const getServerSideProps = async ctx => {
-  const initialAuth = getServerSideAuth(ctx.req)
-  return { props: { initialAuth } }
 }
 
 export default NavBar

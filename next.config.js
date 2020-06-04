@@ -27,7 +27,7 @@ module.exports = phase => {
           USER_POOL_CLIENT_ID: '9u63af3khdtg86dnenaqc9lrn',
           REDIRECT_SIGN_IN: 'https://su-assistant.chat/token',
           REDIRECT_SIGN_OUT: 'https://su-assistant.chat/',
-          AUTH_COOKIE_DOMAIN: 'auth.su-assistant.chat',
+          AUTH_COOKIE_DOMAIN: '.su-assistant.chat',
         },
         target : 'serverless',
         webpack: config => {

@@ -14,6 +14,6 @@ const StyledDateMarker = styled.div`
 `
 
 const DateMarker = ({ timestamp }) =>
-  <StyledDateMarker>{getDate(timestamp)}</StyledDateMarker>
+  <StyledDateMarker aria-label="Chat DateMarker">{getDate(timestamp)}</StyledDateMarker>
 
 export default React.memo(DateMarker)

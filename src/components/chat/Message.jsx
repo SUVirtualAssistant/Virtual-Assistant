@@ -4,15 +4,13 @@ import React, { useCallback } from 'react'
 import styled, { css }        from 'styled-components'
 
 const ChatMessage = styled.div`
-  max-width: 100%;
-  margin: 2px 0 0;
   position: relative;
+  max-width: 100%;
   outline: none;
-  transition: margin ease-in-out .3s;
-  
+  transition: margin .3s ease-in-out;
+  margin: 2px 0 0;
   ${props => props.selected && css`
-      margin-bottom: ${({ theme }) => theme.chat.item_spacing_y};
-      border: 0;
+      margin: 4px 0;
   `};
 `
 
@@ -27,27 +25,28 @@ const Bubble = styled.div`
                  ${({ theme }) => theme.chat.bubble_padding_x};
                  
   color: ${props => !!props.user ? props.theme.text[1]
-                                 : props.theme.su_red['text'] };
+                                 : props.theme.su_red['text']};
   background: ${props => !!props.user ? props.theme.ui[3]
                                       : props.theme.su_red[1]};
-  border:     ${props => !!props.user ? props.theme.ui[1]
+  border:     ${props => !!props.user ? props.theme.ui[3]
                                       : props.theme.su_red[1]};
 `
 
 const Time = styled.time`
-  pointer-events: none;
   position: absolute;
   top: 50%;
   
+  pointer-events: none;
+  
+  ${({ theme }) => theme.type.label};
+  color: ${({ theme }) => theme.text[1]};
   white-space: nowrap;
-  transition: opacity ease-in-out .3s;
-  left:    ${props => !props.user && '100%'};
-  opacity: ${props => props.selected ? '1' : '0'};
+  
+  opacity: ${props => props.selected ? '.7' : '0'};
+  transition: opacity .3s linear;
   transform: translateY(-50%);
   
-  
-               ${({ theme }) => theme.type.label};
-  color:       ${({ theme }) => theme.text[5]};
+  left:    ${props => !props.user && '100%'};
   margin-left: ${({ theme }) => theme.chat.item_spacing_x};
   
   ${props => props.user && css`
@@ -55,7 +54,6 @@ const Time = styled.time`
     text-align: right;
     margin-right: ${({ theme }) => theme.chat.item_spacing_x};
   `};
-
 `
 
 const getTimestampView = (timestamp, selected, user) => timestamp &&
@@ -66,28 +64,29 @@ const getTimestampView = (timestamp, selected, user) => timestamp &&
   </Time>
 
 const getMainView = (user, text) => text &&
-  <Bubble user={user}>{text}</Bubble>
+  <Bubble user={user} aria-label="Message-Text">{text}</Bubble>
 
 const Message = ({
   item,
   isUser,
   selected,
-  onMessageSelected
+  setSelectedItem
 }) => {
   
   const handleSelection = useCallback(() => {
-    onMessageSelected(item.selectionIndex)
+    setSelectedItem(item.selectionIndex)
   }, [selected])
   
   const onBlur = useCallback(() => {
-    onMessageSelected(-1)
+    setSelectedItem(undefined)
   }, [selected])
   
   return (
     <ChatMessage tabIndex={item.selectionIndex}
                  selected={selected}
                  onBlur={onBlur}
-                 onClick={handleSelection}>
+                 onClick={handleSelection}
+                 aria-label="Message">
       {getMainView(isUser, item.text)}
       {getTimestampView(item.timestamp, selected, isUser)}
     </ChatMessage>
@@ -95,10 +94,9 @@ const Message = ({
 }
 
 Message.propTypes = {
-  item             : PropTypes.object.isRequired,
-  isUser           : PropTypes.bool.isRequired,
-  selected         : PropTypes.bool.isRequired,
-  onMessageSelected: PropTypes.func.isRequired
+  item    : PropTypes.object.isRequired,
+  isUser  : PropTypes.bool.isRequired,
+  selected: PropTypes.bool.isRequired
 }
 
 export default Message

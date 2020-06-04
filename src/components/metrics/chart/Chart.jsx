@@ -42,11 +42,11 @@ export const Chart = ({
       
       if (url)
         fetch(url).then(res => res.json())
-        .then(result =>
-          
-          setData(Object.entries(result['body'])
-                .map(([x, y]) => ({ date: x, occurrences: y }))
-        ), error => console.error(error))
+        .then(result => {
+          if (result.body)
+            setData(Object.entries(result['body'])
+                  .map(([x, y]) => ({ date: x, occurrences: y })))
+        }, error => console.error(error))
     }
   }, [])
   

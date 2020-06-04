@@ -13,7 +13,7 @@ class MyDocument extends Document {
           <meta name="keywords" content="Seattle University, Chatbot, Virtual Assistant" />
           
           {/* --- Fonts --- */}
-          <link rel="preconnect" href="https://fonts.googleapis.com/" crossOrigin/>
+          <link rel="preconnect" href="https://fonts.googleapis.com/" crossOrigin="true"/>
           <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
           
           <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32"/>
@@ -21,8 +21,8 @@ class MyDocument extends Document {
           <meta name="application-name" content="&nbsp;"/>
         </Head>
         <body>
-        <Main/>
-        <NextScript/>
+          <Main/>
+          <NextScript/>
         </body>
       </Html>
     )

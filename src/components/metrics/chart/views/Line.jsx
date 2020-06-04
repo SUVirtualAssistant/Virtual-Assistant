@@ -12,7 +12,7 @@ const LineGraph = ({
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3"/>
         <Tooltip wrapperStyle={{ color: '#000', backgroundColor: '#ccc' }}/>}/>
-        <YAxis dataKey={labels[1]} domain={[0, 300]}/>
+        <YAxis dataKey={labels[1]}/>
         <XAxis dataKey={labels[0]}/>
         <Line type="monotone" dataKey="occurrences" stroke="#aa0000"/>
       </LineChart>

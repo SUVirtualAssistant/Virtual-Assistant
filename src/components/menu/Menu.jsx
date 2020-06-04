@@ -1,37 +1,43 @@
+import ThemeToggle    from '@components/themeToggle'
 import Link           from 'next/link'
 import React          from 'react'
-import ThemeToggle    from '../themeToggle'
 import { StyledMenu } from './Menu.styled'
 
+const links = [
+  {
+    name: 'Chat',
+    to  : '/'
+  },
+  {
+    name: 'Dashboard',
+    to  : '/dashboard'
+  }
+]
+
 const Menu = ({
-  links,
   open,
-  auth,
-  login,
-  logout,
   theme,
   toggleTheme
-}) => {
-  return (
-    <StyledMenu open={open}>
-      {links.map((link, index) =>
-        <Link key={index}
-              href={link.to}
-              passHref>
-          <a aria-label={link.name}>
-            {link.name}
-          </a>
-        </Link>)}
-      <a href="https://docs.su-assistant.chat"
-         aria-label="Docs">
-        Docs
+}) =>
+  <StyledMenu open={open} aria-label="menu">
+    <Link href={links[0].to}
+          passHref>
+      <a aria-label={links[0].name}>
+        {links[0].name}
       </a>
-      {auth ? <a onClick={() => logout()}>Logout</a>
-            : <a onClick={() => login()}>Login</a>}
-      <ThemeToggle theme={theme}
-                   toggleTheme={toggleTheme}/>
-    </StyledMenu>
-  )
-}
+    </Link>
+    <Link href={links[1].to}
+          passHref>
+      <a aria-label={links[1].name}>
+        {links[1].name}
+      </a>
+    </Link>
+    <a href="https://docs.su-assistant.chat"
+       aria-label="Docs">
+      Docs
+    </a>
+    <ThemeToggle theme={theme}
+                 toggleTheme={toggleTheme}/>
+  </StyledMenu>
 
 export default Menu

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "pems:prepare": "prepare-pems --region us-west-2 --userPoolId us-west-2_pmpIkt4fs"
+    "pems:prepare dev": "prepare-pems --region us-west-2 --userPoolId us-west-2_pmpIkt4fs",
+    "pems:prepare prod": "prepare-pems --region us-west-2 --userPoolId us-west-2_fxRt1SBrY"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.2.8",

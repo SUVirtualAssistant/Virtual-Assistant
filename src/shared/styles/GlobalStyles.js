@@ -6,6 +6,12 @@
 import { createGlobalStyle } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
+let vh
+if (typeof window !== 'undefined') {
+  vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
 
@@ -22,21 +28,17 @@ export const GlobalStyle = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
   }
-
-  html, body {
+  
+  html {
     position: fixed;          // prevents scroll bounce
-    overflow: hidden;
-    margin: 0;
   }
 
   body {
-    width: 100vw;
+    overscroll-behavior: none ;
     height: 100vh;
-    
-    overflow-y: auto;         // allows scrolling on the page itself
-    overflow-x: hidden;
+    width: 100vw;
     
     background: ${({ theme }) => theme.background};
     transition: all 0.3s ease-in-out;
@@ -44,6 +46,15 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text[1]};
     font-family: ${({ theme }) => theme.type.regular};
     ${({ theme }) => theme.type.bodyLong[2]};
+    
+    
+    @media only screen
+      and (min-device-width: 375px)
+      and (max-device-width: 812px)
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) {
+      height: calc(var(--vh, 1vh) * 100);
+    }
   }
 
   h1 {

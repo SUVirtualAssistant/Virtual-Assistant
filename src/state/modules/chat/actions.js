@@ -11,3 +11,9 @@ export const addMessage = (
   ...(author && { author: author })
 })
 
+export const setSelectedItem = idx => ({
+  type: types.SET_SELECTED_ITEM,
+  selectedItemIndex: idx
+})
+
+

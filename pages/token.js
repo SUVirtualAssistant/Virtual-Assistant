@@ -1,5 +1,6 @@
 import { useAuthRedirect } from '@services/AWS_Cognito/auth'
 import { useRouter }       from 'next/router'
+import queryString         from 'query-string'
 import React               from 'react'
 
 const extractFirst = value => Array.isArray(value) ? value[0] : value
@@ -13,13 +14,17 @@ const extractFirst = value => Array.isArray(value) ? value[0] : value
 // automatically because the id_token hash is present. Then we redirect the
 // user back to the main page. That page can now use SSR as the user will have
 // the necessary cookies ready.
-export default () => {
+export default function TokenSetter() {
   const router = useRouter()
+  
   useAuthRedirect(() => {
     // We are not using the router here, since the query object will be empty
     // during the prerendering if the page is statically optimized.
     // So the router's location would return no search the first time.
-    router.replace('/dashboard')
+    const redirectUriAfterSignIn =
+            extractFirst(queryString.parse(window.location.search).to || '') || '/dashboard'
+    
+    router.replace(redirectUriAfterSignIn)
   })
   
   return <div/>

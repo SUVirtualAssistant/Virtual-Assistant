@@ -24,6 +24,9 @@ const reducer = (state, action) => {
       ...action.payload   // apply delta from hydration
     }
     
+    if (state.auth === true)
+      nextState.auth = state.auth
+    
     if (state.lex)        // preserve messages on client side nav
       nextState.lex = state.lex
     

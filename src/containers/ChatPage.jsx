@@ -1,6 +1,7 @@
 import Canvas         from '@components/canvas'
 import { Chat }       from '@components/chat'
 import { lexActions } from '@state/modules/lex'
+import { chatActions } from '@state/modules/chat'
 
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector }      from 'react-redux'
@@ -9,10 +10,6 @@ import styled                            from 'styled-components'
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: row;
-
-  @media (max-width: 800px) {
-    height: calc(100vh - 40px);
-  }
 `
 
 const ChatPageContainer = () => {
@@ -22,7 +19,8 @@ const ChatPageContainer = () => {
   const currentView = useSelector(state => state.canvas.currentView)
   const currentDataIdx = useSelector(state => state.canvas.currentDataIndex)
   
-  const messages = useSelector(state => state.chat)
+  const messages = useSelector(state => state.chat.messages)
+  const selectedItemIndex = useSelector(state => state.chat.selectedItemIndex)
   const active = useSelector(state => state.lex.active)
   
   useEffect(() => {
@@ -33,11 +31,16 @@ const ChatPageContainer = () => {
   const sendMessage = useCallback(message =>
     dispatch(lexActions.sendMessage(message)), [dispatch])
   
+  const setSelectedItem = useCallback(idx =>
+    dispatch(chatActions.setSelectedItem(idx)), [dispatch])
+  
   return (
     <ChatContainer>
       <Chat messages={messages}
             sendMessage={sendMessage}
-            placeholder='Type a message...'/>
+            placeholder='Type a message...'
+            selectedItemIndex={selectedItemIndex}
+            setSelectedItem={setSelectedItem}/>
       <Canvas type={currentView}
               data={canvasData[currentDataIdx] && canvasData[currentDataIdx].data}/>
     </ChatContainer>

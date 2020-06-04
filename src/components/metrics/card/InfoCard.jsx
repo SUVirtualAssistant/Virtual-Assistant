@@ -20,7 +20,7 @@ const Card = styled.div`
   letter-spacing: .2em;
 `
 
-const Content = styled.h2`
+const CardContent = styled.h2`
   position: relative;
   font-size: 2rem;
   padding: 1rem;
@@ -50,7 +50,7 @@ export const InfoCard = ({
     <Card>
       {data ? <>
                <h3>{title}</h3>
-               <Content>{data}</Content>
+               <CardContent>{data}</CardContent>
              </>
             : <Loading/>}
     </Card>

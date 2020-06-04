@@ -1,11 +1,9 @@
 import * as types from './types'
 
-const initialState = {
-  menu_visible: false
-}
-
 export default (
-  state = initialState,
+  state = {
+    menu_visible: false
+  },
   action
 ) => {
   switch (action.type) {

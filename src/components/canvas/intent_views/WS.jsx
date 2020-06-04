@@ -3,27 +3,34 @@ import React  from 'react'
 import styled from 'styled-components'
 
 const L = styled.a`
-  position: relative;
-  height: 100%;
-  padding: 2em;
+  flex: 1 1 auto;
+  width: 100%;
   
-  ${({ theme }) => theme.type.expressiveHeading[2]};
-  text-align: center;
+  padding: 2rem 1rem;
+  border: 1px solid ${({ theme }) => theme.ui[4]};
+  border-top: none;
+  
+  ${({ theme }) => theme.backgrounds['WS']};
+  
+  ${({ theme }) => theme.type.expressiveParagraph};
+  text-align: justify;
   word-wrap: break-word;
   
-  border-color: ${({ theme }) => theme.ui[3]};
-  border-style: solid;
-  border-width: 1px 1px;
- 
-  cursor: pointer;
-  
+  transition: background 0.3s ease-in-out,
+              color 0.3s ease-in-out;
   :hover {
-    color: ${({ theme }) => theme.inverse[1]};
-    background-color: ${({ theme }) => theme.focus};
+    color: ${({ theme }) => theme.text[5]};
+    background-color: ${({ theme }) => theme.overlay[2]}CC;
   }
 `
 
 export const WS = ({
   data
 }) => _.values(data)
-       .map((e, index) => <L href={e.Link} target="_blank" key={index}>{e.Title}</L>)
+       .map((e, index) =>
+         <L href={e.Link}
+            target="_blank"
+            key={index}>
+           {e.Title}
+         </L>
+       )

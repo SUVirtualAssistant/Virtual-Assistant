@@ -1,7 +1,6 @@
 import Burger                         from '@components/burger'
 import Header                         from '@components/header'
 import Menu                           from '@components/menu'
-import { useAuth, useAuthFunctions }  from '@services/AWS_Cognito/auth'
 import { useOnClickOutside }          from '@shared/hooks'
 import { uiActions }                  from '@state/modules/ui'
 import React, { useCallback, useRef } from 'react'
@@ -30,15 +29,12 @@ const title = {
 }
 
 const NavBar = props => {
-  const menuRef = useRef()
+  const navRef = useRef(null)
   const open = useSelector(state => state.ui.menu_visible)
-  
-  const auth = useAuth(null)
-  const { login, logout } = useAuthFunctions()
   
   const dispatch = useDispatch()
   
-  useOnClickOutside(menuRef, useCallback(() => {
+  useOnClickOutside(navRef, useCallback(() => {
     if (open)
       toggleMenu(false)
   }, [open]))
@@ -48,15 +44,12 @@ const NavBar = props => {
   }, [dispatch])
   
   return (
-    <StyledNavBar ref={menuRef}
+    <StyledNavBar ref={navRef}
                   aria-label="Navigation Bar">
       <Header title={title}/>
       <Burger open={open}
               setOpen={toggleMenu}/>
       <Menu open={open}
-            auth={auth}
-            login={login}
-            logout={logout}
             theme={props.theme}
             toggleTheme={props.toggleTheme}/>
     </StyledNavBar>

@@ -33,7 +33,7 @@ export const Default = () =>
       <Text>
         I'm Mercury, messenger of the Gods and acting Virtual Assistant for Seattle University.
         <br/><br/>
-        I can help find calendar events, search <a href='https://seattleu.edu' target='_blank'>seattleu.edu</a>, and
+        I can help find calendar events, search the Seattle University website, and
         track down faculty & staff contact info.
       </Text>
     </Article>

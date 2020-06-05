@@ -17,14 +17,15 @@ export const StyledHeader = styled.div`
 `
 
 export const HeaderSVG = styled(logo)`
-  margin-left: 10px;
-  margin-top: 10px;
-  height: 55px;
+  margin-top: .7em;
+  margin-left: .6em;
+  
+  height: 50px;
   
   z-index: 1;
-  
   @media (max-width: 800px) {
     height: 40px;
+    margin-top: .5em;
   }
 `
 

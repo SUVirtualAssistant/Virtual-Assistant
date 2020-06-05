@@ -10,26 +10,20 @@
     "pems:prepare prod": "prepare-pems --region us-west-2 --userPoolId us-west-2_fxRt1SBrY"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^3.2.8",
-    "@aws-amplify/core": "^3.2.8",
-    "aws-cognito-next": "^3.0.0",
     "aws-sdk": "2.673.0",
     "lodash": "^4.17.15",
     "next": "9.4.0",
     "next-redux-wrapper": "6.0.0",
     "prop-types": "^15.7.2",
-    "query-string": "^6.12.1",
     "react": "16.13.1",
     "react-animations": "^1.0.0",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.0",
-    "react-transition-group": "^4.4.1",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.0",
     "styled-normalize": "^8.0.7",
-    "styled-transition-group": "^2.0.1",
     "uuidv4": "^6.0.8"
   },
   "devDependencies": {

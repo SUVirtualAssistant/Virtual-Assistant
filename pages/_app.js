@@ -1,7 +1,3 @@
-import Auth                          from '@aws-amplify/auth'
-import Amplify                       from '@aws-amplify/core'
-import { authConfig, cognitoConfig } from '@services/AWS_Cognito/config'
-
 import { useDarkMode } from '@shared/hooks'
 import { wrapper }     from '@state/store'
 import { GlobalStyle } from '@styles/GlobalStyles'
@@ -12,9 +8,6 @@ import SEO            from 'next-seo.config'
 
 import React             from 'react'
 import { ThemeProvider } from 'styled-components'
-
-Amplify.configure(cognitoConfig)
-Auth.configure(authConfig)
 
 const Noop = ({ children }) => children
 

@@ -1,8 +1,8 @@
 export default {
   openGraph: {
-    type: 'website',
-    locale: 'en_IE',
-    url: 'https://su-assistant.chat',
-    site_name: 'SU Virtual Assistant',
+    url: 'https://www.su-assistant.chat',
+    title: 'SU Virtual Assistant',
+    description: 'Seattle University Virtual Assistant Chatbot',
+    site_name: 'SUVirtualAssistant'
   }
 }

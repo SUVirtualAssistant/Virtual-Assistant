@@ -3,12 +3,6 @@ import { isAuthor } from '.'
 
 const last = arr => arr[arr.length - 1]
 
-const dateChanged = (curr, prev) =>
-  (curr && prev) &&
-  (prev.getDate() !== curr.getDate()
-    || prev.getMonth() !== curr.getMonth()
-    || prev.getFullYear() !== curr.getFullYear())
-
 const groupMessages = (arr, msg) => {
   const lastItem = last(arr)
   let messages = undefined

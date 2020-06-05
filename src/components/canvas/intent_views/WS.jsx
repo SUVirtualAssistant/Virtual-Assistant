@@ -3,12 +3,10 @@ import React  from 'react'
 import styled from 'styled-components'
 
 const L = styled.a`
-  flex: 1 1 auto;
-  width: 100%;
-  
-  padding: 2rem 1rem;
-  border: 1px solid ${({ theme }) => theme.ui[4]};
-  border-top: none;
+  padding: 1em 1em;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: ${({ theme }) => theme.ui[4]}CC;
   
   ${({ theme }) => theme.backgrounds['WS']};
   
@@ -16,12 +14,14 @@ const L = styled.a`
   text-align: justify;
   word-wrap: break-word;
   
-  transition: background 0.3s ease-in-out,
-              color 0.3s ease-in-out;
+  transition: all 300ms cubic-bezier(0.5, 0.1, 0, 1);
+  
   :hover {
     color: ${({ theme }) => theme.text[5]};
     background-color: ${({ theme }) => theme.overlay[2]}CC;
   }
+  
+  &+& { border-top: none; }
 `
 
 export const WS = ({

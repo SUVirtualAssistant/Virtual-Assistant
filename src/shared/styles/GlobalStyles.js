@@ -40,21 +40,13 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
     width: 100vw;
     
-    background: ${({ theme }) => theme.background};
-    transition: all 0.3s ease-in-out;
+    transition: all 300ms cubic-bezier(0.5, 0, 0.1, 1);
+    
+    ${({ theme }) => theme.type.bodyLong[2]};
+    font-family: ${({ theme }) => theme.type.regular};
     
     color: ${({ theme }) => theme.text[1]};
-    font-family: ${({ theme }) => theme.type.regular};
-    ${({ theme }) => theme.type.bodyLong[2]};
-    
-    
-    @media only screen
-      and (min-device-width: 375px)
-      and (max-device-width: 812px)
-      and (-webkit-min-device-pixel-ratio: 3)
-      and (orientation: portrait) {
-      height: calc(var(--vh, 1vh) * 100);
-    }
+    background-color: ${({ theme }) => theme.background};
   }
 
   h1 {

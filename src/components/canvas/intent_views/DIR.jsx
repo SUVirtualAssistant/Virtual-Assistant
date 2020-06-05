@@ -3,47 +3,53 @@ import React        from 'react'
 import styled       from 'styled-components'
 
 const StyledDir = styled.div`
-  flex: 0 0 auto;
+  flex: 1 auto;
   
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row nowrap;
+  align-items: center;
   justify-content: center;
-  align-content: center;
+`
+
+const ContactInfo = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
   
-  padding: 15%;
+  height: 80%;
+  width: 80%;
+  padding: 6em;
+  
   ${({ theme }) => theme.backgrounds['DIR']};
+  text-transform: capitalize;
   
-  @media (max-width: 800px) {
-    flex: 1 1 auto;
-    padding: 10%;
-  }
+  h1 { ${({ theme }) => theme.type.expressiveHeading[5]}; }
+  
+  h3 { ${({ theme }) => theme.type.expressiveHeading[1]}; }
   
   a {
     color: ${({ theme }) => theme.text['link']};
-    ${({ theme }) => theme.type.expressiveHeading[1]};
+    text-transform: none;
+    transition: color 0.3s cubic-bezier(0.5, 0, 0.1, 1);
     
-    :hover { color: ${({ theme }) => theme.hover['link']}; }
+    :hover {
+      color: ${({ theme }) => theme.hover['link']};
+    }
   }
   
-  h1 {
-    ${({ theme }) => theme.type.expressiveHeading[6]};
-  }
-  
-  h2 {
-    ${({ theme }) => theme.type.expressiveHeading[3]};
-    line-height: 4rem;
-  }
-  
-  div {
+  div, a {
     ${({ theme }) => theme.type.expressiveHeading[1]};
-    line-height: 3rem;
+    font-size: 1rem;
+    line-height: normal;
+  }
+  
+  @media screen and (max-width: 800px) {
+    height: 100%;
+    width: 100%;
+    
+    padding: 1em;
   }
 `
-
-const capitalize = s => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 export const DIR = ({
   data
@@ -54,17 +60,21 @@ export const DIR = ({
           LName, Phone
         } = data
   
+  const title = JTitle.split(', ')
   const department = Department.split('-')
   
   return (
     <StyledDir>
-      <h1>{capitalize(Fname)} {capitalize(LName)}</h1>
-      {notEqual(JTitle, 'N/A') && <h2>{capitalize(JTitle)}</h2>}
-      {notEqual(Department, 'N/A') && <div>{department[0]}</div>}
-      {Array.isArray(department) && <div>{department[1]}</div>}
-      {notEqual(Phone, 'N/A') && <div>{Phone}</div>}
-      {notEqual(Email, 'N/A') && <a href={'mailto:' + Email}>{Email}</a>}
-      {notEqual(Address, 'N/A') && <div>{Address}</div>}
+      <ContactInfo>
+        <h1>{Fname} {LName}</h1>
+        {notEqual(title[0], 'N/A') && <h3>{title[0]}</h3>}
+        {Array.isArray(title) && <h3>{title[1]}</h3>}
+        {notEqual(Department, 'N/A') && <div>{department[0]}</div>}
+        {Array.isArray(department) && <div>{department[1]}</div>}
+        {notEqual(Phone, 'N/A') && <div>{Phone}</div>}
+        {notEqual(Email, 'N/A') && <a href={'mailto:' + Email}>{Email}</a>}
+        {notEqual(Address, 'N/A') && <div>{Address}</div>}
+      </ContactInfo>
     </StyledDir>
   )
 }

@@ -4,12 +4,10 @@ import React        from 'react'
 import styled       from 'styled-components'
 
 const Event = styled.a`
-  flex: 1 1 auto;
-  width: 100%;
-  
-  padding: 2rem 1rem;
-  border: 1px solid ${({ theme }) => theme.ui[4]};
-  border-top: none;
+  padding: 1em 1em;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: ${({ theme }) => theme.ui[4]}CC;
   
   ${({ theme }) => theme.backgrounds['CAL']};
   
@@ -18,10 +16,13 @@ const Event = styled.a`
   word-wrap: break-word;
   
   transition: background 0.3s ease-in-out;
+  
   :hover {
-    color: ${({ theme }) => theme.text[1]};
+    color: ${({ theme }) => theme.text[5]};
     background-color: ${({ theme }) => theme.overlay[2]}CC;
   }
+  
+  &+& { border-top: none; }
 `
 
 export const CAL = ({

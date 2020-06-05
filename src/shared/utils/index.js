@@ -31,4 +31,3 @@ export const hasJsonStructure = str => {
     return false
   }
 }
-

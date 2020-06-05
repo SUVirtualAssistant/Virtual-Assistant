@@ -2,7 +2,7 @@ import { px, rem }     from '@styles/layout'
 import { fontWeights } from './fontWeight'
 import { scale }       from './scale'
 
-const Scalar = '2vw'
+const Scalar = '1.5vw'
 
 export const caption = {
   'font-size'     : rem(scale[0]),
@@ -12,7 +12,7 @@ export const caption = {
 }
 
 export const label = {
-  'font-size'     : rem(scale[0]),
+  'font-size'     : rem(12),
   'font-weight'   : fontWeights.regular,
   'line-height'   : rem(16),
   'letter-spacing': px(0.32)
@@ -141,10 +141,10 @@ export const expressiveHeading = {
 
 export const expressiveParagraph = {
   1: {
-    'font-size'     : `clamp(${scale[4]}px, ${Scalar}, ${scale[8]}px);`,
-    'font-weight'   : fontWeights.light,
+    'font-size'     : `clamp(${scale[1]}px, ${Scalar}, ${scale[3]}px);`,
+    'font-weight'   : fontWeights.regular,
     'line-height'   : '125%',
-    'letter-spacing': 0
+    'letter-spacing': 0.2
   }
 }
 

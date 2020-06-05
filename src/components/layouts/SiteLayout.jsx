@@ -4,11 +4,10 @@ import styled from 'styled-components'
 
 const Content = styled.main`
   position: fixed;
-  height: calc(100vh - 50px);
   width: 100vw;
   overflow: hidden;
   margin-top: 50px;
-
+  height: calc(100vh - 50px);
   @media (max-width: 800px) {
     margin-top: 40px;
     height: calc(100vh - 40px);

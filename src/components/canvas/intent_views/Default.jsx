@@ -1,7 +1,7 @@
 import Accordion from '@components/accordion'
+import px2vw     from '@styles/utils'
 import React     from 'react'
-import styled from 'styled-components'
-import px2vw  from '@styles/utils'
+import styled    from 'styled-components'
 
 const StyledView = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Article = styled.article`
   padding: ${px2vw(60)};
   background: ${({ theme }) => theme.ui[2]}80;
 `
-  
+
 const Text = styled.p`
   flex: 1;
   ${({ theme }) => theme.type.expressiveParagraph};
@@ -27,17 +27,14 @@ const FeedbackContent = `
 <a href="mailto:virtualassistant@seattleu.edu">virtualassistant@seattleu.edu</a>
 `
 
-import { fontWeights } from '@styles/type/fontWeight'
-
-console.log('fontWeight', fontWeights)
-
 export const Default = () =>
   <StyledView>
     <Article>
       <Text>
         I'm Mercury, messenger of the Gods and acting Virtual Assistant for Seattle University.
-        <br /><br />
-        I can help find calendar events, search <a href='https://seattleu.edu' target='_blank'>seattleu.edu</a>, and track down faculty & staff contact info.
+        <br/><br/>
+        I can help find calendar events, search <a href='https://seattleu.edu' target='_blank'>seattleu.edu</a>, and
+        track down faculty & staff contact info.
       </Text>
     </Article>
     <Accordion title="Contact Us"

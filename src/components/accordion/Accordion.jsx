@@ -20,19 +20,19 @@ const AccordionButton = styled.button`
   
   ${({ theme }) => theme.type.expressiveParagraph};
   
-  transition: color 0.3s ease,
-              background-color 0.3s ease;
+  transition: color 0.3s cubic-bezier(0.5, 0.1, 0, 1),
+              background-color 0.3s cubic-bezier(0.5, 0.1, 0, 1);
   
   color: ${({ theme, active }) => active ? theme.inverse[1]
                                          : theme.text[1]};
   background-color: ${({ theme, active }) => active ? theme.inverse['background']
-                                                    : theme.ui[2]};
+                                                    : theme.ui[2]}B3;
   :hover {
-    color: ${({ theme, active }) => active ? theme.text[5]
+    color: ${({ theme, active }) => active ? theme.hover['link']
                                            : theme.text[1]};
     
     background-color: ${({ theme, active }) => active ? theme.inverse['background']
-                                                      : theme.hover['selectedUI']}CC;
+                                                      : theme.hover['selectedUI']}B3;
   }
   
   @media (max-width: 800px) {
@@ -56,12 +56,14 @@ const Content = styled.div`
   overflow: hidden;
   
   background: ${({ theme }) => theme.ui[3]}80;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 300ms cubic-bezier(0.5, 0.1, 0, 1);
   max-height: ${props => props.height};
   
   a {
-    ${({ theme }) => theme.type.productiveHeading[3]};
+    transition: color 0.3s cubic-bezier(0.5, 0.1, 0, 1);
+    
     color: ${({ theme }) => theme.text['link']};
+    ${({ theme }) => theme.type.productiveHeading[3]};
     
     :hover {
       color: ${({ theme }) => theme.ui[7]};

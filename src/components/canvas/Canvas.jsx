@@ -3,20 +3,12 @@ import styled          from 'styled-components'
 import * as Components from './intent_views'
 
 const DynamicCanvasContainer = styled.div`
-  box-sizing: border-box;
+  flex: 0 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 50px);
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  
+  flex-flow: column nowrap;
+  align-items: stretch;
+  overflow: auto;
   background-color: ${({ theme }) => theme.ui[1]}1A;
-  @media (max-width: 800px) {
-    height: calc(100vh - 40px);
-  }
 `
 
 const view = {

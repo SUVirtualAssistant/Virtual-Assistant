@@ -5,7 +5,7 @@ export const ToggleButton = styled.div`
   letter-spacing: 2px;
   text-align: center;
   text-transform: uppercase;
-  margin-left: 37%;
+  margin-left: 38%;
   
   position: absolute;
   top: 75%;
@@ -33,7 +33,7 @@ export const ToggleButton = styled.div`
   :after {
     content: "Light mode";
     white-space: nowrap;
-    text-indent: -25px;
+    text-indent: -22px;
     line-height: 150px;
     z-index: 2;
     position: absolute;

@@ -16,8 +16,8 @@ export const getTypeSize = step => {
  * > Array.from({ length: 23 }, (_, i) => getTypeSize(i + 1))
  */
 export const scale = [
-  12,
   14,
+  15,
   16,
   18,
   20,

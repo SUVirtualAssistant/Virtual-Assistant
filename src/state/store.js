@@ -18,28 +18,17 @@ const combinedReducer = combineReducers({
 
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
-    
     const nextState = {
       ...state,           // use previous state
       ...action.payload   // apply delta from hydration
     }
     
-    if (state.auth === true)
-      nextState.auth = state.auth
-    
-    if (state.lex)        // preserve messages on client side nav
-      nextState.lex = state.lex
-    
-    if (state.chat)
-      nextState.chat = state.chat
-    
-    if (state.canvas)
-      nextState.canvas = state.canvas
+    if (state.lex)           nextState.lex = state.lex
+    if (state.chat.messages) nextState.chat.messages = state.chat.messages
+    if (state.canvas)        nextState.canvas = state.canvas
     
     return nextState
-  } else {
-    return combinedReducer(state, action)
-  }
+  } else return combinedReducer(state, action)
 }
 
 const initStore = () => createStore(

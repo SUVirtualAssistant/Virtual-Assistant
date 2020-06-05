@@ -16,7 +16,7 @@ const StyledNavBar = styled.div`
   left: 0;
   z-index: 10;
   
-  border-bottom: 1px solid ${({ theme }) => theme.ui[3]};
+  border-bottom: 1px solid ${({ theme }) => theme.ui[4]}80;
 
   @media (max-width: 800px) {
     height: 40px;

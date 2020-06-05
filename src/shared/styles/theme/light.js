@@ -36,7 +36,7 @@ export const lightMode = {
     4    : colors.grey[100],
     5    : colors.grey[10],
     error: colors.red[60],
-    link : colors.blue[60]
+    link : colors.red[50]
   },
   icon       : {
     1: colors.grey[100],
@@ -55,7 +55,7 @@ export const lightMode = {
   },
   overlay    : {
     1: colors.grey[100],
-    2: colors.red[90]
+    2: colors.red[70]
   },
   inverse    : {
     1         : colors.white[0],
@@ -76,7 +76,7 @@ export const lightMode = {
   
   hover: {
     primary    : '#0353e9',
-    primaryText: colors.blue[70],
+    link       : colors.red[70],
     secondary  : '#4c4c4c',
     tertiary   : '#0353e9',
     UI         : '#e5e5e5',

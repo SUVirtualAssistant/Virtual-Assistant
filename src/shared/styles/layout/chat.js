@@ -9,7 +9,7 @@ export const chat = {
   item_spacing_x: '8px',
   item_spacing_y: '16px',
   
-  message_list_padding_x: '.5em',
+  message_list_padding_x: '.8em',
   message_list_padding_y: '.8em',
   message_list_spacing  : '16px',
   

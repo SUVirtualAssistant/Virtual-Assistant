@@ -10,7 +10,7 @@
     "pems:prepare prod": "prepare-pems --region us-west-2 --userPoolId us-west-2_fxRt1SBrY"
   },
   "dependencies": {
-    "aws-sdk": "2.673.0",
+    "aws-sdk": "2.814.0",
     "lodash": "^4.17.15",
     "next": "9.4.0",
     "next-redux-wrapper": "6.0.0",

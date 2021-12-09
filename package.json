@@ -12,7 +12,7 @@
   "dependencies": {
     "aws-sdk": "2.673.0",
     "lodash": "^4.17.15",
-    "next": "9.4.0",
+    "next": "11.1.3",
     "next-redux-wrapper": "6.0.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
